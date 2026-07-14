@@ -10,6 +10,7 @@
 | **データ保存**<br>（録画・推論結果・移動） | 高速microSDカード（256GBクラス / V30対応） | **【追加推奨】** 約4,000円。<br>USB帯域の競合を避け、システムを安定させるために必須。 | [Amazon](https://www.amazon.co.jp/KIOXIA-%E3%82%AD%E3%82%AA%E3%82%AF%E3%82%B7%E3%82%A2-microSDXC%E3%82%AB%E3%83%BC%E3%83%89-Amazon-co-jp%E3%83%A2%E3%83%87%E3%83%AB-KLMEA128G/dp/B08PTPTMH5/ref=sr_1_5?crid=4WUW5IXTJEFU&dib=eyJ2IjoiMSJ9.zyPa1-F_TmXJju6sibX96UaO9eOYekG23hvZAfDTXrvOrincAhbxQRWDTq8huACRqCQKBDkVRvUzpYhy492FIKZ2ktlvJ9a_wPkesuUSkCzC9lTya0O7DuJnpyXJ8EdJMgv34MNFT5fvBrWlkk4DdSMa4eWVWzzt4BYUCarcskegFqkaLDtXKbOJ0afTrwpMxB3FXJ0ifpmL_DPD9oqcq-zkI3bDifUy6y-K6lyCxQidqQGAFtqYhsodu7R_k7OuiGjSMKj5b7SucTnbiWNegb3JL6ewuvtIPBgW1DzXLv8._ztjz2e2-5I5VvKtuKykCdFuJ_f9YOG-cktyOK8TM90&dib_tag=se&keywords=%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%ADsd%E3%82%AB%E3%83%BC%E3%83%89&qid=1782637771&sprefix=%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%AD%2Caps%2C313&sr=8-5&th=1) |
 | **カメラ固定** | 三脚 | **【既存活用】** <br>研究室の備品を使用するため予算計上なし。 | なし |
 | **ケーブル** | アクティブリピーターケーブル | 撮影用 | なし |
+| **参考書** | なんか本 |  | なし |
 
 
 
