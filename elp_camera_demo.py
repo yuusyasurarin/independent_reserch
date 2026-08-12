@@ -20,7 +20,7 @@ from datetime import datetime
 import cv2
 
 
-def open_camera(camera_index=0):
+def open_camera(camera_index=2):
     """カメラを開いて、成功した場合は VideoCapture を返す"""
     cap = cv2.VideoCapture(camera_index, cv2.CAP_DSHOW)
     if not cap.isOpened():
@@ -30,10 +30,10 @@ def open_camera(camera_index=0):
     if not cap.isOpened():
         raise RuntimeError(f"カメラの起動に失敗しました。camera_index={camera_index}")
 
-    # 画角とフレームレートを設定（ELPカメラに応じて調整可能）
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-    cap.set(cv2.CAP_PROP_FPS, 30)
+    # 画角とフレームレートを設定（ELPカメラに応じて調整可能）最大解像度は 2592x1944、最大フレームレートは 60fps
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 2592)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1944)
+    cap.set(cv2.CAP_PROP_FPS, 60)
     return cap
 
 
