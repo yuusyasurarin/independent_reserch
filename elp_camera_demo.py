@@ -31,9 +31,9 @@ def open_camera(camera_index=2):
         raise RuntimeError(f"カメラの起動に失敗しました。camera_index={camera_index}")
 
     # 画角とフレームレートを設定（ELPカメラに応じて調整可能）最大解像度は 2592x1944、最大フレームレートは 60fps
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 2592)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1944)
-    cap.set(cv2.CAP_PROP_FPS, 60)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1980)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1260)
+    cap.set(cv2.CAP_PROP_FPS, 30)
     return cap
 
 
