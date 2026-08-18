@@ -1,3 +1,3 @@
-opencv-contrib-python>=4.10,<5
-ultralytics>=8.4,<9
-lap>=0.5.12
+# Compatibility entry point for commands run from the workspace root.
+# Canonical dependency definitions live beside the Python programs.
+-r independent_reserch/requirements-cuda.txt

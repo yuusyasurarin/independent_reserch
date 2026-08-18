@@ -1,4 +1,9 @@
 {
     "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-    "python.terminal.activateEnvironment": true
+    "python.terminal.activateEnvironment": true,
+    "terminal.integrated.env.windows": {
+        "YOLO_CONFIG_DIR": "${workspaceFolder}\\.ultralytics",
+        "MPLCONFIGDIR": "${workspaceFolder}\\.matplotlib",
+        "TORCH_HOME": "${workspaceFolder}\\.torch"
+    }
 }

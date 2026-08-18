@@ -14,6 +14,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from project_runtime import ensure_project_venv
+
+ensure_project_venv()
+
 import cv2
 
 
@@ -155,6 +159,7 @@ def draw_overlay(
     box: tuple[float, float, float, float],
     display_fps: float,
     stats: TrackingStats,
+    recording_state: str | None,
 ) -> tuple[int | None, int | None]:
     center_x = center_y = None
     if success:
@@ -178,9 +183,10 @@ def draw_overlay(
         (255, 255, 255),
         2,
     )
+    record_label = f" | {recording_state}" if recording_state is not None else ""
     cv2.putText(
         frame,
-        "R: reselect  S: snapshot  Q/ESC: quit",
+        f"R: reselect  S: snapshot  P: pause/resume{record_label}  Q/ESC: quit",
         (15, 84),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.55,
@@ -210,6 +216,7 @@ def run(args: argparse.Namespace) -> None:
     snapshot_dir = Path(args.snapshot_dir)
     snapshot_dir.mkdir(parents=True, exist_ok=True)
     video_writer: cv2.VideoWriter | None = None
+    recording_paused = False
     stats = TrackingStats()
     tracker = None
     frame_number = 0
@@ -247,7 +254,13 @@ def run(args: argparse.Namespace) -> None:
                 last_tick = now
                 stats.update(success)
 
-                center_x, center_y = draw_overlay(frame, success, box, smoothed_fps, stats)
+                if args.record is None:
+                    recording_state = None
+                else:
+                    recording_state = "PAUSED" if recording_paused else "REC"
+                center_x, center_y = draw_overlay(
+                    frame, success, box, smoothed_fps, stats, recording_state
+                )
                 if success:
                     x, y, width, height = (round(float(value), 2) for value in box)
                 else:
@@ -262,7 +275,7 @@ def run(args: argparse.Namespace) -> None:
                 )
                 csv_file.flush()
 
-                if args.record is not None:
+                if args.record is not None and not recording_paused:
                     if video_writer is None:
                         source_fps = capture.get(cv2.CAP_PROP_FPS)
                         video_writer = create_writer(Path(args.record), frame, source_fps or args.fps)
@@ -282,6 +295,9 @@ def run(args: argparse.Namespace) -> None:
                     image_path = snapshot_dir / f"kcf_{stamp}.jpg"
                     cv2.imwrite(str(image_path), frame)
                     print(f"画像を保存しました: {image_path}")
+                if key == ord("p") and args.record is not None:
+                    recording_paused = not recording_paused
+                    print("録画を一時停止しました。" if recording_paused else "録画を再開しました。")
         finally:
             capture.release()
             if video_writer is not None:
@@ -302,7 +318,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--roi-padding", type=float, default=1.3, help="選択ROIの拡大率（既定: 1.3）")
     parser.add_argument("--detect-threshold", type=float, default=0.5, help="KCF失跡判定閾値")
     parser.add_argument("--learning-rate", type=float, default=0.075, help="KCFモデル更新率")
-    parser.add_argument("--output", default="results/kcf_tracking.csv", help="CSV出力先")
+    parser.add_argument("--output", default="results/kcf/kcf_tracking.csv", help="CSV出力先")
     parser.add_argument("--record", type=Path, help="可視化済みMP4の保存先")
     parser.add_argument("--snapshot-dir", default="captures", help="画像保存先")
     args = parser.parse_args()

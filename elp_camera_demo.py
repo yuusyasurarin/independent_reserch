@@ -17,6 +17,10 @@ import argparse
 import os
 from datetime import datetime
 
+from project_runtime import ensure_project_venv
+
+ensure_project_venv()
+
 import cv2
 
 

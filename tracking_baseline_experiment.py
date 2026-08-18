@@ -10,6 +10,10 @@ import csv
 import os
 from typing import List, Tuple
 
+from project_runtime import ensure_project_venv
+
+ensure_project_venv()
+
 import cv2
 
 
@@ -170,6 +174,9 @@ def run_tracker(video_path: str, tracker_name: str, output_csv: str = None):
     cv2.destroyAllWindows()
 
     if output_csv:
+        output_parent = os.path.dirname(output_csv)
+        if output_parent:
+            os.makedirs(output_parent, exist_ok=True)
         with open(output_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["frame_index", "center_x", "center_y"])
@@ -185,7 +192,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="既存の OpenCV トラッキング手法を比較するベースライン実験")
     parser.add_argument("--video", type=str, required=True, help="実験用動画ファイルのパス")
     parser.add_argument("--tracker", type=str, default="csrt", choices=TRACKER_CHOICES, help="使用するトラッカー")
-    parser.add_argument("--output", type=str, default="tracking_result.csv", help="追跡結果を保存するCSVファイル")
+    parser.add_argument("--output", type=str, help="追跡結果CSV（既定: results/<tracker>/baseline_tracking.csv）")
     args = parser.parse_args()
 
-    run_tracker(args.video, args.tracker, args.output)
+    output = args.output or os.path.join("results", args.tracker, "baseline_tracking.csv")
+    run_tracker(args.video, args.tracker, output)

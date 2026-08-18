@@ -29,130 +29,310 @@
 - 
 
 
-## ELPカメラ動作確認
-PythonでELPカメラの映像を確認するための実行コマンドを以下に記載する。
+## Pythonプログラム利用ガイド
 
-```bash
-cd "C:\Users\taise\OneDrive\ドキュメント\自主研究\independent_reserch"
-python elp_camera_demo.py
-```
+### 共通準備
 
-カメラが複数接続されている場合は、デバイス番号を指定する。
-
-```bash
-cd "C:\Users\taise\OneDrive\ドキュメント\自主研究\independent_reserch"
-python elp_camera_demo.py --camera-index 1
-```
-
-保存先を指定したい場合は次のように実行する。
-
-```bash
-cd "C:\Users\taise\OneDrive\ドキュメント\自主研究\independent_reserch"
-python elp_camera_demo.py --save-dir captures
-```
-
-## 成果
-
-### 既存手法によるリアルタイム・バスケットボール追跡
-
-OpenCVのCSRT（既定）、KCF、MOSSE、MILを使い、ELPカメラまたは録画動画内の
-ボールを追跡する。追跡座標・矩形・失跡状態はCSVへ逐次保存される。
-
-このリポジトリには `.venv` を使うVS Code設定が含まれている。初回または
-`requirements.txt` の更新後は、VS Codeのターミナルで次を実行する。
+すべてのコマンドはPowerShellで `independent_reserch` フォルダへ移動してから実行する。
 
 ```powershell
+cd "D:\自主研究\independent_reserch"
 .\.venv\Scripts\Activate.ps1
+```
+
+親フォルダ `D:\自主研究` にいる状態から有効化する場合は、次を実行する。
+
+```powershell
+.\independent_reserch\.venv\Scripts\Activate.ps1
+```
+
+ターミナルに `(.venv)` と表示されていても `ModuleNotFoundError` が出る場合は、古い環境の
+表示だけが残っている可能性がある。ターミナルを閉じて新しく開くか、上のコマンドで研究用
+venvを有効化し直す。使用中のPythonは次のコマンドで確認できる。
+
+```powershell
+python -c "import sys; print(sys.executable)"
+```
+
+正しく有効化されていれば、末尾は
+`independent_reserch\.venv\Scripts\python.exe` となる。
+
+各カメラ・追跡プログラムには、誤ってシステムPythonから起動した場合でも研究用venvへ
+自動的に切り替える処理が含まれている。このため、venv表示が古いターミナルでも
+`python camera_video_recorder.py` のように起動できる。
+
+このプロジェクトはOneDriveを使用せず、`D:\自主研究\independent_reserch` 内で
+完結するよう設定している。録画・実験結果・YOLOのデータセット・重み・学習結果・設定・
+キャッシュは、すべてこのSSD上のプロジェクト内へ保存する。
+
+プロンプトの先頭に `(.venv)` と表示されれば仮想環境は有効である。通常の依存関係を
+入れ直す場合は `requirements.txt`、CUDA対応PyTorchも含める場合は
+`requirements-cuda.txt` を使用する。
+
+```powershell
 python -m pip install -r requirements.txt
-```
-
-カメラを使う場合（ELPカメラが1番なら `--camera-index 1` に変更する）:
-
-```powershell
-python realtime_basketball_tracker.py --camera-index 0 --tracker csrt
-```
-
-録画動画で事前確認する場合:
-
-```powershell
-python realtime_basketball_tracker.py --video sample.mp4 --tracker kcf
-```
-
-起動後、最初の画像でボールをマウスで囲み、EnterまたはSpaceで開始する。
-`R` は範囲の再選択、`S` は画像保存、`Q` またはEscは終了。
-CSVは既定で `results/realtime_tracking.csv` に保存される。
-
-### KCF専用ボールトラッキング
-
-`既存手法まとめ.md` に基づく、高速・軽量なKCFベースライン。遮蔽や急な速度変化で
-失跡した場合は自動補完せず、そのフレームをCSVへ記録する。これはKCF単独の限界を
-定量評価し、後のYOLO・カルマンフィルタとの比較に使うためである。
-
-ELPカメラ（デバイス番号1）で実行:
-
-```powershell
-python kcf_basketball_tracker.py --camera-index 1
-```
-
-録画動画で実行:
-
-```powershell
-python kcf_basketball_tracker.py --video sample.mp4
-```
-
-可視化結果も動画に保存する場合:
-
-```powershell
-python kcf_basketball_tracker.py --camera-index 1 --record results/kcf_output.mp4
-```
-
-ボールを囲んでEnterまたはSpaceを押すと開始する。`R`でROI再選択、`S`で画像保存、
-`Q`またはEscで終了する。終了時に追跡成功率、失跡数、最長連続追跡フレーム数、
-平均処理FPSを表示し、フレーム単位の結果を `results/kcf_tracking.csv` に保存する。
-
-### YOLO + ByteTrackボールトラッキング
-
-Ultralytics YOLOのCOCO学習済みモデルで `sports ball` を検出し、ByteTrackでIDを
-維持する。ROIの手動指定は不要。標準モデルはバスケットリングを検出しないため、
-この段階ではボールだけを対象にする。
-
-初回起動時はモデルファイルを自動取得する。ELPカメラ（デバイス番号1）で実行:
-
-```powershell
-python yolo_basketball_tracker.py --camera-index 1
-```
-
-録画動画で実行:
-
-```powershell
-python yolo_basketball_tracker.py --video sample.mp4
-```
-
-可視化結果も保存する場合:
-
-```powershell
-python yolo_basketball_tracker.py --camera-index 1 --record results/yolo_output.mp4
-```
-
-独自に学習したボール・リングモデルへ切り替える場合:
-
-```powershell
-python yolo_basketball_tracker.py --camera-index 1 --model runs/detect/train/weights/best.pt
-```
-
-`S`で画像保存、`Q`またはEscで終了する。フレームごとの追跡ID、信頼度、座標、
-推論時間、処理FPSは `results/yolo_tracking.csv` に保存される。小さいボールが
-未検出になる場合は `--confidence 0.10 --image-size 1280` を試す。
-
-現在のPyTorchがCPU版の場合も動作するが、処理速度は低下する。RTX 3050 TiでCUDAを
-使う場合は、NVIDIAドライバーを更新した状態で次を実行し、その後VS Codeを再起動する。
-
-```powershell
 python -m pip install -r requirements-cuda.txt
-python -c "import torch; print(torch.cuda.is_available())"
 ```
 
-最後の結果が `True` なら、YOLOトラッカーは自動的にGPU 0を使用する。
+利用可能なオプションは、各プログラムに `--help` を付けても確認できる。
+
+```powershell
+python yolo_basketball_tracker.py --help
+```
+
+### プログラム一覧
+
+| プログラム | できること | 主な入力 | 主な出力 |
+| :--- | :--- | :--- | :--- |
+| `budget.py` | 購入予定品と合計金額を表示 | なし | ターミナル表示 |
+| `elp_camera_demo.py` | ELPカメラの接続・映像・静止画保存を確認 | カメラ | PNG画像 |
+| `camera_video_recorder.py` | カメラ映像をプレビューしながら録画 | カメラ | MP4動画 |
+| `realtime_basketball_tracker.py` | CSRT、KCF、MOSSE、MILでリアルタイム追跡・録画 | カメラ／動画 | CSV、JPG画像、任意のMP4 |
+| `kcf_basketball_tracker.py` | KCF専用の追跡・性能集計・録画 | カメラ／動画 | CSV、JPG画像、任意のMP4 |
+| `tracking_baseline_experiment.py` | 録画動画で8種類のOpenCVトラッカーを比較 | 動画必須 | CSV、PNG画像 |
+| `yolo_basketball_tracker.py` | YOLOでボールを検出しByteTrackまたはBoT-SORTでID追跡 | カメラ／動画 | CSV、JPG画像、任意のMP4 |
+
+`--camera-index` と `--video` は同時に指定できない。どちらも省略した場合、対応する
+プログラムはカメラ番号 `0` を使用する。カメラが映らない場合は `--camera-index 1`、
+`2` の順に試す。
+
+### 購入予定金額の表示（budget.py）
+
+購入予定品の名称、個別価格、合計金額をターミナルへ表示する。オプションやファイル出力はない。
+
+```powershell
+python budget.py
+```
+
+### ELPカメラ動作確認（elp_camera_demo.py）
+
+ELPカメラのライブ映像を表示し、必要なフレームをPNG画像として保存する。カメラの既定要求値は
+コード内で横1980、縦1260、30 FPSに設定されている。
+
+```powershell
+# カメラ0で起動
+python elp_camera_demo.py
+
+# カメラ1で起動
+python elp_camera_demo.py --camera-index 1
+
+# 画像の保存先を変更
+python elp_camera_demo.py --camera-index 1 --save-dir captures/camera_test
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--camera-index <整数>` | `0` | 使用するカメラのデバイス番号 |
+| `--save-dir <パス>` | `captures` | `S` キーで撮影したPNG画像の保存先 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+操作キーは `S` が現在のフレーム保存、`Q` が終了。画像名は
+`elp_capture_YYYYMMDD_HHMMSS.png` となる。
+
+### カメラ動画の録画（camera_video_recorder.py）
+
+カメラ映像をプレビューしながら、そのままMP4動画へ録画する。起動と同時に録画を開始し、
+画面には録画時間とフレーム数を表示するが、これらの表示は保存動画には含まれない。
+
+```powershell
+# カメラ0を既定設定（1920x1080、60 FPS）で録画
+python camera_video_recorder.py
+
+# ELPカメラが1番の場合
+python camera_video_recorder.py --camera-index 1
+
+# 保存先を指定
+python camera_video_recorder.py --camera-index 1 --output results/recordings/experiment01.mp4
+
+# 1280x720、30 FPSで10秒間だけ録画
+python camera_video_recorder.py --camera-index 1 --width 1280 --height 720 --fps 30 --duration 10
+
+# プレビューなしで60秒間録画
+python camera_video_recorder.py --camera-index 1 --duration 60 --no-preview
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--camera-index <整数>` | `0` | 使用するカメラ番号 |
+| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
+| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `60.0` | カメラへ要求するFPSおよび保存FPSの基準 |
+| `--output <パス>` | `results/recordings/camera_日時.mp4` | MP4の保存先 |
+| `--duration <秒>` | なし | 指定時間で自動的に録画を終了 |
+| `--no-preview` | 無効 | プレビュー画面を表示せず録画 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+プレビュー表示中は `P` で録画の一時停止・再開、`Q` またはEscで保存終了する。一時停止中も
+プレビューは継続し、停止中のフレームはMP4に書き込まれない。`--no-preview` 使用時は
+`--duration` で終了時間を指定するか、ターミナルでCtrl+Cを押す。録画中に異常終了した
+場合はMP4が正常に閉じられないことがあるため、通常はこれらの終了操作を使用する。
+
+## 各トラッキングプログラム
+
+### OpenCV汎用リアルタイム追跡（realtime_basketball_tracker.py）
+
+CSRT、KCF、MOSSE、MILから手法を選び、カメラまたは録画動画内のボールを追跡する。
+起動後の最初のフレームでボールをドラッグして囲み、EnterまたはSpaceで確定する。
+
+```powershell
+# カメラ0をCSRTで追跡
+python realtime_basketball_tracker.py --camera-index 0 --tracker csrt
+
+# 録画動画をKCFで追跡
+python realtime_basketball_tracker.py --video sample.mp4 --tracker kcf
+
+# 解像度、FPS、出力先も指定
+python realtime_basketball_tracker.py --camera-index 1 --tracker mosse --width 1280 --height 720 --fps 60 --output results/mosse/test.csv
+
+# 追跡表示付き動画も録画
+python realtime_basketball_tracker.py --camera-index 1 --tracker csrt --record results/csrt/realtime_output.mp4
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--camera-index <整数>` | `0` | 使用するカメラ番号。`--video` と同時指定不可 |
+| `--video <パス>` | なし | カメラの代わりに読み込む動画 |
+| `--tracker <手法>` | `csrt` | `csrt`、`kcf`、`mosse`、`mil` から選択 |
+| `--width <整数>` | `1920` | カメラへ要求する横解像度。動画入力時は使用しない |
+| `--height <整数>` | `1080` | カメラへ要求する縦解像度。動画入力時は使用しない |
+| `--fps <数値>` | `60.0` | カメラへ要求するFPS。動画入力時は使用しない |
+| `--output <パス>` | `results/<tracker>/realtime_tracking.csv` | CSV保存先 |
+| `--record <パス>` | なし | 追跡表示を重ねたMP4の保存先。省略時は録画しない |
+| `--snapshot-dir <パス>` | `captures` | `S` キーで保存するJPG画像の保存先 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+操作キーは `R` がROI再選択、`S` が追跡表示付き画像の保存、`P` がMP4録画の
+一時停止・再開、`Q` またはEscが終了。録画一時停止中も追跡とCSV記録は継続する。
+CSVにはフレーム番号、経過秒、追跡成否、中心座標、バウンディングボックスを記録する。
+
+### KCF専用ボール追跡（kcf_basketball_tracker.py）
+
+高速・軽量なKCFを単独評価する。失跡を自動補完せずCSVに明示し、終了時には追跡成功率、
+失跡フレーム数／イベント数、最長連続追跡、再初期化回数、平均処理FPSを表示する。
+
+```powershell
+# カメラ1で実行
+python kcf_basketball_tracker.py --camera-index 1
+
+# 録画動画で実行
+python kcf_basketball_tracker.py --video sample.mp4
+
+# 表示結果もMP4へ録画
+python kcf_basketball_tracker.py --camera-index 1 --record results/kcf/kcf_output.mp4
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--camera-index <整数>` | `0` | 使用するカメラ番号。`--video` と同時指定不可 |
+| `--video <パス>` | なし | カメラの代わりに読み込む動画 |
+| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
+| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `60.0` | カメラへ要求するFPS |
+| `--roi-padding <数値>` | `1.3` | 選択ROIの拡大率。`1.0` 以上 |
+| `--detect-threshold <数値>` | `0.5` | KCFの失跡判定閾値。0より大きく1以下 |
+| `--learning-rate <数値>` | `0.075` | KCFモデル更新率。0より大きく1以下 |
+| `--output <パス>` | `results/kcf/kcf_tracking.csv` | CSV保存先 |
+| `--record <パス>` | なし | 追跡表示を重ねたMP4の保存先。省略時は録画しない |
+| `--snapshot-dir <パス>` | `captures` | `S` キーで保存するJPG画像の保存先 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+操作キーは `R` がROI再選択、`S` が画像保存、`P` がMP4録画の一時停止・再開、
+`Q` またはEscが終了。CSVと追跡処理は録画一時停止中も継続する。CSVには追跡成否、
+中心座標、矩形、処理FPSなどをフレーム単位で記録する。
+
+### 録画動画によるベースライン比較（tracking_baseline_experiment.py）
+
+同一の録画動画でOpenCVの8種類のトラッカーを比較するためのプログラム。カメラ入力には
+対応しておらず、`--video` が必須である。最初のフレームでROIをドラッグし、Enterで確定する。
+
+```powershell
+python tracking_baseline_experiment.py --video sample.mp4 --tracker csrt
+python tracking_baseline_experiment.py --video sample.mp4 --tracker kcf --output results/kcf/experiment01.csv
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--video <パス>` | 必須 | 実験に使用する録画動画 |
+| `--tracker <手法>` | `csrt` | `csrt`、`kcf`、`mosse`、`medianflow`、`boosting`、`mil`、`tld`、`goturn` から選択 |
+| `--output <パス>` | `results/<tracker>/baseline_tracking.csv` | CSV保存先 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+ROI選択中と追跡中の `Q` は終了、追跡中の `S` は `captures/<tracker>_<frame>.png`
+への画像保存。CSVには追跡に成功したフレームの番号と中心座標を記録する。GOTURNは、
+OpenCV本体とは別に学習済みモデルファイルを必要とする場合がある。
+
+### YOLO + ByteTrack／BoT-SORT追跡（yolo_basketball_tracker.py）
+
+YOLOでボールを検出し、ByteTrack（既定）またはBoT-SORTで追跡IDを維持する。ROI選択は
+不要で、矩形、ID、信頼度、直近30点の軌跡、処理速度を映像へ表示する。標準モデルでは
+`sports ball` クラスだけを対象とし、リングは検出しない。
+
+```powershell
+# ByteTrackをカメラ1で起動
+python yolo_basketball_tracker.py --camera-index 1
+
+# 録画動画をByteTrackで処理
+python yolo_basketball_tracker.py --video sample.mp4 --tracker bytetrack
+
+# BoT-SORTへ変更
+python yolo_basketball_tracker.py --video sample.mp4 --tracker botsort
+
+# 表示結果もMP4へ録画
+python yolo_basketball_tracker.py --camera-index 1 --record results/yolo/yolo_output.mp4
+
+# 独自学習モデルを使用
+python yolo_basketball_tracker.py --video sample.mp4 --model runs/detect/train/weights/best.pt --class-id 0
+
+# 小さいボール向けの設定例
+python yolo_basketball_tracker.py --camera-index 1 --confidence 0.10 --image-size 1280
+```
+
+| オプション | 既定値 | 内容 |
+| :--- | :--- | :--- |
+| `--camera-index <整数>` | `0` | 使用するカメラ番号。`--video` と同時指定不可 |
+| `--video <パス>` | なし | カメラの代わりに読み込む動画 |
+| `--model <パス／名前>` | `yolo26n.pt` | YOLOモデル。独自の `best.pt` も指定可能 |
+| `--class-id <整数>` | 自動検索 | 追跡するクラスID。省略時は `sports ball`、`basketball`、`ball` の順で検索 |
+| `--tracker <手法>` | `bytetrack` | `bytetrack` または `botsort` |
+| `--confidence <数値>` | `0.15` | 検出信頼度閾値。0より大きく1以下 |
+| `--iou <数値>` | `0.5` | NMSのIoU閾値。0より大きく1以下 |
+| `--image-size <整数>` | `960` | YOLOへ入力する画像サイズ |
+| `--device <値>` | `auto` | `auto`、`cpu`、`0` など。`auto` はCUDAがあればGPU 0 |
+| `--half` / `--no-half` | `--half` | GPUでFP16を使用／不使用 |
+| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
+| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `60.0` | カメラへ要求するFPS |
+| `--output <パス>` | `results/yolo/yolo_tracking.csv` | CSV保存先 |
+| `--record <パス>` | なし | 追跡表示を重ねたMP4の保存先。省略時は録画しない |
+| `--snapshot-dir <パス>` | `captures` | `S` キーで保存するJPG画像の保存先 |
+| `-h`, `--help` | ― | ヘルプを表示して終了 |
+
+操作キーは `S` が画像保存、`P` がMP4録画の一時停止・再開、`Q` またはEscが終了。
+CSVと追跡処理は録画一時停止中も継続する。CSVにはフレーム番号、経過秒、検出成否、
+追跡ID、信頼度、中心座標、矩形座標、推論時間、処理FPSを記録する。終了時には検出フレーム率、
+総検出数、追跡ID数、平均処理FPSを表示する。初回のみモデルが自動ダウンロードされる場合がある。
+
+CUDAの確認コマンドは次のとおり。`True` とGPU名が表示されればGPUを利用できる。
+
+```powershell
+python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
+```
+
+### 出力フォルダ
+
+| パス | 内容 |
+| :--- | :--- |
+| `captures/` | `S` キーで保存した静止画 |
+| `results/recordings/` | 単純録画プログラムで保存したMP4 |
+| `results/<tracker>/` | OpenCVトラッカーごとのCSVや録画結果 |
+| `results/kcf/` | KCF専用プログラムの結果 |
+| `results/yolo/` | YOLO + ByteTrack／BoT-SORTの結果 |
+| `datasets/` | YOLO学習用データセット |
+| `weights/` | YOLOの重みファイル |
+| `runs/` | YOLOの学習・検証結果 |
+| `.ultralytics/`、`.matplotlib/`、`.torch/` | ライブラリ設定とキャッシュ（プロジェクト内管理） |
+
+同名のCSVを再度指定すると上書きされるため、実験条件ごとに別名を付けることを推奨する。
 
 ## 記録
 #### 5/19　

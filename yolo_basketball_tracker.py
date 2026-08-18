@@ -17,19 +17,36 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from project_runtime import ensure_project_venv
+
+ensure_project_venv()
+
 import cv2
 
 # Ultralyticsがユーザーディレクトリ外へ設定を書かず、プロジェクト内で完結するようにする。
 PROJECT_DIR = Path(__file__).resolve().parent
 CONFIG_ROOT = PROJECT_DIR / ".ultralytics"
 CONFIG_ROOT.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("YOLO_CONFIG_DIR", str(CONFIG_ROOT))
+os.environ["YOLO_CONFIG_DIR"] = str(CONFIG_ROOT)
 MATPLOTLIB_ROOT = PROJECT_DIR / ".matplotlib"
 MATPLOTLIB_ROOT.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("MPLCONFIGDIR", str(MATPLOTLIB_ROOT))
+os.environ["MPLCONFIGDIR"] = str(MATPLOTLIB_ROOT)
+TORCH_ROOT = PROJECT_DIR / ".torch"
+TORCH_ROOT.mkdir(parents=True, exist_ok=True)
+os.environ["TORCH_HOME"] = str(TORCH_ROOT)
 
 import torch  # noqa: E402
-from ultralytics import YOLO  # noqa: E402
+from ultralytics import YOLO, settings  # noqa: E402
+
+# 過去の保存場所が設定ファイルに残っていても、常にこのSSD内を使用する。
+settings.update(
+    {
+        "datasets_dir": str(PROJECT_DIR / "datasets"),
+        "weights_dir": str(PROJECT_DIR / "weights"),
+        "runs_dir": str(PROJECT_DIR / "runs"),
+        "sync": False,
+    }
+)
 
 
 WINDOW_NAME = "YOLO Basketball Tracking"
@@ -138,6 +155,7 @@ def draw_detections(
     display_fps: float,
     stats: TrackingStats,
     device: str,
+    recording_state: str | None,
 ) -> None:
     for detection in detections:
         center = detection.center
@@ -185,9 +203,10 @@ def draw_detections(
         (255, 255, 255),
         2,
     )
+    record_label = f" | {recording_state}" if recording_state is not None else ""
     cv2.putText(
         frame,
-        "S: snapshot  Q/ESC: quit",
+        f"S: snapshot  P: pause/resume{record_label}  Q/ESC: quit",
         (15, 84),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.55,
@@ -234,6 +253,7 @@ def run(args: argparse.Namespace) -> None:
     stats = TrackingStats()
     histories: dict[int, deque[tuple[int, int]]] = defaultdict(lambda: deque(maxlen=TRAIL_LENGTH))
     video_writer: cv2.VideoWriter | None = None
+    recording_paused = False
     frame_number = 0
     started = time.perf_counter()
     last_tick = started
@@ -278,7 +298,20 @@ def run(args: argparse.Namespace) -> None:
                 smoothed_fps = instant_fps if smoothed_fps == 0 else 0.9 * smoothed_fps + 0.1 * instant_fps
                 last_tick = now
                 stats.update(detections)
-                draw_detections(frame, detections, histories, inference_ms, smoothed_fps, stats, device)
+                if args.record is None:
+                    recording_state = None
+                else:
+                    recording_state = "PAUSED" if recording_paused else "REC"
+                draw_detections(
+                    frame,
+                    detections,
+                    histories,
+                    inference_ms,
+                    smoothed_fps,
+                    stats,
+                    device,
+                    recording_state,
+                )
 
                 if detections:
                     for detection in detections:
@@ -298,7 +331,7 @@ def run(args: argparse.Namespace) -> None:
                     )
                 csv_file.flush()
 
-                if args.record is not None:
+                if args.record is not None and not recording_paused:
                     if video_writer is None:
                         video_writer = create_writer(
                             Path(args.record), frame, capture.get(cv2.CAP_PROP_FPS), args.fps
@@ -314,6 +347,9 @@ def run(args: argparse.Namespace) -> None:
                     image_path = snapshot_dir / f"yolo_{stamp}.jpg"
                     cv2.imwrite(str(image_path), frame)
                     print(f"画像を保存しました: {image_path}")
+                if key == ord("p") and args.record is not None:
+                    recording_paused = not recording_paused
+                    print("録画を一時停止しました。" if recording_paused else "録画を再開しました。")
         finally:
             capture.release()
             if video_writer is not None:
@@ -339,7 +375,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--width", type=int, default=1920, help="要求するカメラ横解像度")
     parser.add_argument("--height", type=int, default=1080, help="要求するカメラ縦解像度")
     parser.add_argument("--fps", type=float, default=60.0, help="要求するカメラFPS")
-    parser.add_argument("--output", default="results/yolo_tracking.csv", help="CSV出力先")
+    parser.add_argument("--output", default="results/yolo/yolo_tracking.csv", help="CSV出力先")
     parser.add_argument("--record", type=Path, help="可視化済みMP4の保存先")
     parser.add_argument("--snapshot-dir", default="captures", help="画像保存先")
     args = parser.parse_args()
