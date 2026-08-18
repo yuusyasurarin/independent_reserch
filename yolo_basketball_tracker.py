@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import math
 import os
 import time
 from collections import defaultdict, deque
@@ -22,6 +21,8 @@ from project_runtime import ensure_project_venv
 ensure_project_venv()
 
 import cv2
+
+from synchronized_video_writer import SynchronizedVideoWriter
 
 # Ultralyticsがユーザーディレクトリ外へ設定を書かず、プロジェクト内で完結するようにする。
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -215,16 +216,6 @@ def draw_detections(
     )
 
 
-def create_writer(path: Path, frame: Any, source_fps: float, fallback_fps: float) -> cv2.VideoWriter:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    height, width = frame.shape[:2]
-    fps = source_fps if math.isfinite(source_fps) and source_fps > 0 else fallback_fps
-    writer = cv2.VideoWriter(str(path), cv2.VideoWriter_fourcc(*"mp4v"), fps, (width, height))
-    if not writer.isOpened():
-        raise RuntimeError(f"結果動画の保存先を開けませんでした: {path}")
-    return writer
-
-
 def print_summary(stats: TrackingStats, elapsed: float, output_path: Path) -> None:
     average_fps = stats.frames / elapsed if elapsed > 0 else 0.0
     print("\n--- YOLO追跡結果 ---")
@@ -252,7 +243,7 @@ def run(args: argparse.Namespace) -> None:
     snapshot_dir.mkdir(parents=True, exist_ok=True)
     stats = TrackingStats()
     histories: dict[int, deque[tuple[int, int]]] = defaultdict(lambda: deque(maxlen=TRAIL_LENGTH))
-    video_writer: cv2.VideoWriter | None = None
+    video_writer: SynchronizedVideoWriter | None = None
     recording_paused = False
     frame_number = 0
     started = time.perf_counter()
@@ -333,8 +324,12 @@ def run(args: argparse.Namespace) -> None:
 
                 if args.record is not None and not recording_paused:
                     if video_writer is None:
-                        video_writer = create_writer(
-                            Path(args.record), frame, capture.get(cv2.CAP_PROP_FPS), args.fps
+                        video_writer = SynchronizedVideoWriter(
+                            Path(args.record),
+                            frame,
+                            capture.get(cv2.CAP_PROP_FPS),
+                            args.fps,
+                            realtime=args.video is None,
                         )
                     video_writer.write(frame)
 
@@ -349,11 +344,13 @@ def run(args: argparse.Namespace) -> None:
                     print(f"画像を保存しました: {image_path}")
                 if key == ord("p") and args.record is not None:
                     recording_paused = not recording_paused
+                    if video_writer is not None:
+                        video_writer.pause() if recording_paused else video_writer.resume()
                     print("録画を一時停止しました。" if recording_paused else "録画を再開しました。")
         finally:
             capture.release()
             if video_writer is not None:
-                video_writer.release()
+                video_writer.close()
             cv2.destroyAllWindows()
 
     print_summary(stats, time.perf_counter() - started, output_path)

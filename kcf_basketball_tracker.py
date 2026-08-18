@@ -20,6 +20,8 @@ ensure_project_venv()
 
 import cv2
 
+from synchronized_video_writer import SynchronizedVideoWriter
+
 
 WINDOW_NAME = "KCF Basketball Tracking"
 
@@ -142,17 +144,6 @@ def select_and_initialize(
     return tracker, tracking_roi
 
 
-def create_writer(path: Path, frame: Any, fps: float) -> cv2.VideoWriter:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    height, width = frame.shape[:2]
-    writer = cv2.VideoWriter(
-        str(path), cv2.VideoWriter_fourcc(*"mp4v"), max(fps, 1.0), (width, height)
-    )
-    if not writer.isOpened():
-        raise RuntimeError(f"結果動画の保存先を開けませんでした: {path}")
-    return writer
-
-
 def draw_overlay(
     frame: Any,
     success: bool,
@@ -215,7 +206,7 @@ def run(args: argparse.Namespace) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     snapshot_dir = Path(args.snapshot_dir)
     snapshot_dir.mkdir(parents=True, exist_ok=True)
-    video_writer: cv2.VideoWriter | None = None
+    video_writer: SynchronizedVideoWriter | None = None
     recording_paused = False
     stats = TrackingStats()
     tracker = None
@@ -278,7 +269,13 @@ def run(args: argparse.Namespace) -> None:
                 if args.record is not None and not recording_paused:
                     if video_writer is None:
                         source_fps = capture.get(cv2.CAP_PROP_FPS)
-                        video_writer = create_writer(Path(args.record), frame, source_fps or args.fps)
+                        video_writer = SynchronizedVideoWriter(
+                            Path(args.record),
+                            frame,
+                            source_fps,
+                            args.fps,
+                            realtime=args.video is None,
+                        )
                     video_writer.write(frame)
 
                 cv2.imshow(WINDOW_NAME, frame)
@@ -297,11 +294,13 @@ def run(args: argparse.Namespace) -> None:
                     print(f"画像を保存しました: {image_path}")
                 if key == ord("p") and args.record is not None:
                     recording_paused = not recording_paused
+                    if video_writer is not None:
+                        video_writer.pause() if recording_paused else video_writer.resume()
                     print("録画を一時停止しました。" if recording_paused else "録画を再開しました。")
         finally:
             capture.release()
             if video_writer is not None:
-                video_writer.release()
+                video_writer.close()
             cv2.destroyAllWindows()
 
     print_summary(stats, time.perf_counter() - started, output_path)

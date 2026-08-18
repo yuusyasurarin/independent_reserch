@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import math
-import time
 from datetime import datetime
 from pathlib import Path
 
@@ -13,6 +11,8 @@ from project_runtime import ensure_project_venv
 ensure_project_venv()
 
 import cv2
+
+from synchronized_video_writer import SynchronizedVideoWriter
 
 
 WINDOW_NAME = "Camera Video Recorder"
@@ -70,33 +70,11 @@ def open_camera(args: argparse.Namespace) -> cv2.VideoCapture:
     return capture
 
 
-def create_writer(path: Path, frame, fps: float) -> cv2.VideoWriter:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    height, width = frame.shape[:2]
-    writer = cv2.VideoWriter(
-        str(path),
-        cv2.VideoWriter_fourcc(*"mp4v"),
-        fps,
-        (width, height),
-    )
-    if not writer.isOpened():
-        raise RuntimeError(f"録画ファイルを作成できませんでした: {path}")
-    return writer
-
-
 def run(args: argparse.Namespace) -> None:
     output_path = args.output or default_output_path()
     capture = open_camera(args)
-    writer: cv2.VideoWriter | None = None
-    started = 0.0
-    paused_started: float | None = None
-    paused_total = 0.0
+    writer: SynchronizedVideoWriter | None = None
     recording_paused = False
-    frame_count = 0
-
-    def recording_elapsed(now: float) -> float:
-        current_pause = now - paused_started if recording_paused and paused_started is not None else 0.0
-        return max(0.0, now - started - paused_total - current_pause)
 
     try:
         grabbed, frame = capture.read()
@@ -104,25 +82,21 @@ def run(args: argparse.Namespace) -> None:
             raise RuntimeError("カメラから最初のフレームを取得できませんでした")
 
         reported_fps = capture.get(cv2.CAP_PROP_FPS)
-        recording_fps = reported_fps if math.isfinite(reported_fps) and reported_fps > 0 else args.fps
-        writer = create_writer(output_path, frame, recording_fps)
+        writer = SynchronizedVideoWriter(output_path, frame, reported_fps, args.fps)
         actual_width = frame.shape[1]
         actual_height = frame.shape[0]
-        started = time.perf_counter()
 
         print(f"録画を開始しました: {output_path.resolve()}")
-        print(f"映像: {actual_width}x{actual_height} / 保存FPS: {recording_fps:.2f}")
+        print(f"映像: {actual_width}x{actual_height} / 保存FPS: {writer.fps:.2f}")
         if args.no_preview:
             print("終了するにはCtrl+Cを押してください。")
         else:
             print("Pで一時停止・再開、QまたはEscで録画を終了します。")
 
         while True:
-            now = time.perf_counter()
-            elapsed = recording_elapsed(now)
+            elapsed = writer.elapsed
             if not recording_paused:
                 writer.write(frame)
-                frame_count += 1
 
             if not args.no_preview:
                 preview = frame.copy()
@@ -131,7 +105,7 @@ def run(args: argparse.Namespace) -> None:
                 cv2.circle(preview, (24, 27), 8, state_color, -1)
                 cv2.putText(
                     preview,
-                    f"{state} {elapsed:07.1f}s | {frame_count} frames",
+                    f"{state} {elapsed:07.1f}s | input {writer.input_frames} frames",
                     (42, 34),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.7,
@@ -152,15 +126,12 @@ def run(args: argparse.Namespace) -> None:
                 if key in (ord("q"), 27):
                     break
                 if key == ord("p"):
-                    toggle_time = time.perf_counter()
                     if recording_paused:
-                        if paused_started is not None:
-                            paused_total += toggle_time - paused_started
-                        paused_started = None
+                        writer.resume()
                         recording_paused = False
                         print("録画を再開しました。")
                     else:
-                        paused_started = toggle_time
+                        writer.pause()
                         recording_paused = True
                         print("録画を一時停止しました。")
 
@@ -174,13 +145,13 @@ def run(args: argparse.Namespace) -> None:
     finally:
         capture.release()
         if writer is not None:
-            writer.release()
+            writer.close()
         cv2.destroyAllWindows()
 
-    elapsed = recording_elapsed(time.perf_counter()) if started else 0.0
+    elapsed = writer.elapsed if writer is not None else 0.0
     print("録画を終了しました。")
     print(f"保存先: {output_path.resolve()}")
-    print(f"録画時間: {elapsed:.2f}秒 / 保存フレーム数: {frame_count}")
+    print(f"録画時間: {elapsed:.2f}秒 / 保存フレーム数: {writer.frames_written if writer else 0}")
 
 
 if __name__ == "__main__":
