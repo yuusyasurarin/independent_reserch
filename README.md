@@ -52,6 +52,108 @@ python elp_camera_demo.py --save-dir captures
 ```
 
 ## 成果
+
+### 既存手法によるリアルタイム・バスケットボール追跡
+
+OpenCVのCSRT（既定）、KCF、MOSSE、MILを使い、ELPカメラまたは録画動画内の
+ボールを追跡する。追跡座標・矩形・失跡状態はCSVへ逐次保存される。
+
+このリポジトリには `.venv` を使うVS Code設定が含まれている。初回または
+`requirements.txt` の更新後は、VS Codeのターミナルで次を実行する。
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+カメラを使う場合（ELPカメラが1番なら `--camera-index 1` に変更する）:
+
+```powershell
+python realtime_basketball_tracker.py --camera-index 0 --tracker csrt
+```
+
+録画動画で事前確認する場合:
+
+```powershell
+python realtime_basketball_tracker.py --video sample.mp4 --tracker kcf
+```
+
+起動後、最初の画像でボールをマウスで囲み、EnterまたはSpaceで開始する。
+`R` は範囲の再選択、`S` は画像保存、`Q` またはEscは終了。
+CSVは既定で `results/realtime_tracking.csv` に保存される。
+
+### KCF専用ボールトラッキング
+
+`既存手法まとめ.md` に基づく、高速・軽量なKCFベースライン。遮蔽や急な速度変化で
+失跡した場合は自動補完せず、そのフレームをCSVへ記録する。これはKCF単独の限界を
+定量評価し、後のYOLO・カルマンフィルタとの比較に使うためである。
+
+ELPカメラ（デバイス番号1）で実行:
+
+```powershell
+python kcf_basketball_tracker.py --camera-index 1
+```
+
+録画動画で実行:
+
+```powershell
+python kcf_basketball_tracker.py --video sample.mp4
+```
+
+可視化結果も動画に保存する場合:
+
+```powershell
+python kcf_basketball_tracker.py --camera-index 1 --record results/kcf_output.mp4
+```
+
+ボールを囲んでEnterまたはSpaceを押すと開始する。`R`でROI再選択、`S`で画像保存、
+`Q`またはEscで終了する。終了時に追跡成功率、失跡数、最長連続追跡フレーム数、
+平均処理FPSを表示し、フレーム単位の結果を `results/kcf_tracking.csv` に保存する。
+
+### YOLO + ByteTrackボールトラッキング
+
+Ultralytics YOLOのCOCO学習済みモデルで `sports ball` を検出し、ByteTrackでIDを
+維持する。ROIの手動指定は不要。標準モデルはバスケットリングを検出しないため、
+この段階ではボールだけを対象にする。
+
+初回起動時はモデルファイルを自動取得する。ELPカメラ（デバイス番号1）で実行:
+
+```powershell
+python yolo_basketball_tracker.py --camera-index 1
+```
+
+録画動画で実行:
+
+```powershell
+python yolo_basketball_tracker.py --video sample.mp4
+```
+
+可視化結果も保存する場合:
+
+```powershell
+python yolo_basketball_tracker.py --camera-index 1 --record results/yolo_output.mp4
+```
+
+独自に学習したボール・リングモデルへ切り替える場合:
+
+```powershell
+python yolo_basketball_tracker.py --camera-index 1 --model runs/detect/train/weights/best.pt
+```
+
+`S`で画像保存、`Q`またはEscで終了する。フレームごとの追跡ID、信頼度、座標、
+推論時間、処理FPSは `results/yolo_tracking.csv` に保存される。小さいボールが
+未検出になる場合は `--confidence 0.10 --image-size 1280` を試す。
+
+現在のPyTorchがCPU版の場合も動作するが、処理速度は低下する。RTX 3050 TiでCUDAを
+使う場合は、NVIDIAドライバーを更新した状態で次を実行し、その後VS Codeを再起動する。
+
+```powershell
+python -m pip install -r requirements-cuda.txt
+python -c "import torch; print(torch.cuda.is_available())"
+```
+
+最後の結果が `True` なら、YOLOトラッカーは自動的にGPU 0を使用する。
+
 ## 記録
 #### 5/19　
 リポジトリの作成
