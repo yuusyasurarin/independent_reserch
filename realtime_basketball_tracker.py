@@ -213,9 +213,9 @@ def parse_args() -> argparse.Namespace:
     source.add_argument("--camera-index", type=int, default=0, help="カメラ番号（既定: 0）")
     source.add_argument("--video", type=Path, help="カメラの代わりに使う動画ファイル")
     parser.add_argument("--tracker", choices=TRACKERS, default="csrt", help="追跡手法（既定: csrt）")
-    parser.add_argument("--width", type=int, default=1920, help="要求するカメラ横解像度")
-    parser.add_argument("--height", type=int, default=1080, help="要求するカメラ縦解像度")
-    parser.add_argument("--fps", type=float, default=60.0, help="要求するカメラFPS")
+    parser.add_argument("--width", type=int, default=1280, help="要求するカメラ横解像度")
+    parser.add_argument("--height", type=int, default=720, help="要求するカメラ縦解像度")
+    parser.add_argument("--fps", type=float, default=30.0, help="要求するカメラFPS")
     parser.add_argument(
         "--output",
         help="CSV出力先（既定: results/<tracker>/realtime_tracking.csv）",

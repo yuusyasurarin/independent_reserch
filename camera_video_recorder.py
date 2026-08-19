@@ -21,9 +21,9 @@ WINDOW_NAME = "Camera Video Recorder"
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="カメラ映像をMP4動画として録画")
     parser.add_argument("--camera-index", type=int, default=0, help="カメラ番号（既定: 0）")
-    parser.add_argument("--width", type=int, default=1920, help="要求する横解像度（既定: 1920）")
-    parser.add_argument("--height", type=int, default=1080, help="要求する縦解像度（既定: 1080）")
-    parser.add_argument("--fps", type=float, default=60.0, help="要求・保存FPS（既定: 60）")
+    parser.add_argument("--width", type=int, default=1280, help="要求する横解像度（既定: 1280）")
+    parser.add_argument("--height", type=int, default=720, help="要求する縦解像度（既定: 720）")
+    parser.add_argument("--fps", type=float, default=30.0, help="要求・保存FPS（既定: 30）")
     parser.add_argument(
         "--output",
         type=Path,

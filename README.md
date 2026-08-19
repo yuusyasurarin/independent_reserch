@@ -106,8 +106,8 @@ python budget.py
 
 ### ELPカメラ動作確認（elp_camera_demo.py）
 
-ELPカメラのライブ映像を表示し、必要なフレームをPNG画像として保存する。カメラの既定要求値は
-コード内で横1980、縦1260、30 FPSに設定されている。
+ELPカメラのライブ映像を表示し、必要なフレームをPNG画像として保存する。カメラ入力を使う
+全プログラムの既定要求値は1280×720、30 FPSに統一している。
 
 ```powershell
 # カメラ0で起動
@@ -123,6 +123,9 @@ python elp_camera_demo.py --camera-index 1 --save-dir captures/camera_test
 | オプション | 既定値 | 内容 |
 | :--- | :--- | :--- |
 | `--camera-index <整数>` | `0` | 使用するカメラのデバイス番号 |
+| `--width <整数>` | `1280` | カメラへ要求する横解像度 |
+| `--height <整数>` | `720` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `30.0` | カメラへ要求するFPS |
 | `--save-dir <パス>` | `captures` | `S` キーで撮影したPNG画像の保存先 |
 | `-h`, `--help` | ― | ヘルプを表示して終了 |
 
@@ -135,7 +138,7 @@ python elp_camera_demo.py --camera-index 1 --save-dir captures/camera_test
 画面には録画時間とフレーム数を表示するが、これらの表示は保存動画には含まれない。
 
 ```powershell
-# カメラ0を既定設定（1920x1080、60 FPS）で録画
+# カメラ0を既定設定（1280x720、30 FPS）で録画
 python camera_video_recorder.py
 
 # ELPカメラが1番の場合
@@ -154,9 +157,9 @@ python camera_video_recorder.py --camera-index 1 --duration 60 --no-preview
 | オプション | 既定値 | 内容 |
 | :--- | :--- | :--- |
 | `--camera-index <整数>` | `0` | 使用するカメラ番号 |
-| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
-| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
-| `--fps <数値>` | `60.0` | カメラへ要求するFPSおよび保存FPSの基準 |
+| `--width <整数>` | `1280` | カメラへ要求する横解像度 |
+| `--height <整数>` | `720` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `30.0` | カメラへ要求するFPSおよび保存FPSの基準 |
 | `--output <パス>` | `results/recordings/camera_日時.mp4` | MP4の保存先 |
 | `--duration <秒>` | なし | 指定時間で自動的に録画を終了 |
 | `--no-preview` | 無効 | プレビュー画面を表示せず録画 |
@@ -193,9 +196,9 @@ python realtime_basketball_tracker.py --camera-index 1 --tracker csrt --record r
 | `--camera-index <整数>` | `0` | 使用するカメラ番号。`--video` と同時指定不可 |
 | `--video <パス>` | なし | カメラの代わりに読み込む動画 |
 | `--tracker <手法>` | `csrt` | `csrt`、`kcf`、`mosse`、`mil` から選択 |
-| `--width <整数>` | `1920` | カメラへ要求する横解像度。動画入力時は使用しない |
-| `--height <整数>` | `1080` | カメラへ要求する縦解像度。動画入力時は使用しない |
-| `--fps <数値>` | `60.0` | カメラへ要求するFPS。動画入力時は使用しない |
+| `--width <整数>` | `1280` | カメラへ要求する横解像度。動画入力時は使用しない |
+| `--height <整数>` | `720` | カメラへ要求する縦解像度。動画入力時は使用しない |
+| `--fps <数値>` | `30.0` | カメラへ要求するFPS。動画入力時は使用しない |
 | `--output <パス>` | `results/<tracker>/realtime_tracking.csv` | CSV保存先 |
 | `--record <パス>` | なし | 追跡表示を重ねたMP4の保存先。省略時は録画しない |
 | `--snapshot-dir <パス>` | `captures` | `S` キーで保存するJPG画像の保存先 |
@@ -225,9 +228,9 @@ python kcf_basketball_tracker.py --camera-index 1 --record results/kcf/kcf_outpu
 | :--- | :--- | :--- |
 | `--camera-index <整数>` | `0` | 使用するカメラ番号。`--video` と同時指定不可 |
 | `--video <パス>` | なし | カメラの代わりに読み込む動画 |
-| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
-| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
-| `--fps <数値>` | `60.0` | カメラへ要求するFPS |
+| `--width <整数>` | `1280` | カメラへ要求する横解像度 |
+| `--height <整数>` | `720` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `30.0` | カメラへ要求するFPS |
 | `--roi-padding <数値>` | `1.3` | 選択ROIの拡大率。`1.0` 以上 |
 | `--detect-threshold <数値>` | `0.5` | KCFの失跡判定閾値。0より大きく1以下 |
 | `--learning-rate <数値>` | `0.075` | KCFモデル更新率。0より大きく1以下 |
@@ -299,9 +302,9 @@ python yolo_basketball_tracker.py --camera-index 1 --confidence 0.10 --image-siz
 | `--image-size <整数>` | `960` | YOLOへ入力する画像サイズ |
 | `--device <値>` | `auto` | `auto`、`cpu`、`0` など。`auto` はCUDAがあればGPU 0 |
 | `--half` / `--no-half` | `--half` | GPUでFP16を使用／不使用 |
-| `--width <整数>` | `1920` | カメラへ要求する横解像度 |
-| `--height <整数>` | `1080` | カメラへ要求する縦解像度 |
-| `--fps <数値>` | `60.0` | カメラへ要求するFPS |
+| `--width <整数>` | `1280` | カメラへ要求する横解像度 |
+| `--height <整数>` | `720` | カメラへ要求する縦解像度 |
+| `--fps <数値>` | `30.0` | カメラへ要求するFPS |
 | `--output <パス>` | `results/yolo/yolo_tracking.csv` | CSV保存先 |
 | `--record <パス>` | なし | 追跡表示を重ねたMP4の保存先。省略時は録画しない |
 | `--snapshot-dir <パス>` | `captures` | `S` キーで保存するJPG画像の保存先 |

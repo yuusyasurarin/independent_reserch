@@ -24,7 +24,7 @@ ensure_project_venv()
 import cv2
 
 
-def open_camera(camera_index=2):
+def open_camera(camera_index=0, width=1280, height=720, fps=30.0):
     """カメラを開いて、成功した場合は VideoCapture を返す"""
     cap = cv2.VideoCapture(camera_index, cv2.CAP_DSHOW)
     if not cap.isOpened():
@@ -34,10 +34,10 @@ def open_camera(camera_index=2):
     if not cap.isOpened():
         raise RuntimeError(f"カメラの起動に失敗しました。camera_index={camera_index}")
 
-    # 画角とフレームレートを設定（ELPカメラに応じて調整可能）最大解像度は 2592x1944、最大フレームレートは 60fps
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1980)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1260)
-    cap.set(cv2.CAP_PROP_FPS, 30)
+    cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+    cap.set(cv2.CAP_PROP_FPS, fps)
     return cap
 
 
@@ -54,11 +54,14 @@ def save_frame(frame, save_dir="captures"):
 def main():
     parser = argparse.ArgumentParser(description="ELPカメラのライブ表示と保存")
     parser.add_argument("--camera-index", type=int, default=0, help="カメラのデバイス番号 (例: 0, 1, 2)")
+    parser.add_argument("--width", type=int, default=1280, help="要求する横解像度（既定: 1280）")
+    parser.add_argument("--height", type=int, default=720, help="要求する縦解像度（既定: 720）")
+    parser.add_argument("--fps", type=float, default=30.0, help="要求するFPS（既定: 30）")
     parser.add_argument("--save-dir", type=str, default="captures", help="保存先ディレクトリ")
     args = parser.parse_args()
 
     print("[Step 1] カメラを起動しています...")
-    cap = open_camera(args.camera_index)
+    cap = open_camera(args.camera_index, args.width, args.height, args.fps)
 
     print("[Step 2] 映像を表示します. 's' = 保存, 'q' = 終了")
     try:
