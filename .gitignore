@@ -7,3 +7,4 @@ results/
 .matplotlib/
 .torch/
 *.pt
+/編集済み元データ/
