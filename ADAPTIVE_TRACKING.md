@@ -54,8 +54,9 @@ YOLO観測の分散は25、KCF観測は100、加速度ノイズの標準偏差�
 必要なパッケージは `numpy`, `opencv-contrib-python`, `ultralytics`, `torch`。
 動作する研究用Python環境を有効化してから実行する。OpenCVの通常版とcontrib版が
 同一環境に混在している場合は、KCF生成APIが利用できるか確認する。
-既存の `requirements.txt` は存在しない子ディレクトリを参照しているため、
-環境再構築ではそのファイルをそのまま使用せず依存関係を確認すること。
+`requirements.txt` の参照不整合は修正済み。環境再構築はREADMEの共通準備を参照。
+2026年10月資料のM1〜M6比較には、新しい `run_tracking_experiment.py` を使用する。
+本ファイルの適応的追跡は従来方式として残しており、M5の固定頻度版とは区別する。
 
 ```powershell
 cd D:\自主研究\independent_reserch

@@ -1,0 +1,4 @@
+session_id,split,video,background
+day01,train,../datasets/raw/day01_shot01.mp4,../datasets/backgrounds/day01.png
+day02,val,../datasets/raw/day02_shot01.mp4,../datasets/backgrounds/day02.png
+day03,test,../datasets/raw/day03_shot01.mp4,../datasets/backgrounds/day03.png

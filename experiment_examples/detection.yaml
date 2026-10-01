@@ -1,0 +1,9 @@
+# Paths are examples: replace path with the absolute dataset directory.
+path: D:/自主研究/independent_reserch/datasets/detection
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: ball
+  1: player
+  2: ring
