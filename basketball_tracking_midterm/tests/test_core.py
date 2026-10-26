@@ -244,6 +244,40 @@ class IntegrationTests(unittest.TestCase):
             checkpoint_callback(root)(last,3,False,0.,0.)
             self.assertEqual(sha256(last),sha256(root/'weights/resume_latest.pt'))
             self.assertEqual(json.loads((root/'resume_checkpoint.json').read_text())['epoch_zero_based'],3)
+            last.write_bytes(b'new epoch with optimizer state')
+            checkpoint_callback(root)(last,4,False,0.,0.)
+            self.assertEqual((root/'weights/resume_latest.pt').read_bytes(),last.read_bytes())
+            self.assertEqual(json.loads((root/'resume_checkpoint.json').read_text())['epoch_zero_based'],4)
+            self.assertEqual(sorted(p.name for p in (root/'weights').iterdir()),['last.pt','resume_latest.pt'])
+
+    def test_resume_disables_old_epoch_archives_without_changing_training_settings(self):
+        import yaml
+        from scripts.train_yolov5 import configure_resume_save_period
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'weights').mkdir()
+            original='save_period: 1\nepochs: 100\nbatch_size: 4\nseed: 0\n'
+            (root/'opt.yaml').write_text(original,encoding='utf-8')
+            old=root/'weights/epoch0.pt';old.write_bytes(b'keep existing checkpoint')
+            configure_resume_save_period(root,{'save_period':10},-1)
+            options=yaml.safe_load((root/'opt.yaml').read_text())
+            self.assertEqual(options,dict(save_period=-1,epochs=100,batch_size=4,seed=0))
+            self.assertEqual((root/'opt.before_storage_change.yaml').read_text(),original)
+            self.assertEqual(old.read_bytes(),b'keep existing checkpoint')
+            policy=json.loads((root/'resume_storage_policy.json').read_text())
+            self.assertEqual((policy['previous_save_period'],policy['save_period']),(1,-1))
+            configure_resume_save_period(root,None,-1)
+            self.assertEqual((root/'opt.before_storage_change.yaml').read_text(),original)
+
+    def test_resume_storage_policy_uses_checkpoint_options_when_yaml_missing(self):
+        import yaml
+        from scripts.train_yolov5 import configure_resume_save_period
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d)
+            with self.assertRaises(ValueError):configure_resume_save_period(root,None,-1)
+            checkpoint_options=dict(save_period=1,epochs=100,batch_size=4)
+            configure_resume_save_period(root,checkpoint_options,-1)
+            self.assertEqual(yaml.safe_load((root/'opt.yaml').read_text()),dict(save_period=-1,epochs=100,batch_size=4))
+            self.assertEqual(checkpoint_options['save_period'],1)
 
 
 if __name__=='__main__':unittest.main()

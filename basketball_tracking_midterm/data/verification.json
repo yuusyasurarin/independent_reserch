@@ -3,11 +3,11 @@
     "code_cells": 9,
     "all_cells_compile": true,
     "expensive_actions_default_off": true,
-    "colab_execution": false
+    "colab_execution_by_this_check": false
   },
-  "colab_upload_sha256": "3169b254059f441964a7ce1bdc3da1a9e94897d3d6fcfa8ac72e00744e7dc78d",
+  "colab_upload_sha256": "6dd7dc20b1ce7cb458466902871deb7d2df41e833fc9fc0eb077bb601193b465",
   "tests": {
-    "run": 21,
+    "run": 23,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -23,6 +23,116 @@
       "complete_video": true,
       "processing_fps": 10.110745946637609,
       "tsr05": 0.201805629314923
+    },
+    {
+      "run": "results/comparison_20261027/m_A_20261026T155237344976Z",
+      "condition": "A",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 15.263271135812907,
+      "tsr05": 0.36059479553903345
+    },
+    {
+      "run": "results/comparison_20261027/m_B_20261026T155535216005Z",
+      "condition": "B",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 15.55942694717247,
+      "tsr05": 0.8422729686670207
+    },
+    {
+      "run": "results/comparison_20261027/m_C_20261026T155822168125Z",
+      "condition": "C",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 15.21526224736517,
+      "tsr05": 0.1460435475305364
+    },
+    {
+      "run": "results/comparison_20261027/m_D_20261026T160112363500Z",
+      "condition": "D",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 36.23689493848286,
+      "tsr05": 0.18799787573021773
+    },
+    {
+      "run": "results/comparison_20261027/m_E_20261026T160226501635Z",
+      "condition": "E",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 33.496985219327975,
+      "tsr05": 0.19012214551248008
+    },
+    {
+      "run": "results/comparison_20261027/s_A_20261026T160346085599Z",
+      "condition": "A",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 25.938110734344313,
+      "tsr05": 0.201805629314923
+    },
+    {
+      "run": "results/comparison_20261027/s_B_20261026T160528226567Z",
+      "condition": "B",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 27.20709732832204,
+      "tsr05": 0.8146574614976102
+    },
+    {
+      "run": "results/comparison_20261027/s_C_20261026T160704946749Z",
+      "condition": "C",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 26.568604148699755,
+      "tsr05": 0.4885820499203399
+    },
+    {
+      "run": "results/comparison_20261027/s_D_20261026T160844184827Z",
+      "condition": "D",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 50.10610446340362,
+      "tsr05": 0.4163568773234201
+    },
+    {
+      "run": "results/comparison_20261027/s_E_20261026T160938381616Z",
+      "condition": "E",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 46.606220983162295,
+      "tsr05": 0.443441317047265
+    },
+    {
+      "run": "results/experiment_B/s_B_20261026T093145953885Z",
+      "condition": "B",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 26.607541602190068,
+      "tsr05": 0.8146574614976102
     },
     {
       "run": "results/smoke/m_A_20261026T061335039013Z",
@@ -45,6 +155,16 @@
       "tsr05": 0.2288135593220339
     },
     {
+      "run": "results/smoke_B/s_B_20261026T093054572044Z",
+      "condition": "B",
+      "size": "s",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 24.47556013336257,
+      "tsr05": 0.8135593220338984
+    },
+    {
       "run": "results/smoke_loop/s_A_20261026T061745196989Z",
       "condition": "A",
       "size": "s",
@@ -53,13 +173,67 @@
       "complete_video": true,
       "processing_fps": 23.174734718808487,
       "tsr05": null
+    },
+    {
+      "run": "results/smoke_m_20261027/m_B_20261026T155117884254Z",
+      "condition": "B",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 15.278434768152277,
+      "tsr05": 0.923728813559322
+    },
+    {
+      "run": "results/smoke_m_20261027/m_C_20261026T155152209494Z",
+      "condition": "C",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 15.52851112932486,
+      "tsr05": 0.7796610169491526
+    },
+    {
+      "run": "results/smoke_m_20261027/m_D_20261026T155202882417Z",
+      "condition": "D",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 36.02833051745234,
+      "tsr05": 0.5338983050847458
+    },
+    {
+      "run": "results/smoke_m_20261027/m_E_20261026T155208978764Z",
+      "condition": "E",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 30.823879927574087,
+      "tsr05": 0.5677966101694916
     }
   ],
+  "external_colab_evidence": {
+    "s": {
+      "export_hashes_verified": true,
+      "test_evidence_files": [
+        "weights/finetuned/s/test_evaluation_20261026T090143487913Z/metrics.json"
+      ],
+      "note": "User ran Colab training/test; verified exported evidence, not re-executed by this check."
+    },
+    "m": {
+      "export_hashes_verified": true,
+      "test_evidence_files": [
+        "weights/finetuned/m/test_evaluation_20261026T154327525576Z/metrics.json"
+      ],
+      "note": "User ran Colab training/test; verified exported evidence, not re-executed by this check."
+    }
+  },
+  "missing_full_video_conditions": [],
   "not_executed": [
-    "Colab training s/m",
     "Real optimizer resume after Colab disconnect",
-    "Final dataset test on selected fine-tuned models",
-    "B-E with fine-tuned models",
     "15-minute stability trial"
   ]
 }

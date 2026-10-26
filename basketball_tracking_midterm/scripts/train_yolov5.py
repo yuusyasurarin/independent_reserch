@@ -53,6 +53,26 @@ def checkpoint_callback(run_dir):
     return on_save
 
 
+def configure_resume_save_period(run_dir, checkpoint_options, save_period):
+    """v7 main reloads opt.yaml on resume, overriding the caller's options."""
+    import yaml
+    options_path=run_dir/'opt.yaml'
+    options=(yaml.safe_load(options_path.read_text(encoding='utf-8'))
+             if options_path.is_file() else checkpoint_options)
+    if not isinstance(options,dict):
+        raise ValueError('Resume requires opt.yaml or checkpoint opt settings')
+    options=dict(options)
+    previous=options.get('save_period',-1)
+    options['save_period']=save_period
+    if options_path.is_file() and previous!=save_period:
+        backup=run_dir/'opt.before_storage_change.yaml'
+        if not backup.exists():shutil.copy2(options_path,backup)
+    options_path.write_text(yaml.safe_dump(options,sort_keys=False),encoding='utf-8')
+    save_json(run_dir/'resume_storage_policy.json',dict(previous_save_period=previous,
+        save_period=save_period,updated_utc=datetime.now(timezone.utc).isoformat(),
+        note='Only periodic epoch-file retention changed; existing checkpoints are not deleted.'))
+
+
 def train_model(a):
     import yaml
     cfg=json.loads(a.config.read_text(encoding='utf-8'))
@@ -62,6 +82,9 @@ def train_model(a):
     torch,train,Callbacks=load_training_modules(repo)
     if not torch.cuda.is_available():raise RuntimeError('Colab GPU runtime is required for training')
     if cfg['imgsz']%32 or cfg['batch']<1 or cfg['epochs']<1:raise ValueError('Invalid image size / batch / epochs')
+    cfg.setdefault('save_period',-1)
+    if type(cfg['save_period']) is not int or (cfg['save_period']!=-1 and cfg['save_period']<1):
+        raise ValueError('save_period must be -1 (no epoch archives) or a positive integer')
     if a.mode=='train':
         if a.run.exists():raise FileExistsError('Choose a new run directory; use resume only for an interrupted run')
         a.run.mkdir(parents=True)
@@ -105,6 +128,7 @@ def train_model(a):
             raise ValueError('This weight has no optimizer/epoch state; it is not a resume checkpoint')
         if ckpt['epoch']+1>=metadata['config']['epochs']:
             raise ValueError('Requested training already completed; using weights for another run is additional training, not resume')
+        configure_resume_save_period(a.run,ckpt.get('opt'),cfg['save_period'])
         del ckpt
         opt=train.parse_opt(known=True);opt.resume=str(checkpoint.resolve());opt.device='0'
     callbacks=Callbacks()

@@ -16,7 +16,7 @@
   "byte_activation_threshold": 0.25,
   "byte_matching_threshold": 0.8,
   "byte_lost_buffer_s": 0.5,
-  "selection_split": "not_selected_yet",
+  "selection_split": "val",
   "save_video": true,
   "save_failures": 8,
   "telemetry_interval_s": 5,

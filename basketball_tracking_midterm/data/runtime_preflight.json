@@ -17,7 +17,7 @@
       "pandas": "2.2.3",
       "matplotlib": "3.9.2"
     },
-    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 0, 4096, 40",
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 0, 4096, 48",
     "cuda_available": true,
     "torch_cuda": "12.1",
     "cuda_devices": [
@@ -34,20 +34,24 @@
       "class_id": 32
     },
     "s/B": {
-      "ready": false,
-      "reason": "B/s unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt. Train YOLOv5s in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt",
+      "class_id": 0
     },
     "s/C": {
-      "ready": false,
-      "reason": "C/s unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt. Train YOLOv5s in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt",
+      "class_id": 0
     },
     "s/D": {
-      "ready": false,
-      "reason": "D/s unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt. Train YOLOv5s in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt",
+      "class_id": 0
     },
     "s/E": {
-      "ready": false,
-      "reason": "E/s unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt. Train YOLOv5s in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt",
+      "class_id": 0
     },
     "m/A": {
       "ready": true,
@@ -55,20 +59,24 @@
       "class_id": 32
     },
     "m/B": {
-      "ready": false,
-      "reason": "B/m unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt. Train YOLOv5m in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt",
+      "class_id": 0
     },
     "m/C": {
-      "ready": false,
-      "reason": "C/m unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt. Train YOLOv5m in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt",
+      "class_id": 0
     },
     "m/D": {
-      "ready": false,
-      "reason": "D/m unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt. Train YOLOv5m in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt",
+      "class_id": 0
     },
     "m/E": {
-      "ready": false,
-      "reason": "E/m unavailable: D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt. Train YOLOv5m in Colab and copy the export; no pretrained substitution is permitted."
+      "ready": true,
+      "weight": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\m\\best.pt",
+      "class_id": 0
     }
   }
 }

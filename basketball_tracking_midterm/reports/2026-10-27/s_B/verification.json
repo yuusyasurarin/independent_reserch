@@ -1,0 +1,22 @@
+{
+  "run": "results/comparison_20261027/s_B_20261026T160528226567Z",
+  "condition": "B",
+  "model_size": "s",
+  "status": "passed",
+  "frames": 2512,
+  "video_frames_decoded": 2512,
+  "yolo_calls": 2512,
+  "log_alignment_and_schedule_valid": true,
+  "saved_prediction_reevaluation_identical": true,
+  "original_coordinate_bounds_valid": true,
+  "confidence_and_output_semantics_valid": true,
+  "sources": {
+    "YOLO": 1822,
+    "none": 690
+  },
+  "events": {},
+  "run_config_sha256": "2aeb2b13fec22715ce287c8ed0000cf5649f5db616ac3a9b7939a5804316d51a",
+  "metrics_sha256": "ad7369225a3bc9b4fd0a39801db7bcb1064e607af266890cce54035943262f51",
+  "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+}

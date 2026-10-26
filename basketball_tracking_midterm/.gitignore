@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 vendor/
 weights/**/*.pt
+weights/finetuned/
 results/**/tracked.mp4
 results/**/failures/
 colab_upload.zip

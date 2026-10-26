@@ -1,0 +1,114 @@
+{
+  "condition": "A",
+  "model_size": "m",
+  "detection": {
+    "precision": 0.5286478227654698,
+    "recall": 0.3674986723313861,
+    "f1": 0.4335839598997494,
+    "ap50": 0.30881463645459567,
+    "tp": 692,
+    "fp": 617,
+    "fn": 1191,
+    "confidence": 0.25,
+    "iou_threshold": 0.5,
+    "eligible_detection_frames": 1883,
+    "gt_boxes": 1883,
+    "yolo_executed_frames": 2512,
+    "scope": "Scheduled YOLO frames only; visible/confirmed-absent GT only. Unknown positions excluded.",
+    "ap_definition": "101-point interpolated precision envelope, one ball class, IoU 0.5; candidates above configured floor after NMS."
+  },
+  "tracking": {
+    "evaluated_position_frames": 1883,
+    "total_frames": 2512,
+    "tsr_iou_03": 0.49814126394052044,
+    "tsr_iou_05": 0.36059479553903345,
+    "mean_iou": 0.3073550959165991,
+    "output_rate_visible": 0.5969198088157196,
+    "output_rate_all": 0.4948248407643312,
+    "cle_px": {
+      "n": 1124,
+      "mean": 58.0771295473949,
+      "median": 2.6582081930043473,
+      "p95": 448.7707656068646
+    },
+    "missing_outputs": 759,
+    "longest_failure_at_05_s": 3.7333333333333334,
+    "longest_no_output_s": 0.7666666666666667,
+    "failure_runs_ge3": 93,
+    "unknown_position_frames": 629,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 119,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "performance": {
+    "processed_frames": 2512,
+    "yolo_calls": 2512,
+    "warmup_yolo_calls": 3,
+    "video_fps": 30.0,
+    "scheduled_detection_hz": 30.0,
+    "realized_yolo_calls_per_video_second": 30.0,
+    "realized_yolo_calls_per_wall_second": 15.263271135812907,
+    "wall_seconds": 164.57808930000465,
+    "pacing_sleep_seconds": 0.0,
+    "wall_fps": 15.263271135812907,
+    "processing_fps": 15.263271135812907,
+    "processing_ms": {
+      "n": 2512,
+      "mean": 65.49804136141859,
+      "median": 64.09015000826912,
+      "p95": 70.11090500091085
+    },
+    "yolo_stage_ms": {
+      "preprocess_ms": {
+        "n": 2512,
+        "mean": 7.168793550886076,
+        "median": 6.91979999828618,
+        "p95": 9.312495008634864
+      },
+      "inference_ms": {
+        "n": 2512,
+        "mean": 44.59301162428549,
+        "median": 44.48240000056103,
+        "p95": 45.15303999942262
+      },
+      "postprocess_ms": {
+        "n": 2512,
+        "mean": 3.7381519506447045,
+        "median": 3.424100003030617,
+        "p95": 5.59432999725686
+      }
+    },
+    "tracking_ms_all_frames": {
+      "n": 2512,
+      "mean": 0.01984426749322955,
+      "median": 0.018100006855092943,
+      "p95": 0.03334500652272252
+    },
+    "render_save_ms": {
+      "n": 2512,
+      "mean": 5.476691321723158,
+      "median": 5.193349992623553,
+      "p95": 7.372869999380782
+    },
+    "gpu_memory": {
+      "max_allocated_bytes": 305968640,
+      "max_reserved_bytes": 337641472
+    },
+    "completed_loops": 1,
+    "first_pass_complete": true,
+    "reached_requested_loop_seconds": null,
+    "note": "processing_fps excludes deliberate pacing sleeps; wall_fps includes them. Both exclude setup/warmup and post-run evaluation/graphs. Telemetry overhead is included. No frames dropped."
+  },
+  "accuracy_scope": "First complete pass only",
+  "stability_scope": "Single short video; no 15-minute stability conclusion",
+  "complete_video": true
+}

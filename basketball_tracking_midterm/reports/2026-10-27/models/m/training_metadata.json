@@ -1,0 +1,116 @@
+{
+  "model_size": "m",
+  "config": {
+    "model_size": "m",
+    "imgsz": 960,
+    "epochs": 100,
+    "batch": 4,
+    "seed": 0,
+    "patience": 20,
+    "workers": 2,
+    "save_period": -1,
+    "optimizer": "SGD",
+    "cache": false,
+    "allow_background": true,
+    "classes": {
+      "0": "ball"
+    },
+    "note": "Initial experimental settings, not validated recommendations. Use identical settings for s/m or record differences."
+  },
+  "initial_weights": {
+    "role": "pretrained",
+    "model_size": "m",
+    "source_url": "https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5m.pt",
+    "sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+    "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+    "class_id": 32,
+    "class_name": "sports ball"
+  },
+  "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/content/midterm_venv/bin/python",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "versions": {
+      "torch": "2.5.1+cu121",
+      "torchvision": "0.20.1+cu121",
+      "numpy": "1.26.4",
+      "opencv-contrib-python": "4.10.0.84",
+      "opencv-python": null,
+      "supervision": "0.25.0",
+      "scipy": "1.14.1",
+      "Pillow": "10.4.0",
+      "PyYAML": "6.0.2",
+      "pandas": "2.2.3",
+      "matplotlib": "3.9.2"
+    },
+    "nvidia_smi": "0, Tesla T4, 3, 15360, 34",
+    "cuda_available": true,
+    "torch_cuda": "12.1",
+    "cuda_devices": [
+      "Tesla T4"
+    ],
+    "opencv": "4.10.0",
+    "kcf_available": true
+  },
+  "dataset_inventory_sha256": "248c1b4583750b96fc9d0457fa5f7fbc578ba94aa27ac67a512c5db3b36f7b09",
+  "dataset": {
+    "valid": true,
+    "root": "/content/midterm_dataset_zip/ball_yolo_colab/dataset",
+    "counts": {
+      "train": {
+        "images": 300,
+        "empty": 113,
+        "boxes": 187
+      },
+      "val": {
+        "images": 50,
+        "empty": 20,
+        "boxes": 30
+      },
+      "test": {
+        "images": 58,
+        "empty": 28,
+        "boxes": 30
+      }
+    },
+    "errors": [],
+    "warnings": [],
+    "source_names": [
+      "experiment11",
+      "experiment12"
+    ],
+    "allow_background": true,
+    "image_cache": false,
+    "data_yaml_sha256": "a69c9b403b0d68aed711506019cfb96616555175a94a962064746171cb86fa63",
+    "limitation": "Exact file/pixel checks do not detect edited replays or near-duplicate scenes."
+  },
+  "class_names": {
+    "0": "ball"
+  },
+  "selection_split": "val",
+  "selection_rule": "YOLOv5 v7.0 validation fitness; no test used in training/early stopping",
+  "compatibility_adaptations": [
+    "Pillow 10 getsize plotting shim; model/training mathematics unchanged"
+  ],
+  "wrapper_source_sha256": {
+    "src/compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+    "src/__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+    "src/common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+    "src/data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+    "src/reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+    "src/evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+    "src/detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+    "src/tracking.py": "c81d0b8e31a6220238957c5c31e3f82fb86bafb81676832bfa0446c7b648bcf1",
+    "scripts/compare_results.py": "d770b4fe80c16593e04f52d6b90a6f2606787d8bbfb6cfd90add054c885417d8",
+    "scripts/build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+    "scripts/check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+    "scripts/audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+    "scripts/evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+    "scripts/setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+    "scripts/verify_delivery.py": "fa597c12a8f5739249696c3a500f8646a77b555b9a1b17e9e18e1912bf255e7e",
+    "scripts/run_experiment.py": "17b962cec57e5076abf18004403124434178882dc120c6ad85269c172d80fad1",
+    "scripts/train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105"
+  }
+}

@@ -6,7 +6,7 @@
   "seed": 0,
   "patience": 20,
   "workers": 2,
-  "save_period": 1,
+  "save_period": -1,
   "optimizer": "SGD",
   "cache": false,
   "allow_background": true,

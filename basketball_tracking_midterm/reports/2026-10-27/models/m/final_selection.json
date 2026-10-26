@@ -1,0 +1,15 @@
+{
+  "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+  "model_size": "m",
+  "selection_split": "val",
+  "selection_note": "m。初期値のまま変化なし。",
+  "operating_settings": {
+    "imgsz": 960,
+    "confidence": 0.25,
+    "nms_iou": 0.45,
+    "half": false
+  },
+  "validation_evidence_sha256": "6eda251b233dea0ea6414c4ab80bab43dc006d01870cd1b8617f7fd8dc519e0a",
+  "validation_evidence": "/content/drive/MyDrive/basketball_tracking_midterm/runs/m/20261026T150005651376Z/val_evaluation_20261026T153622235269Z/metrics.json",
+  "fixed_utc": "2026-10-26T15:42:25.521598+00:00"
+}

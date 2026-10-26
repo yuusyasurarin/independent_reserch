@@ -1,0 +1,33 @@
+{
+  "split": "test",
+  "result_names": [
+    "precision",
+    "recall",
+    "mAP50",
+    "mAP50_95",
+    "box_loss",
+    "obj_loss",
+    "cls_loss"
+  ],
+  "results": [
+    0.8581246795698857,
+    0.8066436650895601,
+    0.9220925327870213,
+    0.5218487000333646,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "per_class_map": [
+    0.5218487000333646
+  ],
+  "stage_ms": [
+    0.3630128400079135,
+    13.233595880968817,
+    5.251983116412985
+  ],
+  "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+  "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+  "confidence_floor": 0.001,
+  "note": "PR/AP evaluation uses candidate confidence .001. Logged P/R can use v5 best-F1 curve threshold; not the deployment operating point."
+}

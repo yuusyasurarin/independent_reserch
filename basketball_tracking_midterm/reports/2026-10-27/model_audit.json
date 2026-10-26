@@ -1,0 +1,66 @@
+{
+  "models": {
+    "s": {
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "training_run": "/content/drive/MyDrive/basketball_tracking_midterm/runs/s/20261026T080653932076Z",
+      "dataset_inventory_sha256": "248c1b4583750b96fc9d0457fa5f7fbc578ba94aa27ac67a512c5db3b36f7b09",
+      "config": {
+        "model_size": "s",
+        "imgsz": 960,
+        "epochs": 100,
+        "batch": 4,
+        "seed": 0,
+        "patience": 20,
+        "workers": 2,
+        "save_period": 1,
+        "optimizer": "SGD",
+        "cache": false,
+        "allow_background": true,
+        "classes": {
+          "0": "ball"
+        },
+        "note": "Initial experimental settings, not validated recommendations. Use identical settings for s/m or record differences."
+      },
+      "operating_settings": {
+        "imgsz": 960,
+        "confidence": 0.25,
+        "nms_iou": 0.45,
+        "half": false
+      },
+      "export_hashes_verified": true
+    },
+    "m": {
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "training_run": "/content/drive/MyDrive/basketball_tracking_midterm/runs/m/20261026T150005651376Z",
+      "dataset_inventory_sha256": "248c1b4583750b96fc9d0457fa5f7fbc578ba94aa27ac67a512c5db3b36f7b09",
+      "config": {
+        "model_size": "m",
+        "imgsz": 960,
+        "epochs": 100,
+        "batch": 4,
+        "seed": 0,
+        "patience": 20,
+        "workers": 2,
+        "save_period": -1,
+        "optimizer": "SGD",
+        "cache": false,
+        "allow_background": true,
+        "classes": {
+          "0": "ball"
+        },
+        "note": "Initial experimental settings, not validated recommendations. Use identical settings for s/m or record differences."
+      },
+      "operating_settings": {
+        "imgsz": 960,
+        "confidence": 0.25,
+        "nms_iou": 0.45,
+        "half": false
+      },
+      "export_hashes_verified": true
+    }
+  },
+  "same_training_inventory": true,
+  "local_inventory_sha256": "248c1b4583750b96fc9d0457fa5f7fbc578ba94aa27ac67a512c5db3b36f7b09",
+  "same_core_training_settings": true,
+  "note": "Colab training and test performed by user; exported evidence verified locally."
+}

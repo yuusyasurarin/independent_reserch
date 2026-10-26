@@ -99,11 +99,12 @@ BATCH = 4
 SEED = 0
 PATIENCE = 20
 WORKERS = 2
+SAVE_PERIOD = -1  # epoch0.pt等を蓄積しない。best/last/再開用の最新版のみ更新
 ALLOW_CONFIRMED_BACKGROUND = True
 assert MODEL_SIZE in ('s','m')
 TRAIN_CONFIG = json.loads((WORK/'configs/training.json').read_text())
 TRAIN_CONFIG.update(model_size=MODEL_SIZE,imgsz=IMGSZ,epochs=EPOCHS,batch=BATCH,seed=SEED,
-                    patience=PATIENCE,workers=WORKERS,allow_background=ALLOW_CONFIRMED_BACKGROUND)
+                    patience=PATIENCE,workers=WORKERS,save_period=SAVE_PERIOD,allow_background=ALLOW_CONFIRMED_BACKGROUND)
 CONFIG_PATH = WORK/'configs/colab_current.json'
 CONFIG_PATH.write_text(json.dumps(TRAIN_CONFIG,indent=2))
 RUN = PROJECT/'runs'/MODEL_SIZE/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
@@ -135,7 +136,10 @@ print((AUDIT/'dataset_validation.json').read_text())
 add('markdown','''
 ## 新しい追加学習を開始
 trainで更新し、valだけでbest重み・early stoppingを決めます。testはこの処理に使いません。
-Driveへ各epochのlast.ptとresume_latest.ptを保存します。最初のepochが完了する前の切断では再開できません。
+保存容量を抑えるため、epoch0.pt、epoch1.pt…の個別保存は無効（SAVE_PERIOD=-1）です。
+last.ptとresume_latest.ptは毎epoch同じ名前で更新し、best.ptはvalの最良モデルとして更新します。
+1つのrunのweights内に残る.ptは基本3個で、epoch数に比例して増えません。更新時には一時コピーの空き容量も必要です。
+最初のepochが完了する前の切断では再開できません。複数runやexportsのモデルは別途容量を使います。
 ''')
 add('code','''
 RUN_TRAIN = False  # 検査結果を確認してからTrueに変更
@@ -150,6 +154,7 @@ add('markdown','''
 resume_latest.ptはoptimizer・epoch・EMAを含むチェックポイントです。
 best.ptだけを初期重みとして別runを学習することは「追加学習」であり、この再開とは異なります。
 完了済みrunのepochs延長には使いません。正常終了後のlast.ptはYOLOv5がoptimizerを除くため、再開用にはresume_latest.ptを使用します。
+旧版で開始したrunも、再開時に現在のSAVE_PERIODを適用します。元の保存設定は記録し、既存のepoch*.ptは削除しません。
 ''')
 add('code','''
 RUN_RESUME = False
@@ -157,7 +162,7 @@ RESUME_RUN = ''  # 例: /content/drive/MyDrive/basketball_tracking_midterm/runs/
 if RUN_RESUME:
     if not RESUME_RUN: raise ValueError('RESUME_RUNを指定してください')
     subprocess.run([PYTHON,str(WORK/'scripts/train_yolov5.py'),'resume','--size',MODEL_SIZE,
-                    '--dataset',str(DATASET),'--run',RESUME_RUN],check=True)
+                    '--config',str(CONFIG_PATH),'--dataset',str(DATASET),'--run',RESUME_RUN],check=True)
     RUN = Path(RESUME_RUN)
 ''')
 add('markdown','''

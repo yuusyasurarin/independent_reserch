@@ -1,0 +1,10 @@
+{
+  "role": "finetuned",
+  "model_size": "s",
+  "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+  "sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+  "class_id": 0,
+  "class_name": "ball",
+  "training_run": "/content/drive/MyDrive/basketball_tracking_midterm/runs/s/20261026T080653932076Z",
+  "training_metadata_sha256": "0624118f06ee6309291403e355698d5393b1b749fb728e634de2845b72001ce2"
+}

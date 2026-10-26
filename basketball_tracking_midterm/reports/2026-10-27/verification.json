@@ -1,0 +1,239 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "run": "results/comparison_20261027/m_A_20261026T155237344976Z",
+      "condition": "A",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 1243,
+        "none": 1269
+      },
+      "events": {},
+      "run_config_sha256": "75ad0a4932baf94d2e389ebc211e5fc7a3971a9e9558f9a85d44c05f5ded5787",
+      "metrics_sha256": "7b89df438b6aeff8a0b67aa85ccbe5d4fdd410d978f32796d127f1d46fb5e0bd",
+      "weights_sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/m_B_20261026T155535216005Z",
+      "condition": "B",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 2326,
+        "none": 186
+      },
+      "events": {},
+      "run_config_sha256": "81fd4cbf67958dbf556a3a196bdd5f9b9ece1a5a4ae759cf34e07aad1c697afe",
+      "metrics_sha256": "1c82c8ad75b55e67aa865103ee4f1804cea0f57ce37133bb9a139c407c9cad8d",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/m_C_20261026T155822168125Z",
+      "condition": "C",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO+ByteTrack": 2220,
+        "none": 292
+      },
+      "events": {},
+      "run_config_sha256": "03ea3b5ee4d80c76614f6ebdc5a71efd48f7a6d1787dbc776a8dcff53cf10021",
+      "metrics_sha256": "96985f94827197f39f55e0de496651ff8a634c7331b68e165a4b4c40bacf8a8a",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/m_D_20261026T160112363500Z",
+      "condition": "D",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 751,
+        "hold": 1500,
+        "none": 261
+      },
+      "events": {
+        "yolo_miss_or_gate_rejection": 46
+      },
+      "run_config_sha256": "92504a6f53f0640272bc527bdcfc05914fd0d1eb41524b0b15ac961d747727ac",
+      "metrics_sha256": "1cb20b582b4db22e5b9c493666be373e3c9664a5f8f299f517f914e337169d26",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/m_E_20261026T160226501635Z",
+      "condition": "E",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 755,
+        "KCF": 1383,
+        "none": 374
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 125,
+        "yolo_miss_or_gate_rejection": 32
+      },
+      "run_config_sha256": "f362628597bd7507048160f1c88c3c4166107a43d1267f10ed1069aef5ff8648",
+      "metrics_sha256": "df277a60fbaa9b8cc18265b6b610c82e6b83de5e7c3dae5b6e26864ef19d1b95",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/s_A_20261026T160346085599Z",
+      "condition": "A",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "none": 1516,
+        "YOLO": 996
+      },
+      "events": {},
+      "run_config_sha256": "458ac1220724e21103824d2b0c6063007b0a1605411e55b6fe55aa7343b4b5d6",
+      "metrics_sha256": "7b68e7bf326dab081706da82aff5235c9b51df95d9ed194bfe40e0eea4b79936",
+      "weights_sha256": "8b3b748c1e592ddd8868022e8732fde20025197328490623cc16c6f24d0782ee",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/s_B_20261026T160528226567Z",
+      "condition": "B",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 1822,
+        "none": 690
+      },
+      "events": {},
+      "run_config_sha256": "2aeb2b13fec22715ce287c8ed0000cf5649f5db616ac3a9b7939a5804316d51a",
+      "metrics_sha256": "ad7369225a3bc9b4fd0a39801db7bcb1064e607af266890cce54035943262f51",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/s_C_20261026T160704946749Z",
+      "condition": "C",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO+ByteTrack": 1066,
+        "none": 1446
+      },
+      "events": {},
+      "run_config_sha256": "b31df8cc8e2dd4a7a33f4b4b104342719f99ccf53e409a1e631dd3096e4284b4",
+      "metrics_sha256": "44f32a85bdb4b329c3b972fbae2568ec2a01032b4aab8841aee77af6005f6b47",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/s_D_20261026T160844184827Z",
+      "condition": "D",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 597,
+        "hold": 1192,
+        "none": 723
+      },
+      "events": {
+        "yolo_miss_or_gate_rejection": 84
+      },
+      "run_config_sha256": "b57b5789c2e41d2ca213c7aecee6957530dbf2762bdf04e2f47655eccb094547",
+      "metrics_sha256": "a02149c36cc377171e28b3529b265fcb0652e56035dce6ba8d9c66b72f74c5d0",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/comparison_20261027/s_E_20261026T160938381616Z",
+      "condition": "E",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 599,
+        "KCF": 885,
+        "none": 1028
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 311,
+        "yolo_miss_or_gate_rejection": 38
+      },
+      "run_config_sha256": "b676e366907ce99ee24f5238d31b9e47a554e172fa653948615a7c4cfd2b3592",
+      "metrics_sha256": "478832f558988d6533059c69dfe21f040ef6ea7ded8aafc9921939791098f46d",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    }
+  ]
+}

@@ -12,6 +12,8 @@ test_legacy_yolo_pillow_plotting (test_core.IntegrationTests.test_legacy_yolo_pi
 test_original_coordinate_roundtrip_letterbox (test_core.IntegrationTests.test_original_coordinate_roundtrip_letterbox) ... ok
 test_real_kcf_init_and_update (test_core.IntegrationTests.test_real_kcf_init_and_update) ... ok
 test_resume_copy_keeps_full_checkpoint_bytes (test_core.IntegrationTests.test_resume_copy_keeps_full_checkpoint_bytes) ... ok
+test_resume_disables_old_epoch_archives_without_changing_training_settings (test_core.IntegrationTests.test_resume_disables_old_epoch_archives_without_changing_training_settings) ... ok
+test_resume_storage_policy_uses_checkpoint_options_when_yaml_missing (test_core.IntegrationTests.test_resume_storage_policy_uses_checkpoint_options_when_yaml_missing) ... ok
 test_weight_role_size_class_hash_and_val_settings (test_core.IntegrationTests.test_weight_role_size_class_hash_and_val_settings) ... ok
 test_ab_use_highest_only_and_do_not_track_id (test_core.TrackingTests.test_ab_use_highest_only_and_do_not_track_id) ... ok
 test_bytetrack_empty_frame_and_identity_continuation (test_core.TrackingTests.test_bytetrack_empty_frame_and_identity_continuation) ... ok
@@ -21,6 +23,6 @@ test_kcf_confidence_absent_and_failure_clears (test_core.TrackingTests.test_kcf_
 test_schedule_and_hold_no_future_detections (test_core.TrackingTests.test_schedule_and_hold_no_future_detections) ... ok
 
 ----------------------------------------------------------------------
-Ran 21 tests in 25.976s
+Ran 23 tests in 11.250s
 
 OK
