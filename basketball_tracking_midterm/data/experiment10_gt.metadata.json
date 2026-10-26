@@ -1,0 +1,30 @@
+{
+  "video_sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+  "annotation_sha256": "52897582faa10e7fd08ba97d06f03fe68f9b95689f878d82d764ce0c336003ec",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+  "source_manifest": {
+    "experiment": "experiment10",
+    "video": {
+      "sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+      "fps": 30.0,
+      "frame_count": 2512,
+      "width": 1280,
+      "height": 720,
+      "duration_s": 83.73333333333333,
+      "file": "data/experiment10.mp4"
+    },
+    "annotations": {
+      "file": "data/annotations10.zip",
+      "sha256": "52897582faa10e7fd08ba97d06f03fe68f9b95689f878d82d764ce0c336003ec",
+      "missing_policy": "not_visible",
+      "original_filename": "ball_tracking_experiment10.zip",
+      "confirmation": "Annotator confirmed all unlabeled frames reviewed and ball not visible; recorded via --confirm-not-visible."
+    },
+    "purpose": "Held-out experiment10; inference and evaluation only, no training"
+  },
+  "counts": {
+    "visible": 1883,
+    "unknown_position": 629
+  },
+  "visibility_confirmation": "All 629 unlabeled frames confirmed not visible by user on 2026-10-26; not asserted absent."
+}

@@ -1,0 +1,27 @@
+{
+  "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+  "executable": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "versions": {
+    "torch": "2.5.1+cu121",
+    "torchvision": "0.20.1+cu121",
+    "numpy": "1.26.4",
+    "opencv-contrib-python": "4.10.0.84",
+    "opencv-python": null,
+    "supervision": "0.25.0",
+    "scipy": "1.14.1",
+    "Pillow": "10.4.0",
+    "PyYAML": "6.0.2",
+    "pandas": "2.2.3",
+    "matplotlib": "3.9.2"
+  },
+  "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 0, 4096, 53",
+  "cuda_available": true,
+  "torch_cuda": "12.1",
+  "cuda_devices": [
+    "NVIDIA GeForce RTX 3050 Ti Laptop GPU"
+  ],
+  "opencv": "4.10.0",
+  "kcf_available": true
+}

@@ -1,0 +1,12 @@
+{
+  "confirmed_on": "2026-10-26",
+  "confirmed_by": "user",
+  "statement": "experiment10 is from a separate recording from experiment11/12, with no repeated play footage.",
+  "independent_recording": true,
+  "evaluation_video_sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+  "training_source_sha256": {
+    "experiment11": "7c5e7f3cbd411a3c9f29968fb91be22c1a61efd9695f5e3bcf474f10d39777c3",
+    "experiment12": "12ffcd4c0a534c8f1b1b93fbb20807be08029061010de233d5a82181ad61d700"
+  },
+  "limit": "One 83.733-second evaluation video; does not establish cross-venue generalization or 15-minute stability."
+}

@@ -1,0 +1,65 @@
+{
+  "notebook": {
+    "code_cells": 9,
+    "all_cells_compile": true,
+    "expensive_actions_default_off": true,
+    "colab_execution": false
+  },
+  "colab_upload_sha256": "3169b254059f441964a7ce1bdc3da1a9e94897d3d6fcfa8ac72e00744e7dc78d",
+  "tests": {
+    "run": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "saved_prediction_reevaluation_identical": true,
+  "actual_runs": [
+    {
+      "run": "results/baseline/s_A_20261026T060623998365Z",
+      "condition": "A",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 10.110745946637609,
+      "tsr05": 0.201805629314923
+    },
+    {
+      "run": "results/smoke/m_A_20261026T061335039013Z",
+      "condition": "A",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 15.145543370855705,
+      "tsr05": 0.5338983050847458
+    },
+    {
+      "run": "results/smoke/s_A_20261026T060446044736Z",
+      "condition": "A",
+      "size": "s",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 7.739848071810342,
+      "tsr05": 0.2288135593220339
+    },
+    {
+      "run": "results/smoke_loop/s_A_20261026T061745196989Z",
+      "condition": "A",
+      "size": "s",
+      "frames": 70,
+      "cycles": 14,
+      "complete_video": true,
+      "processing_fps": 23.174734718808487,
+      "tsr05": null
+    }
+  ],
+  "not_executed": [
+    "Colab training s/m",
+    "Real optimizer resume after Colab disconnect",
+    "Final dataset test on selected fine-tuned models",
+    "B-E with fine-tuned models",
+    "15-minute stability trial"
+  ]
+}

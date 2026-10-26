@@ -1,0 +1,12 @@
+{
+  "path": "D:\\自主研究\\independent_reserch\\編集済み元データ\\experiment10_編集.mp4",
+  "sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+  "fps": 30.0,
+  "frame_count": 2512,
+  "width": 1280,
+  "height": 720,
+  "duration_s": 83.73333333333333,
+  "decoded_frames": 2512,
+  "exact_source_pixel_matches": [],
+  "timestamp_basis": "frame_id / nominal fps; constant-fps source required"
+}

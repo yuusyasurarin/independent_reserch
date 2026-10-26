@@ -1,0 +1,9 @@
+.venv/
+.cache/
+__pycache__/
+*.pyc
+vendor/
+weights/**/*.pt
+results/**/tracked.mp4
+results/**/failures/
+colab_upload.zip

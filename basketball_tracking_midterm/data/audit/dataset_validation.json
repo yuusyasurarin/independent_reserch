@@ -1,0 +1,31 @@
+{
+  "valid": true,
+  "root": "D:\\自主研究\\independent_reserch\\colab_ball_yolo\\dataset",
+  "counts": {
+    "train": {
+      "images": 300,
+      "empty": 113,
+      "boxes": 187
+    },
+    "val": {
+      "images": 50,
+      "empty": 20,
+      "boxes": 30
+    },
+    "test": {
+      "images": 58,
+      "empty": 28,
+      "boxes": 30
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "source_names": [
+    "experiment11",
+    "experiment12"
+  ],
+  "allow_background": true,
+  "image_cache": false,
+  "data_yaml_sha256": "a69c9b403b0d68aed711506019cfb96616555175a94a962064746171cb86fa63",
+  "limitation": "Exact file/pixel checks do not detect edited replays or near-duplicate scenes."
+}

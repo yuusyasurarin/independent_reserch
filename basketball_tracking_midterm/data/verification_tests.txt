@@ -1,0 +1,26 @@
+test_class_coordinates_corruption_and_duplicates (test_core.DataTests.test_class_coordinates_corruption_and_duplicates) ... ok
+test_confirmed_experiment10_status_counts (test_core.DataTests.test_confirmed_experiment10_status_counts) ... ok
+test_missing_vs_empty_labels_no_repair (test_core.DataTests.test_missing_vs_empty_labels_no_repair) ... ok
+test_sparse_gt_statuses_and_frame_times (test_core.DataTests.test_sparse_gt_statuses_and_frame_times) ... ok
+test_detection_excludes_unknown_and_skipped_frames (test_core.EvaluationTests.test_detection_excludes_unknown_and_skipped_frames) ... ok
+test_gaps_and_segments_break_failure_runs (test_core.EvaluationTests.test_gaps_and_segments_break_failure_runs) ... ok
+test_missing_output_fails_tsr_but_not_zero_cle (test_core.EvaluationTests.test_missing_output_fails_tsr_but_not_zero_cle) ... ok
+test_one_to_one_duplicate_predictions (test_core.EvaluationTests.test_one_to_one_duplicate_predictions) ... ok
+test_perfect_ap_and_wrong_object_ap (test_core.EvaluationTests.test_perfect_ap_and_wrong_object_ap) ... ok
+test_wrong_object_is_fp_and_fn_not_success (test_core.EvaluationTests.test_wrong_object_is_fp_and_fn_not_success) ... ok
+test_legacy_yolo_pillow_plotting (test_core.IntegrationTests.test_legacy_yolo_pillow_plotting) ... ok
+test_original_coordinate_roundtrip_letterbox (test_core.IntegrationTests.test_original_coordinate_roundtrip_letterbox) ... ok
+test_real_kcf_init_and_update (test_core.IntegrationTests.test_real_kcf_init_and_update) ... ok
+test_resume_copy_keeps_full_checkpoint_bytes (test_core.IntegrationTests.test_resume_copy_keeps_full_checkpoint_bytes) ... ok
+test_weight_role_size_class_hash_and_val_settings (test_core.IntegrationTests.test_weight_role_size_class_hash_and_val_settings) ... ok
+test_ab_use_highest_only_and_do_not_track_id (test_core.TrackingTests.test_ab_use_highest_only_and_do_not_track_id) ... ok
+test_bytetrack_empty_frame_and_identity_continuation (test_core.TrackingTests.test_bytetrack_empty_frame_and_identity_continuation) ... ok
+test_expiry_prevents_indefinite_old_outputs (test_core.TrackingTests.test_expiry_prevents_indefinite_old_outputs) ... ok
+test_fast_nonoverlapping_ball_and_gate_rejection (test_core.TrackingTests.test_fast_nonoverlapping_ball_and_gate_rejection) ... ok
+test_kcf_confidence_absent_and_failure_clears (test_core.TrackingTests.test_kcf_confidence_absent_and_failure_clears) ... ok
+test_schedule_and_hold_no_future_detections (test_core.TrackingTests.test_schedule_and_hold_no_future_detections) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 25.976s
+
+OK

@@ -1,0 +1,7 @@
+names:
+  0: ball
+nc: 1
+path: D:\自主研究\independent_reserch\colab_ball_yolo\dataset
+test: images/test
+train: images/train
+val: images/val

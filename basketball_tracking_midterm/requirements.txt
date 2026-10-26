@@ -1,0 +1,20 @@
+# Python 3.11/3.12. Install torch/torchvision separately from the cu121 index.
+-c constraints-common.txt
+numpy==1.26.4
+opencv-contrib-python==4.10.0.84
+Pillow==10.4.0
+PyYAML==6.0.2
+scipy==1.14.1
+matplotlib==3.9.2
+pandas==2.2.3
+seaborn==0.13.2
+requests==2.32.3
+tqdm==4.66.5
+psutil==6.0.0
+GitPython==3.1.43
+ipython==8.29.0
+thop==0.1.1.post2209072238
+tensorboard==2.18.0
+defusedxml==0.7.1
+# Install supervision==0.25.0 with --no-deps after this file, to avoid installing
+# another OpenCV wheel beside opencv-contrib-python. All its requirements are here.

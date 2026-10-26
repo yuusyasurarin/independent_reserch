@@ -1,0 +1,9 @@
+{
+  "role": "pretrained",
+  "model_size": "m",
+  "source_url": "https://github.com/ultralytics/yolov5/releases/download/v7.0/yolov5m.pt",
+  "sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+  "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+  "class_id": 32,
+  "class_name": "sports ball"
+}
