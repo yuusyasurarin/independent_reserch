@@ -29,8 +29,16 @@ test_expiry_prevents_indefinite_old_outputs (test_core.TrackingTests.test_expiry
 test_fast_nonoverlapping_ball_and_gate_rejection (test_core.TrackingTests.test_fast_nonoverlapping_ball_and_gate_rejection) ... ok
 test_kcf_confidence_absent_and_failure_clears (test_core.TrackingTests.test_kcf_confidence_absent_and_failure_clears) ... ok
 test_schedule_and_hold_no_future_detections (test_core.TrackingTests.test_schedule_and_hold_no_future_detections) ... ok
+test_backward_lk_recovers_missing_positions_from_later_anchor (test_fixed_lag.FixedLagTests.test_backward_lk_recovers_missing_positions_from_later_anchor) ... ok
+test_beam_rejects_isolated_high_score_distractor (test_fixed_lag.FixedLagTests.test_beam_rejects_isolated_high_score_distractor) ... ok
+test_bridge_uses_future_anchor_only_after_arrival (test_fixed_lag.FixedLagTests.test_bridge_uses_future_anchor_only_after_arrival) ... ok
+test_committed_output_is_not_changed_by_future_frames (test_fixed_lag.FixedLagTests.test_committed_output_is_not_changed_by_future_frames) ... ok
+test_invalid_method_and_duplicate_frames (test_fixed_lag.FixedLagTests.test_invalid_method_and_duplicate_frames) ... ok
+test_long_unobserved_gap_is_not_filled (test_fixed_lag.FixedLagTests.test_long_unobserved_gap_is_not_filled) ... ok
+test_output_deadline_order_tail_and_bounded_storage (test_fixed_lag.FixedLagTests.test_output_deadline_order_tail_and_bounded_storage) ... ok
+test_rts_reduces_noise_on_constant_motion (test_fixed_lag.FixedLagTests.test_rts_reduces_noise_on_constant_motion) ... ok
 
 ----------------------------------------------------------------------
-Ran 31 tests in 26.639s
+Ran 39 tests in 10.032s
 
 OK

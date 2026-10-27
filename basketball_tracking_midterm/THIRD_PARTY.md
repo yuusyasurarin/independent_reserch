@@ -1,5 +1,7 @@
 # 出典・固定バージョン
 
+条件Gの固定窓の概念は [GTSAM FixedLagSmoother](https://borglab.github.io/gtsam/fixedlagsmoother/)、RTS平滑化の参考は [FilterPy KalmanFilter](https://filterpy.readthedocs.io/en/latest/kalman/KalmanFilter.html) です。これらのライブラリは依存に追加せず、NumPyによる本プロジェクトの実装を比較しました。双方向LKは下記のOpenCVを使用します。beamは本プロジェクトの幅制限付き近似探索であり、厳密なViterbiの実装ではありません。
+
 | 用途 | 実装・固定版 | ライセンス・出典 |
 |---|---|---|
 | 従来YOLOv5 | Ultralytics YOLOv5 v7.0、commit `915bbf294bb74c859f0b41f1c23bc395014ea679` | [固定ソース](https://github.com/ultralytics/yolov5/tree/915bbf294bb74c859f0b41f1c23bc395014ea679)、このcommitのLICENSEはGPL-3.0 |

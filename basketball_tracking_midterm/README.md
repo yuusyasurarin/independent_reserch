@@ -3,6 +3,7 @@
 目的は、全フレームYOLOに対して、低頻度YOLOの中間フレームをKCFで補う効果を実測することです。
 2026-10-27にs/mのA〜Eを実測しました。方法・結果・制約は後半の「8. 実測結果」にまとめています。
 続いて条件F（局所特徴点追跡＋移動予測＋適応再検出）を追加しました。方法と再実行手順は「9. 条件F」、測定結果は [Fの実験レポート](reports/2026-10-27-condition-f/README.md) にまとめます。
+条件Gでは固定遅延とSystem 1 / System 2を追加しました。「10. 条件G」と [Gの実験レポート](reports/2026-10-27-condition-g/README.md) に方式比較・実測・動画の保存先をまとめています。
 得点判定、LSTM、選手追跡、コート変換、3D復元は含みません。
 
 このフォルダ内に学習・推論・評価を新規作成しました。既存コード・元画像・ラベル・動画は参照のみです。
@@ -498,3 +499,101 @@ Fの検証では元動画と保存検出候補から追跡を再実行し、正�
 experiment10の既存結果を見て方式を設計しているため、**今回の結果は開発用動画への適合を含み、独立した汎化評価ではありません**。
 検出器の設定は既存のval確定値を維持していますが、F固有の追跡設定がvalで最適化されたという意味ではありません。
 別の動画が用意できた時点で設定を固定して評価します。低スペックCPU端末での速度や長時間安定性は今回のGPU実験から断定しません。
+
+## 10. 条件G：固定遅延とSystem 1 / System 2
+
+2026-10-27、experiment10で31通りの候補再生比較と5回の全動画・実推論を行いました。主な対象はユーザー指定の **RTX 3050 Ti搭載PC** です。
+推奨する出発点は **YOLOv5s＋局所LK＋2秒の表示遅延＋短区間補間（f / bridge）** です。Fと同じ1,076回のYOLOでTSR@0.5が77.85%から82.47%へ改善しました。
+過去のs/Bは81.47%ですが、この動画で方式を選んでいるため、Bを一般的に上回ったとは結論しません。
+詳細な数値、遅延の実測、実行順、動画一覧、設定と検証記録は [Gの実験レポート](reports/2026-10-27-condition-g/README.md) に保存しています。
+
+### System 1 / System 2の分担
+
+ここでのSystem 1 / 2はLLMではなく、軽い処理と重い確認処理の役割分担です。EもFも元々YOLOを毎フレーム呼ぶ方式ではありません。Gもその考え方を引き継ぎます。
+
+| 担当 | 実装 | 役割 |
+|---|---|---|
+| System 1 | 局所Lucas–Kanade、短時間の速度予測 | 毎フレーム、ボール周辺だけを安く追跡する |
+| System 2 | 学習済みYOLOv5s、信頼度・移動・大きさによる候補確認 | 追跡の信頼性低下や一定間隔で再検出する。連続1秒内の呼び出し上限を守る |
+| 固定遅延の補正 | bridge / RTS / beam / bidir | 到着済みの未来フレームを使って、まだ出力していない過去位置だけを修正する |
+
+例えば入力が10秒時点に達したら、表示するのは8秒時点です。8秒の位置を決めるときに10秒を超える情報は使いません。一度出力した位置は後から変更しません。
+固定遅延は先読み量であり、計算が追いつかなければ実際の出力遅延は2秒を超えます。`--realtime` でその超過を測定します。
+
+LKは新規ボールを発見する検出器ではないため、探索と再捕捉には小さいモデル側のYOLOv5sを残します。今回は追加学習せず、既存のs重みを使いました。
+選手保持の推定、人物検出、姿勢推定、YOLOv5nの追加学習、量子化は今回の比較には含めません。
+
+### 比較したアルゴリズム
+
+| オプション | 方法 | 今回の判断 |
+|---|---|---|
+| `forward` | 同じオンライン結果を遅らせるだけ | 補正の効果を測る対照 |
+| `bridge` | 前後のYOLO位置・枠サイズを短区間で線形補間 | F相当の検出量では最良。追加計算も小さく、主な推奨候補 |
+| `rts` | 位置・速度のKalmanフィルタと固定窓のRTS後向き平滑化 | F入力で81.20%。バウンド等で等速仮定が外れる影響が残る |
+| `beam` | 検出候補と欠測候補から幅8の経路探索 | F入力で82.10%。bridgeより計算が大きく、この動画では上回らなかった。厳密なViterbiではない |
+| `bidir` | 後のYOLO検出位置から過去画像へ逆向きLKし、前向き追跡と整合性を確認 | 検出を減らした構成では最良。budget10で62.45%→70.58% |
+
+`bridge` と `bidir` は最大0.4秒までの短い区間を補います。急な動きや長い遮蔽を強制的に滑らかな線で埋める設計にはしていません。
+ただし誤ったYOLO位置間を補間することや、逆向きLKが背景に移ることはあります。物理的に正しい軌道を保証するものではありません。
+
+実装は既存のNumPy/OpenCVだけで動作します。固定窓の考え方は [GTSAM FixedLagSmoother](https://borglab.github.io/gtsam/fixedlagsmoother/)、RTSの参考は [FilterPy KalmanFilter](https://filterpy.readthedocs.io/en/latest/kalman/KalmanFilter.html)、LKは [OpenCV](https://docs.opencv.org/4.x/dc/d6b/group__video__track.html) を参照しました。GTSAMやFilterPy製品自体を導入・速度比較したわけではありません。
+
+### 検出回数と遅延長で分かったこと
+
+| プロファイル | 通常の最大間隔 | 連続1秒のYOLO上限 | 960入力で実際の回数 | 実平均頻度 | 2秒遅延で最良の方式 / TSR |
+|---|---:|---:|---:|---:|---|
+| `f` | 3フレーム | 15回 | 1,076 | 12.85回/動画秒 | bridge / 82.47% |
+| `budget10` | 6フレーム | 10回 | 649 | 7.75回/動画秒 | bidir / 70.58% |
+| `budget5` | 12フレーム | 5回 | 330 | 3.94回/動画秒 | bidir / 52.84% |
+
+上限は固定周期ではありません。追跡の失敗時は前倒しし、予算を使い切れば延期します。高信頼度の検出から0.3秒で失効するFのルールは各構成で共通です。
+検出を減らすほど遅延補正の価値はありますが、失った観測を完全には補えません。B程度の精度を優先するなら、今回はf / bridgeを選びます。
+
+0.2・0.4・1・2・3秒の遅延も比較しました。bridge/bidirでは0.4秒以上の結果が同一でした。これは補正対象を最大0.4秒に制限した実装での結果です。
+2秒より長い文脈で保持者・誤候補を判断する方法まで不要という意味ではありません。今後その判断を実装する場合は、別の評価が必要です。
+CPUの参考実験では、640入力で55.55%・22.28fps、416入力で32.13%・35.49fpsでした。解像度を下げるとこの小さいボールの精度を大きく失ったため、対象GPUで960入力を維持する構成を優先します。
+
+### 実行するプログラムと手順
+
+Gは専用の `scripts/run_fixed_lag.py` から実行します。既存の `run_experiment.py` のA〜Fは従来どおりです。共通設定は `configs/experiment_f.json`、検出頻度の差は `scripts/research_g.py` の `PROFILES` にあります。
+Gの補正本体は `src/lag_tracking.py`、因果的なSystem 1 / 2は既存の `src/adaptive_tracking.py`、検出器は `src/detector.py` です。
+
+PowerShellで `basketball_tracking_midterm` に移動し、既存の `.venv` と `weights/finetuned/s/` を使います。
+
+```powershell
+# 推奨候補：精度重視、2秒遅延、30fpsでのファイル到着を模擬
+.\.venv\Scripts\python.exe scripts/run_fixed_lag.py --profile f --method bridge --lag 2 --imgsz 960 --device cuda:0 --realtime --output results/g_recommended_new
+
+# YOLO回数をさらに減らす比較候補
+.\.venv\Scripts\python.exe scripts/run_fixed_lag.py --profile budget10 --method bidir --lag 2 --imgsz 960 --device cuda:0 --realtime --output results/g_sparse_new
+
+# 最速でファイルを処理する測定は --realtime を外す
+# 動画保存を省くときは --no-video（時間比較時は保存条件をそろえる）
+
+# 保存された候補から追跡を再現し、動画・時刻・予算・指標を監査
+.\.venv\Scripts\python.exe scripts/verify_g.py --fresh-root results/g_recommended_new --output results/g_recommended_new_verification.json
+```
+
+各runに `tracked.mp4`、補正前の `online.jsonl`、補正後の `tracking.jsonl`、`candidates.jsonl`、`metrics.json`、`timing.csv`、`release.csv` を保存します。
+補正位置のconfidenceはYOLOの確率ではないため空欄にし、`G_bridge` 等のsourceで区別します。
+動画の末尾は未来フレームが足りないので `full_lookahead=false` として保存します。ペーシングありでは末尾も時刻に応じて出力します。
+
+方式比較を再現する場合は、最初に全フレームs/Bの保存候補から低頻度入力を作り、それぞれ同じ入力で後処理だけを比較します。以下の元runはこのPC上の記録です。
+
+```powershell
+.\.venv\Scripts\python.exe scripts/research_g.py frontend --cache-run results/condition_f_20261027/s_B_20261027T010601520998Z --profile budget10 --output results/g_front10_new
+.\.venv\Scripts\python.exe scripts/research_g.py frontend --cache-run results/condition_f_20261027/s_B_20261027T010601520998Z --profile budget5 --output results/g_front5_new
+.\.venv\Scripts\python.exe scripts/research_g.py sweep --frontends results/condition_f_20261027/s_F_20261027T010310356111Z results/g_front10_new results/g_front5_new --lags 2 --methods forward bridge rts beam bidir --output results/g_sweep_new
+.\.venv\Scripts\python.exe scripts/research_g.py sweep --frontends results/condition_f_20261027/s_F_20261027T010310356111Z results/g_front10_new --lags 0.2 0.4 1 3 --methods bridge bidir --output results/g_lag_new
+```
+
+現在フレームで再検出が必要と判断した後に、そのフレームの保存候補だけを参照します。候補再生から推論込みのFPSは報告しません。
+今回の報告書の再生成は次の手順です（上の任意名の再実行フォルダとは別に、今回の保存先を使用します）。
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_g.py --sweeps results/condition_g/sweep_2s results/condition_g/sweep_bidir results/condition_g/sweep_lag --fresh-root results/condition_g/fresh --output results/condition_g/verification.json
+.\.venv\Scripts\python.exe scripts/summarize_g.py
+```
+
+正解ラベルは事後評価と描画だけに使用します。629不可視フレームの真の位置は不明なので、保持中・遮蔽中の推定位置が正しいかは今回のアノテーションから判定できません。
+今回の31比較から選んだ方式は開発用の暫定候補です。別の動画を用意できた時点で、方式・遅延・検出予算を固定して評価します。

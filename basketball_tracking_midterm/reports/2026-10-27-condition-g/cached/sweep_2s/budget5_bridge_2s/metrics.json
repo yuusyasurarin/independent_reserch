@@ -1,0 +1,70 @@
+{
+  "tracking": {
+    "evaluated_position_frames": 1883,
+    "total_frames": 2512,
+    "tsr_iou_03": 0.5209771640998406,
+    "tsr_iou_05": 0.35156664896441847,
+    "mean_iou": 0.3442767465591913,
+    "output_rate_visible": 0.807222517259692,
+    "output_rate_all": 0.6771496815286624,
+    "cle_px": {
+      "n": 1520,
+      "mean": 19.29350922291453,
+      "median": 11.097556123350909,
+      "p95": 55.8603838454235
+    },
+    "missing_outputs": 363,
+    "longest_failure_at_05_s": 1.0666666666666667,
+    "longest_no_output_s": 0.8666666666666667,
+    "failure_runs_ge3": 127,
+    "unknown_position_frames": 629,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 181,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "full_lookahead_tracking": {
+    "evaluated_position_frames": 1828,
+    "total_frames": 2452,
+    "tsr_iou_03": 0.526258205689278,
+    "tsr_iou_05": 0.3572210065645514,
+    "mean_iou": 0.3469300954748136,
+    "output_rate_visible": 0.8047045951859956,
+    "output_rate_all": 0.6733278955954323,
+    "cle_px": {
+      "n": 1471,
+      "mean": 19.40050628323839,
+      "median": 10.86430717565682,
+      "p95": 56.59507795369906
+    },
+    "missing_outputs": 357,
+    "longest_failure_at_05_s": 1.0666666666666667,
+    "longest_no_output_s": 0.8666666666666667,
+    "failure_runs_ge3": 123,
+    "unknown_position_frames": 624,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 180,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "algorithm_seconds": 0.0477404999837745,
+  "algorithm_ms_per_frame": 0.019004976108190484,
+  "timing_scope": "coordinates/candidates only; excludes YOLO, decoding and rendering",
+  "peak_state_rows": 73
+}

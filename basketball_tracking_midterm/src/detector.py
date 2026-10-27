@@ -45,7 +45,13 @@ def verify_weight(cfg,size,condition):
         if selection['weights_sha256']!=info['sha256'] or selection['selection_split']!='val' or cfg['selection_split']!='val':
             raise ValueError('Use operating settings frozen on val, and set selection_split=val')
         for key in ('imgsz','confidence','nms_iou','half'):
-            if cfg[key]!=selection['operating_settings'][key]:raise ValueError(f'Config {key} differs from exported val-selected setting')
+            if cfg[key]!=selection['operating_settings'][key]:
+                override=cfg.get('g_development_override',{})
+                # G may explicitly STUDY a smaller input. Never rewrite export evidence,
+                # silently apply the override to B-F, or call it val-selected.
+                allowed=(condition=='G' and key=='imgsz' and override.get('imgsz')==cfg['imgsz']
+                         and isinstance(override.get('reason'),str) and bool(override['reason'].strip()))
+                if not allowed:raise ValueError(f'Config {key} differs from exported val-selected setting')
     return path,info,class_id
 
 

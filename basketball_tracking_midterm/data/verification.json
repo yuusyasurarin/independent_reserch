@@ -5,9 +5,9 @@
     "expensive_actions_default_off": true,
     "colab_execution_by_this_check": false
   },
-  "colab_upload_sha256": "29f46f4593e5bc435a48bad5d64bfb54a836ff7ed2a93e3b5302447d181894c1",
+  "colab_upload_sha256": "15697db6a473342d3e7c74e9b2a425c0600f32660a8f5c183cc4f52979982a13",
   "tests": {
-    "run": 31,
+    "run": 39,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -203,6 +203,66 @@
       "complete_video": false,
       "processing_fps": 12.7964965581091,
       "tsr05": 0.8135593220338984
+    },
+    {
+      "run": "results/condition_g/fresh/s_G_budget10_bidir_416_cpu_20261027T094405897796Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 35.49354925479542,
+      "tsr05": 0.32129580456718004
+    },
+    {
+      "run": "results/condition_g/fresh/s_G_budget10_bidir_640_cpu_20261027T094201212139Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 22.278397742142605,
+      "tsr05": 0.5554965480616039
+    },
+    {
+      "run": "results/condition_g/fresh/s_G_budget10_bidir_960_cuda0_20261027T094905935771Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 41.00634534048245,
+      "tsr05": 0.7057886351566649
+    },
+    {
+      "run": "results/condition_g/fresh/s_G_f_bridge_960_cuda0_20261027T094051778520Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 45.08637810570805,
+      "tsr05": 0.8247477429633564
+    },
+    {
+      "run": "results/condition_g/fresh/s_G_f_bridge_960_cuda0_20261027T095044774094Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 37.8129361414465,
+      "tsr05": 0.8247477429633564
+    },
+    {
+      "run": "results/condition_g/smoke/s_G_budget10_bridge_640_cpu_20261027T093721976636Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 20.42158490047593,
+      "tsr05": 0.635593220338983
     },
     {
       "run": "results/experiment_B/s_B_20261026T093145953885Z",

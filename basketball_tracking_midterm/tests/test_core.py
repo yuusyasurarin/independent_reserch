@@ -203,6 +203,15 @@ class IntegrationTests(unittest.TestCase):
             selection=dict(weights_sha256=sha256(p),selection_split='val',operating_settings={k:cfg[k] for k in ('imgsz','confidence','nms_iou','half')})
             save_json(root/'final_selection.json',selection)
             self.assertEqual(verify_weight(cfg,'s','B')[2],0)
+            cfg['imgsz']=640
+            with self.assertRaises(ValueError):verify_weight(cfg,'s','G')
+            cfg['g_development_override']=dict(imgsz=640,reason='Explicit development test')
+            self.assertEqual(verify_weight(cfg,'s','G')[2],0)
+            with self.assertRaises(ValueError):verify_weight(cfg,'s','F')
+            cfg['confidence']=.4
+            with self.assertRaises(ValueError):verify_weight(cfg,'s','G')
+            cfg['confidence']=selection['operating_settings']['confidence']
+            cfg['imgsz']=selection['operating_settings']['imgsz'];cfg.pop('g_development_override')
             cfg['confidence']=.4
             with self.assertRaises(ValueError):verify_weight(cfg,'s','B')
             cfg['confidence']=selection['operating_settings']['confidence'];p.write_bytes(b'changed')

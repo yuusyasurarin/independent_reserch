@@ -1,0 +1,292 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget10_beam_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget10_bridge_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget10_forward_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget10_rts_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget5_beam_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget5_bridge_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget5_forward_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\budget5_rts_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\f_beam_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\f_bridge_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\f_forward_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_2s\\f_rts_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_bidir\\budget10_bidir_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_bidir\\budget5_bidir_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_bidir\\f_bidir_2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bidir_0.2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bidir_0.4s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bidir_1s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bidir_3s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bridge_0.2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bridge_0.4s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bridge_1s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\budget10_bridge_3s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bidir_0.2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bidir_0.4s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bidir_1s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bidir_3s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bridge_0.2s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bridge_0.4s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bridge_1s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\sweep_lag\\f_bridge_3s",
+      "status": "passed",
+      "frames": 2512,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true
+    },
+    {
+      "run": "results\\condition_g\\fresh\\s_G_budget10_bidir_416_cpu_20261027T094405897796Z",
+      "status": "passed",
+      "frames": 2512,
+      "decoded_video_frames": 2512,
+      "causal_frontend_replay_identical": true,
+      "fixed_lag_replay_identical": true,
+      "rolling_yolo_budget_valid": true,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true,
+      "yolo_calls": 562,
+      "metrics_sha256": "4b7a99bf69bb0373716ef7428afab8e5205fb130d0ebfdc31cc1d3bbb049e951",
+      "run_config_sha256": "186d97beb38676be3ddc204eef08328c8945409643828f0d318bd937afbd65fb"
+    },
+    {
+      "run": "results\\condition_g\\fresh\\s_G_budget10_bidir_640_cpu_20261027T094201212139Z",
+      "status": "passed",
+      "frames": 2512,
+      "decoded_video_frames": 2512,
+      "causal_frontend_replay_identical": true,
+      "fixed_lag_replay_identical": true,
+      "rolling_yolo_budget_valid": true,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true,
+      "yolo_calls": 614,
+      "metrics_sha256": "b0720a6f8a78f7f2e7bc1388ae456f27443308a5cda3b46bc49c5b65d5fc0f50",
+      "run_config_sha256": "00dde178d8c57f21cacc9de83eee862d8f1c3bcff69db8977707ce0129c94de7"
+    },
+    {
+      "run": "results\\condition_g\\fresh\\s_G_budget10_bidir_960_cuda0_20261027T094905935771Z",
+      "status": "passed",
+      "frames": 2512,
+      "decoded_video_frames": 2512,
+      "causal_frontend_replay_identical": true,
+      "fixed_lag_replay_identical": true,
+      "rolling_yolo_budget_valid": true,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true,
+      "yolo_calls": 649,
+      "metrics_sha256": "5c96984dd7697bd8b92d39d0ef9fd74dcde23707ffedf9dfe19e560f9013aae9",
+      "run_config_sha256": "924643bec67a1cd189d2aa7c2f5bc55b459b45f309a55ed3b9f4e3f7e326f54c"
+    },
+    {
+      "run": "results\\condition_g\\fresh\\s_G_f_bridge_960_cuda0_20261027T094051778520Z",
+      "status": "passed",
+      "frames": 2512,
+      "decoded_video_frames": 2512,
+      "causal_frontend_replay_identical": true,
+      "fixed_lag_replay_identical": true,
+      "rolling_yolo_budget_valid": true,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true,
+      "yolo_calls": 1076,
+      "metrics_sha256": "044888c5c701bd7faf695f5b2af9136b328879c4c74cd9619682f90d9f2692fb",
+      "run_config_sha256": "2417e23473993c1d7f7f126bfad533954f5a97ba13548794025b293ddfc17e24"
+    },
+    {
+      "run": "results\\condition_g\\fresh\\s_G_f_bridge_960_cuda0_20261027T095044774094Z",
+      "status": "passed",
+      "frames": 2512,
+      "decoded_video_frames": 2512,
+      "causal_frontend_replay_identical": true,
+      "fixed_lag_replay_identical": true,
+      "rolling_yolo_budget_valid": true,
+      "temporal_boundaries_valid": true,
+      "reevaluated_metrics_identical": true,
+      "yolo_calls": 1076,
+      "metrics_sha256": "9e2c9b65bf2c373a8bf72345e1e2a952465867a557843efe6665ecf9cce02b6a",
+      "run_config_sha256": "e78a2291ffad0310b7c613f49fba883e84e7ae363da0cbd796d46ba40917fdc0"
+    }
+  ]
+}

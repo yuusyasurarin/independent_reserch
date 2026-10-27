@@ -1,0 +1,14 @@
+{
+  "run": "results\\condition_g\\fresh\\s_G_budget10_bidir_416_cpu_20261027T094405897796Z",
+  "status": "passed",
+  "frames": 2512,
+  "decoded_video_frames": 2512,
+  "causal_frontend_replay_identical": true,
+  "fixed_lag_replay_identical": true,
+  "rolling_yolo_budget_valid": true,
+  "temporal_boundaries_valid": true,
+  "reevaluated_metrics_identical": true,
+  "yolo_calls": 562,
+  "metrics_sha256": "4b7a99bf69bb0373716ef7428afab8e5205fb130d0ebfdc31cc1d3bbb049e951",
+  "run_config_sha256": "186d97beb38676be3ddc204eef08328c8945409643828f0d318bd937afbd65fb"
+}

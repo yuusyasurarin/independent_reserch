@@ -1,0 +1,14 @@
+{
+  "run": "results\\condition_g\\fresh\\s_G_f_bridge_960_cuda0_20261027T095044774094Z",
+  "status": "passed",
+  "frames": 2512,
+  "decoded_video_frames": 2512,
+  "causal_frontend_replay_identical": true,
+  "fixed_lag_replay_identical": true,
+  "rolling_yolo_budget_valid": true,
+  "temporal_boundaries_valid": true,
+  "reevaluated_metrics_identical": true,
+  "yolo_calls": 1076,
+  "metrics_sha256": "9e2c9b65bf2c373a8bf72345e1e2a952465867a557843efe6665ecf9cce02b6a",
+  "run_config_sha256": "e78a2291ffad0310b7c613f49fba883e84e7ae363da0cbd796d46ba40917fdc0"
+}

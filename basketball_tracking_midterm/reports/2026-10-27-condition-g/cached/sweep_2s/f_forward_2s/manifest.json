@@ -1,0 +1,76 @@
+{
+  "method": "forward",
+  "lag_s": 2.0,
+  "profile": "f",
+  "source_frontend": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\results\\condition_f_20261027\\s_F_20261027T010310356111Z",
+  "source_tracking_sha256": "549312caada8e78846b2db9d26e5b1266ec11ce82434085eed760163ed8a3d29",
+  "source_candidates_sha256": "47980fcf55d4d5264046949f5104e45ea58ee28678445561db928c86a14241db",
+  "source_sha256": "07d4b57f8fd5777548c902cb60dedf21f1b56db18d481ab8cae2f9d70083d89a",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+  "config": {
+    "video": "../編集済み元データ/experiment10_編集.mp4",
+    "ground_truth": "data/experiment10_gt.csv",
+    "dataset": "../colab_ball_yolo/dataset",
+    "yolov5_repo": "vendor/yolov5",
+    "device": "cuda:0",
+    "imgsz": 960,
+    "confidence": 0.25,
+    "candidate_conf": 0.001,
+    "nms_iou": 0.45,
+    "half": false,
+    "detect_interval": 3,
+    "max_age_s": 0.3,
+    "association_base_px": 40,
+    "association_speed_px_s": 1800,
+    "byte_activation_threshold": 0.25,
+    "byte_matching_threshold": 0.8,
+    "byte_lost_buffer_s": 0.5,
+    "selection_split": "val",
+    "save_video": true,
+    "save_failures": 8,
+    "telemetry_interval_s": 5,
+    "adaptive": {
+      "max_interval": 3,
+      "max_yolo_hz": 15,
+      "min_points": 4,
+      "max_points": 30,
+      "fb_error_px": 1.5,
+      "min_flow_fraction": 0.5,
+      "motion_gate_diameters": 2.5,
+      "velocity_alpha": 0.7,
+      "max_prediction_frames": 2,
+      "low_confidence": 0.1,
+      "motion_bonus": 0.12,
+      "size_penalty": 0.04,
+      "challenge_margin": 0.15
+    },
+    "models": {
+      "s": {
+        "pretrained": "weights/pretrained/yolov5s.pt",
+        "finetuned": "weights/finetuned/s/best.pt",
+        "pretrained_class": 32,
+        "finetuned_class": 0
+      },
+      "m": {
+        "pretrained": "weights/pretrained/yolov5m.pt",
+        "finetuned": "weights/finetuned/m/best.pt",
+        "pretrained_class": 32,
+        "finetuned_class": 0
+      }
+    }
+  },
+  "video": {
+    "path": "D:\\自主研究\\independent_reserch\\編集済み元データ\\experiment10_編集.mp4",
+    "sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+    "fps": 30.0,
+    "frame_count": 2512,
+    "width": 1280,
+    "height": 720,
+    "duration_s": 83.73333333333333,
+    "decoded_frames": 0,
+    "exact_source_pixel_matches": [],
+    "timestamp_basis": "frame_id / nominal fps; constant-fps source required"
+  },
+  "selection_scope": "experiment10 development only",
+  "yolo_calls": 1076
+}
