@@ -2,6 +2,7 @@
 
 目的は、全フレームYOLOに対して、低頻度YOLOの中間フレームをKCFで補う効果を実測することです。
 2026-10-27にs/mのA〜Eを実測しました。方法・結果・制約は後半の「8. 実測結果」にまとめています。
+続いて条件F（局所特徴点追跡＋移動予測＋適応再検出）を追加しました。方法と再実行手順は「9. 条件F」、測定結果は [Fの実験レポート](reports/2026-10-27-condition-f/README.md) にまとめます。
 得点判定、LSTM、選手追跡、コート変換、3D復元は含みません。
 
 このフォルダ内に学習・推論・評価を新規作成しました。既存コード・元画像・ラベル・動画は参照のみです。
@@ -37,7 +38,7 @@ Set-Location 'D:\自主研究\independent_reserch\basketball_tracking_midterm'
 experiment10と学習元動画のSHA-256一致、provenanceに記録された元フレームの画素ハッシュ一致はありませんでした。
 2026-10-26にユーザーから、**experiment10は別の撮影映像で、同じプレーの重複もない**と確認を受けました。
 `configs/data_provenance.json` にこの確認と対象動画のSHA-256を保存しています。機械的な完全一致検査と、人手の確認を区別して記録します。
-今回のexperiment10は学習元動画と独立した評価映像として扱います。ただし、83.733秒の1動画であり、別試合・別体育館への一般化を十分に示すものではありません。
+A〜Eの初回実験ではexperiment10を学習元動画と独立した評価映像として扱いました。条件Fはその結果を確認して設計したため、**experiment10での開発実験**です。Fの独立した最終評価とは呼びません。83.733秒の1動画であり、別試合・別体育館への一般化も未確認です。
 別動画へ設定を変えた場合、この確認は引き継ぎません。
 
 検査を再実行するコマンド（環境準備は次節）：
@@ -420,3 +421,80 @@ $comparisonRuns = @(Get-ChildItem -LiteralPath 'results/comparison_20261027' -Di
 - 連続ロスト指標は位置評価可能な連続区間だけを数え、不可視区間をまたぐ真の再捕捉時間ではありません。
 - 15分反復安定性試験、独立した別試合・別体育館での評価、Colab切断からの実optimizer再開は今回未実施です。
 - `VERIFICATION.md`と`EVALUATION_B.md`は以前の時点の記録です。今回のs/m比較は本節と2026-10-27のreportsを参照してください。
+
+## 9. 条件F：局所特徴点追跡・移動予測・適応再検出
+
+FはBと同じ追加学習済みYOLOを使い、検出しないフレームを局所Lucas–Kanade（LK）特徴点追跡で補います。
+実装は `src/adaptive_tracking.py`、設定は `configs/experiment_f.json`、入口は既存の `scripts/run_experiment.py` です。
+KCFを使うEは比較用に残しています。人物検出・保持者の特定・姿勢推定・3D物理モデルはFに含めていません。
+
+experiment10を全2,512フレーム処理し、同じ実行環境でB/Eも測り直しました。TSR@0.5は1,883可視フレームを共通分母とする追跡成功率です。
+
+| モデル | 条件 | TSR@0.5 | 処理fps | YOLO回数 |
+|---|---|---:|---:|---:|
+| s | B | 81.47% | 12.56 | 2,512 |
+| s | E | 44.34% | 27.76 | 838 |
+| s | F | **77.85%** | **18.25** | **1,076** |
+| m | B | 84.23% | 9.03 | 2,512 |
+| m | E | 19.01% | 19.94 | 838 |
+| m | F | **77.43%** | **15.94** | **1,109** |
+
+s/FはBとの差が-3.61ポイント、速度はBの1.45倍、YOLO回数は57.17%減でした。Eからは+33.51ポイント改善しましたが、速度はEの0.66倍です。
+m/FはBとの差が-6.80ポイント、速度はBの1.77倍でした。今回のF同士ではsが精度・速度ともに上回っています。
+この1動画でBと同等の精度になったとは断定しません。Fは今回のGPU環境でも30fpsに届いておらず、小型CPU端末は未検証です。
+前節の初回測定とは処理速度が異なるため、上表では今回測り直したB/Eだけと比較しています。実行順はs/F→s/B→s/E→m/F→m/B→m/Eの各1回です。
+
+### Fの処理
+
+1. ボール枠の内部から最大30点の特徴点を選び、現在と直前の画像のボール周辺だけを元の画素解像度で追跡します。
+2. 前向き・逆向きに追跡した位置のずれが1.5px以内の点を残し、移動量の外れ値も除きます。4点以上かつ半数以上が有効な場合に中央値の移動を採用します。
+3. 直近の移動から速度を更新し、次の位置を予測します。YOLO候補は信頼度・予測位置との距離・枠サイズの変化で選びます。
+4. 通常は前回検出から3フレームでYOLOを実行します。特徴点不足や急な動きでは前倒しします。急変を一定速度モデルへ無理に合わせず、再検出で確認します。
+5. 30fps映像の連続30フレームで検出は最大15回です。上限到達時は検出を延期します。これは動画時間に対する予算であり、実際の処理時間1秒あたり15回という意味ではありません。
+6. 画像による位置更新ができない場合は最大2フレームだけ速度予測を出力します。高信頼度YOLOで確認されない出力は最大0.3秒で失効します。
+7. 信頼度0.10以上0.25未満の候補は既存軌跡の近くにある場合だけ救済します。新規開始には使わず、高信頼度検出からの0.3秒期限も延長しません。
+8. 離れた位置に強い候補が出た場合、2回の検出でその近傍に候補があることを確認して対象を切り替えます。距離だけで誤検出へ固定され続けることを防ぐための処理です。
+
+「ボールの動きは連続する」という仮定を使いますが、シュート・ドリブル・キャッチを分類するものではありません。
+人物による遮蔽からの復帰も画像と再検出によるもので、保持者情報を利用したものではありません。
+特徴点が選手や背景へ移る誤追跡、遠方候補への誤切替、急な方向転換時の予測誤差は残り得ます。
+
+`tracking.jsonl` の `source` は `YOLO` / `YOLO_low` / `LK` / `motion_prediction` / `none` を区別します。
+LKと速度予測にはYOLOのconfidenceを付けません。`events` に前倒し理由、予算による延期、候補の救済・再捕捉を保存します。
+正解ラベルは対象選択に渡さず、処理後の描画・評価だけに使用します。未来フレームや将来の検出結果も使いません。
+
+### 実行方法
+
+学習はやり直さず、既に配置した `weights/finetuned/s/` と `m/` を使用します。
+PowerShellで `basketball_tracking_midterm` に移動して実行します。出力先は実験ごとに別の親フォルダを指定してください。
+
+```powershell
+# まず120フレームで動作確認（最終精度として扱わない）
+.\.venv\Scripts\python.exe scripts/run_experiment.py --config configs/experiment_f.json --sizes s --conditions F --max-frames 120 --offline-guard --output results/f_smoke_new
+
+# Fだけを全動画で実行
+.\.venv\Scripts\python.exe scripts/run_experiment.py --config configs/experiment_f.json --sizes s m --conditions F --offline-guard --output results/f_full_new
+
+# B・Eも同じ実行環境で測り直す比較実験（今回実行した形式）
+.\.venv\Scripts\python.exe scripts/run_experiment.py --config configs/experiment_f.json --sizes s m --conditions F B E --offline-guard --output results/condition_f_20261027
+```
+
+各runに `tracked.mp4`、追跡・候補・時間のログ、`metrics.json`、失敗画像を保存します。
+追跡処理時間には、検出要否を決める前の特徴点追跡も含みます。条件Fの `scheduled_detection_hz` は固定値を持たないためnullです。
+実際の検出頻度は `realized_yolo_calls_per_video_second` と `yolo_calls` を参照します。
+Fの検出PR/APは適応的に選ばれたフレームだけの値なので、B/Eとの方式全体の比較には全可視フレーム共通のTSRを使います。
+
+```powershell
+$fRuns = @(Get-ChildItem -LiteralPath 'results/condition_f_20261027' -Directory | Sort-Object CreationTime | ForEach-Object { $_.FullName })
+.\.venv\Scripts\python.exe scripts/verify_experiment_runs.py --runs $fRuns --output results/condition_f_20261027/verification.json
+.\.venv\Scripts\python.exe scripts/summarize_condition_f.py --runs $fRuns --output reports/2026-10-27-condition-f
+```
+
+集計先は未使用のフォルダを指定します。上記の集計にはs/mそれぞれB/E/Fの全6runが必要です。
+Fの検証では元動画と保存検出候補から追跡を再実行し、正解ラベルを使わず適応スケジュール・出力・イベントが完全一致することを確認します。
+さらに全出力動画のデコード、ログのフレーム対応、検出予算、座標範囲、保存予測からの指標再計算を検証します。
+
+測定値と実行順、設定・ソースのハッシュは [条件Fの実験レポート](reports/2026-10-27-condition-f/README.md) を参照してください。
+experiment10の既存結果を見て方式を設計しているため、**今回の結果は開発用動画への適合を含み、独立した汎化評価ではありません**。
+検出器の設定は既存のval確定値を維持していますが、F固有の追跡設定がvalで最適化されたという意味ではありません。
+別の動画が用意できた時点で設定を固定して評価します。低スペックCPU端末での速度や長時間安定性は今回のGPU実験から断定しません。

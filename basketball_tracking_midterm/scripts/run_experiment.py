@@ -1,4 +1,4 @@
-"""Sequential offline A-E experiment runner. Missing trained weights are an error."""
+"""Sequential offline A-F experiment runner. Missing trained weights are an error."""
 from __future__ import annotations
 
 import argparse
@@ -61,7 +61,8 @@ def run_one(cfg,size,condition,args):
             rendering=cfg['save_video'],realtime_pacing=args.realtime,loop_seconds=args.loop_seconds,
             warmup_calls=3,precision='FP16' if cfg['half'] else 'FP32',
             source_sha256={str(p.relative_to(ROOT)):sha256(p) for folder in ('src','scripts') for p in (ROOT/folder).glob('*.py')},
-            interpretation='Repeated-video stability test' if args.loop_seconds else 'Single pass through experiment10',
+            interpretation=('Development experiment on previously inspected experiment10; not independent validation'
+                if condition=='F' else ('Repeated-video stability test' if args.loop_seconds else 'Single pass through experiment10')),
             timing='CUDA synchronized at each stage; includes transfers/NMS in pre/post stages; not camera-to-display latency')
         overlap=ROOT/'data/audit/overlap.json'
         if overlap.is_file():
@@ -100,7 +101,9 @@ def run_one(cfg,size,condition,args):
                     continue
                 if frame_id>=info['frame_count']:raise ValueError('Video has more frames than expected')
                 read_done=time.perf_counter()
-                detected=policy.needs_detection(frame_id)
+                prepare_start=time.perf_counter()
+                detected=policy.needs_detection(frame_id,frame)
+                prepare_ms=(time.perf_counter()-prepare_start)*1000
                 candidates=[];timing=dict(preprocess_ms=0.,inference_ms=0.,postprocess_ms=0.)
                 if detected:
                     candidates,timing=detector.detect(frame);yolo_calls+=1
@@ -128,7 +131,7 @@ def run_one(cfg,size,condition,args):
                     if remaining>0:
                         sleep_start=time.perf_counter();time.sleep(remaining);sleep_s=time.perf_counter()-sleep_start
                 all_timing.append(dict(global_frame_id=total-1,cycle=cycle,frame_id=frame_id-1,yolo_executed=detected,
-                    decode_ms=(read_done-work_start)*1000,**timing,tracking_ms=(track_end-track_start)*1000,
+                    decode_ms=(read_done-work_start)*1000,**timing,tracking_ms=prepare_ms+(track_end-track_start)*1000,
                     render_save_ms=(render_end-track_end)*1000,log_telemetry_ms=(work_done-render_end)*1000,
                     processing_ms=(work_done-work_start)*1000,pacing_sleep_ms=sleep_s*1000,
                     schedule_lag_ms=max(0.,(time.perf_counter()-started-total/info['fps'])*1000) if args.realtime else None))
@@ -143,7 +146,7 @@ def run_one(cfg,size,condition,args):
         memory=dict(max_allocated_bytes=detector.torch.cuda.max_memory_allocated(detector.device),
                     max_reserved_bytes=detector.torch.cuda.max_memory_reserved(detector.device)) if detector.device.type=='cuda' else None
         performance=dict(processed_frames=total,yolo_calls=yolo_calls,warmup_yolo_calls=detector.warmup_calls,
-            video_fps=info['fps'],scheduled_detection_hz=info['fps']/(cfg['detect_interval'] if condition in 'DE' else 1),
+            video_fps=info['fps'],scheduled_detection_hz=None if condition=='F' else info['fps']/(cfg['detect_interval'] if condition in 'DE' else 1),
             realized_yolo_calls_per_video_second=yolo_calls/(total/info['fps']) if total else None,
             realized_yolo_calls_per_wall_second=yolo_calls/elapsed,wall_seconds=elapsed,pacing_sleep_seconds=sleeps,
             wall_fps=total/elapsed,processing_fps=total/(elapsed-sleeps),
@@ -192,7 +195,7 @@ def run_one(cfg,size,condition,args):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config',default=str(ROOT/'configs/experiment.json'))
-    p.add_argument('--conditions',nargs='+',choices=list('ABCDE'),required=True)
+    p.add_argument('--conditions',nargs='+',choices=list('ABCDEF'),required=True)
     p.add_argument('--sizes',nargs='+',choices=['s','m'],required=True)
     p.add_argument('--output',default='results')
     p.add_argument('--max-frames',type=int,default=0,help='Partial smoke test only')

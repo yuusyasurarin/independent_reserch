@@ -2,4 +2,5 @@
 data/** -text whitespace=cr-at-eol
 reports/** -text whitespace=cr-at-eol
 weights/**/*.metadata.json -text whitespace=cr-at-eol
+configs/experiment_f.json -text
 *.py text eol=lf

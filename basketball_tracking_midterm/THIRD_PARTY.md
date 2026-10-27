@@ -7,6 +7,7 @@
 | ByteTrack | Roboflow Supervision 0.25.0 | [固定版実装](https://github.com/roboflow/supervision/blob/0.25.0/supervision/tracker/byte_tracker/core.py)、[MIT License](https://github.com/roboflow/supervision/blob/0.25.0/LICENSE.md) |
 | ByteTrackの元研究 | ByteTrack: Multi-Object Tracking by Associating Every Detection Box | [論文](https://arxiv.org/abs/2110.06864)、[公式実装](https://github.com/ifzhang/ByteTrack) |
 | KCF | opencv-contrib-python 4.10.0.84のTrackerKCF | [OpenCV contrib 4.10.0 tracking](https://github.com/opencv/opencv_contrib/tree/4.10.0/modules/tracking)、Apache-2.0 |
+| 条件Fの特徴点・局所LK追跡 | OpenCV 4.10.0のgoodFeaturesToTrack / calcOpticalFlowPyrLK | [固定版のvideo実装](https://github.com/opencv/opencv/tree/4.10.0/modules/video)、Apache-2.0。速度予測・候補選択・検出予算は本プロジェクトの実装 |
 | 学習・推論ランタイム | PyTorch 2.5.1／torchvision 0.20.1、CUDA 12.1 wheel | [公式旧版インストール手順](https://pytorch.org/get-started/previous-versions/#v251) |
 
 YOLOv5ソースはsetup時に固定commitから取得し、元LICENSEをvendor内に保持します。

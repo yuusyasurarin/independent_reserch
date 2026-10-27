@@ -1,0 +1,39 @@
+{
+  "run": "results/condition_f_20261027/m_F_20261027T011112605641Z",
+  "condition": "F",
+  "model_size": "m",
+  "status": "passed",
+  "frames": 2512,
+  "video_frames_decoded": 2512,
+  "yolo_calls": 1109,
+  "log_alignment_and_schedule_valid": true,
+  "saved_prediction_reevaluation_identical": true,
+  "original_coordinate_bounds_valid": true,
+  "confidence_and_output_semantics_valid": true,
+  "sources": {
+    "YOLO": 968,
+    "LK": 1111,
+    "motion_prediction": 208,
+    "none": 198,
+    "YOLO_low": 27
+  },
+  "events": {
+    "detect_lost_search": 77,
+    "detect_flow_unreliable": 587,
+    "detect_interval": 434,
+    "detection_budget_deferred": 211,
+    "global_candidate_pending": 89,
+    "global_reacquisition": 39,
+    "low_confidence_recovery": 27,
+    "expired_since_high_confidence_yolo": 95,
+    "motion_change": 17,
+    "detect_motion_change": 11,
+    "out_of_bounds": 24
+  },
+  "run_config_sha256": "172dd425f040cbe2d1537998254323fad563768424603b79e85437a3f16c28ce",
+  "metrics_sha256": "9ca3d827ed276d8385a2889bb19bf836971989cc7475fd886a973821ca271285",
+  "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+  "causal_adaptive_replay_identical": true,
+  "rolling_detection_budget_valid": true
+}

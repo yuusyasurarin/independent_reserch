@@ -1,0 +1,179 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "run": "results/condition_f_20261027/s_F_20261027T010310356111Z",
+      "condition": "F",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 1076,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 778,
+        "LK": 1057,
+        "motion_prediction": 185,
+        "none": 441,
+        "YOLO_low": 51
+      },
+      "events": {
+        "detect_lost_search": 157,
+        "detect_flow_unreliable": 488,
+        "detect_interval": 417,
+        "detection_budget_deferred": 148,
+        "global_candidate_pending": 22,
+        "low_confidence_recovery": 51,
+        "motion_change": 18,
+        "detect_motion_change": 14,
+        "global_reacquisition": 8,
+        "expired_since_high_confidence_yolo": 312,
+        "out_of_bounds": 6
+      },
+      "run_config_sha256": "e1be4c8890569b6f51a2621fe25678c289120dafc6b2294591b596bf64c866c8",
+      "metrics_sha256": "2f23725cab1dc3538404d10735da55219e27978e3bea7ca4a2ce780775cf55a2",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+      "causal_adaptive_replay_identical": true,
+      "rolling_detection_budget_valid": true
+    },
+    {
+      "run": "results/condition_f_20261027/s_B_20261027T010601520998Z",
+      "condition": "B",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 1822,
+        "none": 690
+      },
+      "events": {},
+      "run_config_sha256": "ff06bf6eacfa70fee00d1eec35cf518d1ecb72a2030688aa7de48441651e2947",
+      "metrics_sha256": "156f46f9417e4f3bb32f630d70aea5e496310a80c09a36a9b5a111367c3bfeb9",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/condition_f_20261027/s_E_20261027T010929365037Z",
+      "condition": "E",
+      "model_size": "s",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 599,
+        "KCF": 885,
+        "none": 1028
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 311,
+        "yolo_miss_or_gate_rejection": 38
+      },
+      "run_config_sha256": "55000104a8a6ced8ca28880d6533152040be97a3f495ea2dcab48e84d493c365",
+      "metrics_sha256": "e9a1e83f8a4199d428767271f55134feb8bc8d67d459829e3075a6227fee1ac2",
+      "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/condition_f_20261027/m_F_20261027T011112605641Z",
+      "condition": "F",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 1109,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 968,
+        "LK": 1111,
+        "motion_prediction": 208,
+        "none": 198,
+        "YOLO_low": 27
+      },
+      "events": {
+        "detect_lost_search": 77,
+        "detect_flow_unreliable": 587,
+        "detect_interval": 434,
+        "detection_budget_deferred": 211,
+        "global_candidate_pending": 89,
+        "global_reacquisition": 39,
+        "low_confidence_recovery": 27,
+        "expired_since_high_confidence_yolo": 95,
+        "motion_change": 17,
+        "detect_motion_change": 11,
+        "out_of_bounds": 24
+      },
+      "run_config_sha256": "172dd425f040cbe2d1537998254323fad563768424603b79e85437a3f16c28ce",
+      "metrics_sha256": "9ca3d827ed276d8385a2889bb19bf836971989cc7475fd886a973821ca271285",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+      "causal_adaptive_replay_identical": true,
+      "rolling_detection_budget_valid": true
+    },
+    {
+      "run": "results/condition_f_20261027/m_B_20261027T011402384099Z",
+      "condition": "B",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 2512,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 2326,
+        "none": 186
+      },
+      "events": {},
+      "run_config_sha256": "193844c759be8575e620016a8d6b095053a7a995a300e67a49c930862e1c171b",
+      "metrics_sha256": "fa15f44d482bd55ccd805a22f5ada67e01940a0eb720125d77fc4728dd1903b3",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    },
+    {
+      "run": "results/condition_f_20261027/m_E_20261027T011856296572Z",
+      "condition": "E",
+      "model_size": "m",
+      "status": "passed",
+      "frames": 2512,
+      "video_frames_decoded": 2512,
+      "yolo_calls": 838,
+      "log_alignment_and_schedule_valid": true,
+      "saved_prediction_reevaluation_identical": true,
+      "original_coordinate_bounds_valid": true,
+      "confidence_and_output_semantics_valid": true,
+      "sources": {
+        "YOLO": 755,
+        "KCF": 1383,
+        "none": 374
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 125,
+        "yolo_miss_or_gate_rejection": 32
+      },
+      "run_config_sha256": "b07fd254d5fa8ac392ab96b7f787704b54b8ad57a1a0ab81b917cfd6e1bba7ff",
+      "metrics_sha256": "46fb1eb94fc0d44df50161477405caeb9dd7d58b413a9cd0ed77f4440a734ef4",
+      "weights_sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+    }
+  ]
+}

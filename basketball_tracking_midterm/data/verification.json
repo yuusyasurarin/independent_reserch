@@ -5,9 +5,9 @@
     "expensive_actions_default_off": true,
     "colab_execution_by_this_check": false
   },
-  "colab_upload_sha256": "6dd7dc20b1ce7cb458466902871deb7d2df41e833fc9fc0eb077bb601193b465",
+  "colab_upload_sha256": "29f46f4593e5bc435a48bad5d64bfb54a836ff7ed2a93e3b5302447d181894c1",
   "tests": {
-    "run": 23,
+    "run": 31,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -123,6 +123,86 @@
       "complete_video": true,
       "processing_fps": 46.606220983162295,
       "tsr05": 0.443441317047265
+    },
+    {
+      "run": "results/condition_f_20261027/m_B_20261027T011402384099Z",
+      "condition": "B",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 9.027068276933356,
+      "tsr05": 0.8422729686670207
+    },
+    {
+      "run": "results/condition_f_20261027/m_E_20261027T011856296572Z",
+      "condition": "E",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 19.9442177379355,
+      "tsr05": 0.19012214551248008
+    },
+    {
+      "run": "results/condition_f_20261027/m_F_20261027T011112605641Z",
+      "condition": "F",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 15.935259931127346,
+      "tsr05": 0.7742963356346256
+    },
+    {
+      "run": "results/condition_f_20261027/s_B_20261027T010601520998Z",
+      "condition": "B",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 12.559426398437324,
+      "tsr05": 0.8146574614976102
+    },
+    {
+      "run": "results/condition_f_20261027/s_E_20261027T010929365037Z",
+      "condition": "E",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 27.759505716715537,
+      "tsr05": 0.443441317047265
+    },
+    {
+      "run": "results/condition_f_20261027/s_F_20261027T010310356111Z",
+      "condition": "F",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 18.246745983769603,
+      "tsr05": 0.7785448751991503
+    },
+    {
+      "run": "results/condition_f_smoke/m_F_20261027T010130060142Z",
+      "condition": "F",
+      "size": "m",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 12.786955395968615,
+      "tsr05": 0.8728813559322034
+    },
+    {
+      "run": "results/condition_f_smoke/s_F_20261027T010056423472Z",
+      "condition": "F",
+      "size": "s",
+      "frames": 120,
+      "cycles": 1,
+      "complete_video": false,
+      "processing_fps": 12.7964965581091,
+      "tsr05": 0.8135593220338984
     },
     {
       "run": "results/experiment_B/s_B_20261026T093145953885Z",

@@ -14,6 +14,29 @@ from src.data import load_gt
 from src.evaluation import detection_metrics, tracking_metrics
 
 
+def replay_adaptive(manifest, predictions, logs):
+    """Independently replay current/past frames + saved detections, without GT."""
+    import cv2
+    from src.tracking import TrackingPolicy
+    previous_threads=cv2.getNumThreads()
+    cv2.setNumThreads(0)  # Same setting as pinned YOLOv5 utils/general.py during inference.
+    policy=TrackingPolicy('F',manifest['config'],manifest['video']['fps'])
+    cap=cv2.VideoCapture(manifest['video']['path'])
+    assert cap.isOpened()
+    try:
+        for i,(saved,log) in enumerate(zip(predictions,logs)):
+            ok,frame=cap.read()
+            assert ok
+            scheduled=policy.needs_detection(i,frame)
+            assert scheduled==log['yolo_executed'], f'Adaptive schedule mismatch at {i}'
+            replay=policy.update(frame,i,log['candidates'],scheduled)
+            for key in ('bbox','source','state','confidence','track_id','events','detection_reason'):
+                assert replay[key]==saved[key], f'Adaptive replay mismatch: {i}/{key}'
+    finally:
+        cap.release()
+        cv2.setNumThreads(previous_threads)
+
+
 def verify_run(run):
     read = lambda name: json.loads((run/name).read_text(encoding='utf-8'))
     manifest, metrics, status = read('run_config.json'), read('metrics.json'), read('status.json')
@@ -31,14 +54,14 @@ def verify_run(run):
         assert p['frame_id'] == log['frame_id'] == p['global_frame_id'] == log['global_frame_id'] == i
         assert p['cycle'] == log['cycle'] == 0
         assert abs(p['timestamp_s'] - i/fps) < 1e-9
-        scheduled = condition in 'ABC' or i % cfg['detect_interval'] == 0
+        scheduled = log['yolo_executed'] if condition=='F' else condition in 'ABC' or i % cfg['detect_interval'] == 0
         assert p['yolo_executed'] == log['yolo_executed'] == scheduled
         scheduled_count += scheduled
         if not scheduled:
             assert log['candidates'] == []
         if p['bbox'] is not None:
             assert valid_box(p['bbox'], video['width'], video['height'])
-            if condition in 'DE':
+            if condition in 'DEF':
                 assert p['age_since_yolo_s'] <= cfg['max_age_s'] + 1e-9
         if condition in 'AB':
             choice = max((c for c in log['candidates'] if c['confidence'] >= cfg['confidence']),
@@ -52,6 +75,15 @@ def verify_run(run):
             assert condition == 'D' and i > 0 and p['bbox'] == predictions[i-1]['bbox']
         if p['source'] == 'KCF':
             assert condition == 'E' and p['kcf_success_flag'] is True
+        if condition=='F':
+            recent=predictions[max(0,i-p['detection_window_frames']+1):i+1]
+            assert sum(r['yolo_executed'] for r in recent)<=p['detection_budget']
+            if p['source'] in ('LK','motion_prediction','none'):
+                assert p['confidence'] is None
+            if p['source'] in ('YOLO','YOLO_low'):
+                assert scheduled and any(c['bbox']==p['bbox'] and c['confidence']==p['confidence'] for c in log['candidates'])
+            if p['source']=='YOLO_low':
+                assert cfg['adaptive']['low_confidence']<=p['confidence']<cfg['confidence']
     assert metrics['performance']['processed_frames'] == n
     assert metrics['performance']['yolo_calls'] == scheduled_count
     for name in ('tracking.csv', 'timing.csv', 'per_frame.csv'):
@@ -65,6 +97,9 @@ def verify_run(run):
     detection, _ = detection_metrics(gt, logs, cfg['confidence'])
     tracking, _ = tracking_metrics(gt, predictions, fps)
     assert detection == metrics['detection'] and tracking == metrics['tracking']
+    if condition=='F':
+        assert sha256(Path(video['path']))==video['sha256']
+        replay_adaptive(manifest,predictions,logs)
     decoded = None
     if manifest['rendering']:
         import cv2
@@ -94,6 +129,9 @@ def verify_run(run):
         events=dict(Counter(event for p in predictions for event in p['events'])),
         run_config_sha256=sha256(manifest_path), metrics_sha256=sha256(run/'metrics.json'),
         weights_sha256=manifest['weights']['sha256'], gt_sha256=manifest['gt_sha256'])
+    if condition=='F':
+        report['causal_adaptive_replay_identical']=True
+        report['rolling_detection_budget_valid']=True
     save_json(run/'verification.json', report)
     return report
 

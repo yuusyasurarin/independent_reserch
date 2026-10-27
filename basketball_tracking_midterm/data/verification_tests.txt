@@ -1,3 +1,11 @@
+test_current_frame_required_and_invalid_settings_rejected (test_adaptive.AdaptiveTests.test_current_frame_required_and_invalid_settings_rejected) ... ok
+test_disappearance_requests_detection_and_prediction_expires (test_adaptive.AdaptiveTests.test_disappearance_requests_detection_and_prediction_expires) ... ok
+test_distant_distractor_requires_confirmation_then_releases_lock (test_adaptive.AdaptiveTests.test_distant_distractor_requires_confirmation_then_releases_lock) ... ok
+test_high_confidence_expiry_even_when_optical_flow_is_valid (test_adaptive.AdaptiveTests.test_high_confidence_expiry_even_when_optical_flow_is_valid) ... ok
+test_low_score_never_initializes_or_extends_high_confidence_ttl (test_adaptive.AdaptiveTests.test_low_score_never_initializes_or_extends_high_confidence_ttl) ... ok
+test_output_leaves_frame_without_clamping_to_false_location (test_adaptive.AdaptiveTests.test_output_leaves_frame_without_clamping_to_false_location) ... ok
+test_rolling_detection_budget_even_under_constant_flow_failure (test_adaptive.AdaptiveTests.test_rolling_detection_budget_even_under_constant_flow_failure) ... ok
+test_translation_tracks_observed_motion_without_yolo (test_adaptive.AdaptiveTests.test_translation_tracks_observed_motion_without_yolo) ... ok
 test_class_coordinates_corruption_and_duplicates (test_core.DataTests.test_class_coordinates_corruption_and_duplicates) ... ok
 test_confirmed_experiment10_status_counts (test_core.DataTests.test_confirmed_experiment10_status_counts) ... ok
 test_missing_vs_empty_labels_no_repair (test_core.DataTests.test_missing_vs_empty_labels_no_repair) ... ok
@@ -23,6 +31,6 @@ test_kcf_confidence_absent_and_failure_clears (test_core.TrackingTests.test_kcf_
 test_schedule_and_hold_no_future_detections (test_core.TrackingTests.test_schedule_and_hold_no_future_detections) ... ok
 
 ----------------------------------------------------------------------
-Ran 23 tests in 11.250s
+Ran 31 tests in 26.639s
 
 OK

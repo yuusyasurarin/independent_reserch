@@ -93,7 +93,7 @@ def main():
             test_evidence_files=[p.relative_to(ROOT).as_posix() for p in tests],
             note='User ran Colab training/test; verified exported evidence, not re-executed by this check.')
     complete={(r['size'],r['condition']) for r in run_reports if r['complete_video']}
-    report['missing_full_video_conditions']=[f'{s}/{c}' for s in ('s','m') for c in 'ABCDE' if (s,c) not in complete]
+    report['missing_full_video_conditions']=[f'{s}/{c}' for s in ('s','m') for c in 'ABCDEF' if (s,c) not in complete]
     report['not_executed']=['Real optimizer resume after Colab disconnect','15-minute stability trial']
     save_json(ROOT/'data/verification.json',report)
     print(json.dumps(report,ensure_ascii=False,indent=2))

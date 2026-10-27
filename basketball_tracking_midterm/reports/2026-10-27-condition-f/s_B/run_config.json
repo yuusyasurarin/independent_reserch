@@ -1,0 +1,182 @@
+{
+  "config": {
+    "video": "../編集済み元データ/experiment10_編集.mp4",
+    "ground_truth": "data/experiment10_gt.csv",
+    "dataset": "../colab_ball_yolo/dataset",
+    "yolov5_repo": "vendor/yolov5",
+    "device": "cuda:0",
+    "imgsz": 960,
+    "confidence": 0.25,
+    "candidate_conf": 0.001,
+    "nms_iou": 0.45,
+    "half": false,
+    "detect_interval": 3,
+    "max_age_s": 0.3,
+    "association_base_px": 40,
+    "association_speed_px_s": 1800,
+    "byte_activation_threshold": 0.25,
+    "byte_matching_threshold": 0.8,
+    "byte_lost_buffer_s": 0.5,
+    "selection_split": "val",
+    "save_video": true,
+    "save_failures": 8,
+    "telemetry_interval_s": 5,
+    "adaptive": {
+      "max_interval": 3,
+      "max_yolo_hz": 15,
+      "min_points": 4,
+      "max_points": 30,
+      "fb_error_px": 1.5,
+      "min_flow_fraction": 0.5,
+      "motion_gate_diameters": 2.5,
+      "velocity_alpha": 0.7,
+      "max_prediction_frames": 2,
+      "low_confidence": 0.1,
+      "motion_bonus": 0.12,
+      "size_penalty": 0.04,
+      "challenge_margin": 0.15
+    },
+    "models": {
+      "s": {
+        "pretrained": "weights/pretrained/yolov5s.pt",
+        "finetuned": "weights/finetuned/s/best.pt",
+        "pretrained_class": 32,
+        "finetuned_class": 0
+      },
+      "m": {
+        "pretrained": "weights/pretrained/yolov5m.pt",
+        "finetuned": "weights/finetuned/m/best.pt",
+        "pretrained_class": 32,
+        "finetuned_class": 0
+      }
+    }
+  },
+  "condition": "B",
+  "model_size": "s",
+  "video": {
+    "path": "D:\\自主研究\\independent_reserch\\編集済み元データ\\experiment10_編集.mp4",
+    "sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+    "fps": 30.0,
+    "frame_count": 2512,
+    "width": 1280,
+    "height": 720,
+    "duration_s": 83.73333333333333,
+    "decoded_frames": 0,
+    "exact_source_pixel_matches": [],
+    "timestamp_basis": "frame_id / nominal fps; constant-fps source required"
+  },
+  "ground_truth": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\data\\experiment10_gt.csv",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86",
+  "weights": {
+    "role": "finetuned",
+    "model_size": "s",
+    "yolov5_commit": "915bbf294bb74c859f0b41f1c23bc395014ea679",
+    "sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+    "class_id": 0,
+    "class_name": "ball",
+    "training_run": "/content/drive/MyDrive/basketball_tracking_midterm/runs/s/20261026T080653932076Z",
+    "training_metadata_sha256": "0624118f06ee6309291403e355698d5393b1b749fb728e634de2845b72001ce2"
+  },
+  "weights_path": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\weights\\finetuned\\s\\best.pt",
+  "command": [
+    "scripts/run_experiment.py",
+    "--config",
+    "configs/experiment_f.json",
+    "--sizes",
+    "s",
+    "m",
+    "--conditions",
+    "F",
+    "B",
+    "E",
+    "--offline-guard",
+    "--output",
+    "results/condition_f_20261027"
+  ],
+  "environment": {
+    "python": "3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]",
+    "executable": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "versions": {
+      "torch": "2.5.1+cu121",
+      "torchvision": "0.20.1+cu121",
+      "numpy": "1.26.4",
+      "opencv-contrib-python": "4.10.0.84",
+      "opencv-python": null,
+      "supervision": "0.25.0",
+      "scipy": "1.14.1",
+      "Pillow": "10.4.0",
+      "PyYAML": "6.0.2",
+      "pandas": "2.2.3",
+      "matplotlib": "3.9.2"
+    },
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 193, 4096, 51",
+    "cuda_available": true,
+    "torch_cuda": "12.1",
+    "cuda_devices": [
+      "NVIDIA GeForce RTX 3050 Ti Laptop GPU"
+    ],
+    "opencv": "4.10.0",
+    "kcf_available": true
+  },
+  "pinned_runtime": true,
+  "cache": "No detection or image cache; frames decoded sequentially. OS filesystem cache is not controlled.",
+  "rendering": true,
+  "realtime_pacing": false,
+  "loop_seconds": 0,
+  "warmup_calls": 3,
+  "precision": "FP32",
+  "source_sha256": {
+    "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+    "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+    "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+    "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+    "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+    "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+    "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+    "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+    "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+    "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+    "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+    "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+    "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+    "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+    "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+    "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+    "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+    "scripts\\verify_delivery.py": "982c43ebe1122d3d87dc407d2653ff0f6d4a951466cf0d5dfe1dd0528971ccbb",
+    "scripts\\verify_experiment_runs.py": "e42dcdba032182d5ef35dd63f9d857e9e51b4d3115ea4bfb1edcbaa53f022300",
+    "scripts\\summarize_condition_f.py": "f3a06ae6073cfbadd76230824aa7d5efd7961a6e6e20a2c3b0cbafc826a8302a"
+  },
+  "interpretation": "Single pass through experiment10",
+  "timing": "CUDA synchronized at each stage; includes transfers/NMS in pre/post stages; not camera-to-display latency",
+  "dataset_overlap_audit": {
+    "evaluation_video_sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+    "source_video_hash_matches": [],
+    "exact_source_pixel_match_frames": [],
+    "dataset_sources": [
+      "experiment11",
+      "experiment12"
+    ],
+    "source_video_hashes": {
+      "experiment11": "7c5e7f3cbd411a3c9f29968fb91be22c1a61efd9695f5e3bcf474f10d39777c3",
+      "experiment12": "12ffcd4c0a534c8f1b1b93fbb20807be08029061010de233d5a82181ad61d700"
+    },
+    "user_confirmation": {
+      "confirmed_on": "2026-10-26",
+      "confirmed_by": "user",
+      "statement": "experiment10 is from a separate recording from experiment11/12, with no repeated play footage.",
+      "independent_recording": true,
+      "evaluation_video_sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+      "training_source_sha256": {
+        "experiment11": "7c5e7f3cbd411a3c9f29968fb91be22c1a61efd9695f5e3bcf474f10d39777c3",
+        "experiment12": "12ffcd4c0a534c8f1b1b93fbb20807be08029061010de233d5a82181ad61d700"
+      },
+      "limit": "One 83.733-second evaluation video; does not establish cross-venue generalization or 15-minute stability."
+    },
+    "independent_recording_verified": true,
+    "independence_basis": "User confirmed separate recordings and no repeated play; hashes bind this confirmation to the audited files.",
+    "conclusion": "Separate evaluation recording confirmed by user; scope is one 83.733-second clip."
+  }
+}

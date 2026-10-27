@@ -1,0 +1,326 @@
+[
+  {
+    "elapsed_s": 0.16868950000207406,
+    "cycle": 0,
+    "frame_id": 0,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 52"
+  },
+  {
+    "elapsed_s": 5.3482137999963015,
+    "cycle": 0,
+    "frame_id": 49,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 55"
+  },
+  {
+    "elapsed_s": 10.46999300000607,
+    "cycle": 0,
+    "frame_id": 98,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 15.661540300003253,
+    "cycle": 0,
+    "frame_id": 147,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 20.83824870000535,
+    "cycle": 0,
+    "frame_id": 197,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 26.02100779999455,
+    "cycle": 0,
+    "frame_id": 247,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 31.168390799997724,
+    "cycle": 0,
+    "frame_id": 296,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 36.2666409000085,
+    "cycle": 0,
+    "frame_id": 344,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 41.37800720000814,
+    "cycle": 0,
+    "frame_id": 391,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 46.538547000003746,
+    "cycle": 0,
+    "frame_id": 439,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 51.63992519999738,
+    "cycle": 0,
+    "frame_id": 488,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 56.819845000005444,
+    "cycle": 0,
+    "frame_id": 537,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 61.93031369999517,
+    "cycle": 0,
+    "frame_id": 583,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 67.03615410000202,
+    "cycle": 0,
+    "frame_id": 630,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 72.15402170000016,
+    "cycle": 0,
+    "frame_id": 675,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 77.34546270000283,
+    "cycle": 0,
+    "frame_id": 721,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 82.49424919999728,
+    "cycle": 0,
+    "frame_id": 765,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 87.68978329999663,
+    "cycle": 0,
+    "frame_id": 809,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 92.8767652999959,
+    "cycle": 0,
+    "frame_id": 853,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 98.06615139999485,
+    "cycle": 0,
+    "frame_id": 897,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 56"
+  },
+  {
+    "elapsed_s": 103.24154840000847,
+    "cycle": 0,
+    "frame_id": 942,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 108.37757159999455,
+    "cycle": 0,
+    "frame_id": 986,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 113.52768020000076,
+    "cycle": 0,
+    "frame_id": 1030,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 118.62760100000014,
+    "cycle": 0,
+    "frame_id": 1074,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 123.78393150000193,
+    "cycle": 0,
+    "frame_id": 1118,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 128.8849099000072,
+    "cycle": 0,
+    "frame_id": 1162,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 134.05838349999976,
+    "cycle": 0,
+    "frame_id": 1205,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 139.17294309999852,
+    "cycle": 0,
+    "frame_id": 1248,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 144.3007021999947,
+    "cycle": 0,
+    "frame_id": 1292,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 149.43440450000344,
+    "cycle": 0,
+    "frame_id": 1336,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 154.62900850000733,
+    "cycle": 0,
+    "frame_id": 1379,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 159.75496010000643,
+    "cycle": 0,
+    "frame_id": 1421,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 164.85402050000266,
+    "cycle": 0,
+    "frame_id": 1465,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 169.98348490000353,
+    "cycle": 0,
+    "frame_id": 1512,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 175.12565970000287,
+    "cycle": 0,
+    "frame_id": 1559,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 180.2439788000047,
+    "cycle": 0,
+    "frame_id": 1606,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 185.3611041999975,
+    "cycle": 0,
+    "frame_id": 1652,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 190.55058749999444,
+    "cycle": 0,
+    "frame_id": 1699,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 195.7815055999963,
+    "cycle": 0,
+    "frame_id": 1745,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 200.98170109999774,
+    "cycle": 0,
+    "frame_id": 1789,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 206.11561999999685,
+    "cycle": 0,
+    "frame_id": 1835,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 211.23744070000248,
+    "cycle": 0,
+    "frame_id": 1881,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 216.44116390000272,
+    "cycle": 0,
+    "frame_id": 1929,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 221.6066204999952,
+    "cycle": 0,
+    "frame_id": 1978,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 226.73908860000665,
+    "cycle": 0,
+    "frame_id": 2027,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 231.93743130000075,
+    "cycle": 0,
+    "frame_id": 2076,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 237.1325807999965,
+    "cycle": 0,
+    "frame_id": 2126,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 242.25438519999443,
+    "cycle": 0,
+    "frame_id": 2175,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 247.4105777000077,
+    "cycle": 0,
+    "frame_id": 2225,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 252.59838009999658,
+    "cycle": 0,
+    "frame_id": 2275,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 257.7371348000015,
+    "cycle": 0,
+    "frame_id": 2322,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  },
+  {
+    "elapsed_s": 262.903327100008,
+    "cycle": 0,
+    "frame_id": 2370,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 268.06095329999516,
+    "cycle": 0,
+    "frame_id": 2417,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 58"
+  },
+  {
+    "elapsed_s": 273.2639468999987,
+    "cycle": 0,
+    "frame_id": 2465,
+    "nvidia_smi": "0, NVIDIA GeForce RTX 3050 Ti Laptop GPU, 512, 4096, 57"
+  }
+]

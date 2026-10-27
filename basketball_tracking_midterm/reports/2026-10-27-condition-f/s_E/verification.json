@@ -1,0 +1,26 @@
+{
+  "run": "results/condition_f_20261027/s_E_20261027T010929365037Z",
+  "condition": "E",
+  "model_size": "s",
+  "status": "passed",
+  "frames": 2512,
+  "video_frames_decoded": 2512,
+  "yolo_calls": 838,
+  "log_alignment_and_schedule_valid": true,
+  "saved_prediction_reevaluation_identical": true,
+  "original_coordinate_bounds_valid": true,
+  "confidence_and_output_semantics_valid": true,
+  "sources": {
+    "YOLO": 599,
+    "KCF": 885,
+    "none": 1028
+  },
+  "events": {
+    "kcf_failed_or_out_of_bounds": 311,
+    "yolo_miss_or_gate_rejection": 38
+  },
+  "run_config_sha256": "55000104a8a6ced8ca28880d6533152040be97a3f495ea2dcab48e84d493c365",
+  "metrics_sha256": "e9a1e83f8a4199d428767271f55134feb8bc8d67d459829e3075a6227fee1ac2",
+  "weights_sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+  "gt_sha256": "3b8230d4b5a51ca36fa1c35f68563ca7ccb1e73acb71a853337900f707e41a86"
+}

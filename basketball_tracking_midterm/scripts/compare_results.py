@@ -1,4 +1,4 @@
-"""Build tables/plots from actual completed runs; never invent missing B-E results."""
+"""Build tables/plots from actual completed runs; never invent missing B-F results."""
 import argparse
 import json
 from pathlib import Path
@@ -37,16 +37,16 @@ def compare(runs,output):
             ap50=d['ap50'],detector_gt_boxes=d['gt_boxes'],yolo_calls=p['yolo_calls'],
             yolo_hz_video=p['realized_yolo_calls_per_video_second'],processing_fps=p['processing_fps'],wall_fps=p['wall_fps'],
             frame_ms_mean=p['processing_ms']['mean'],frame_ms_p95=p['processing_ms']['p95']))
-    # B-E must share identical trained weights for each model size.
+    # B-F must share identical trained weights for each model size.
     for size in ('s','m'):
         hashes=set()
         for run in runs:
             c=json.loads((run/'run_config.json').read_text(encoding='utf-8'))
             if c['model_size']==size and c['condition']!='A':hashes.add(c['weights']['sha256'])
-        if len(hashes)>1:issues.append(f'{size}: B-E trained weights differ')
+        if len(hashes)>1:issues.append(f'{size}: B-F trained weights differ')
     save_csv(output/'comparison.csv',rows)
     save_json(output/'comparison.json',dict(rows=rows,comparability_issues=sorted(set(issues)),
-        note='No missing condition is imputed. D/E detector PR is on scheduled frames; compare tracking TSR on common full-video visible GT.'))
+        note='No missing condition is imputed. D/E/F detector PR is conditional on executed detection frames (adaptive for F); compare tracking TSR on common full-video visible GT.'))
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

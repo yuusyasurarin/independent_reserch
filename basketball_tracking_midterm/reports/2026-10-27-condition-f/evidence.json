@@ -1,0 +1,255 @@
+{
+  "development_only": true,
+  "video": "experiment10; previously inspected while designing F",
+  "no_independent_generalization_claim": true,
+  "run_order": [
+    "s_F_20261027T010310356111Z",
+    "s_B_20261027T010601520998Z",
+    "s_E_20261027T010929365037Z",
+    "m_F_20261027T011112605641Z",
+    "m_B_20261027T011402384099Z",
+    "m_E_20261027T011856296572Z"
+  ],
+  "runs": {
+    "s_F": {
+      "run": "results/condition_f_20261027/s_F_20261027T010310356111Z",
+      "video": "results/condition_f_20261027/s_F_20261027T010310356111Z/tracked.mp4",
+      "sources": {
+        "YOLO": 778,
+        "LK": 1057,
+        "motion_prediction": 185,
+        "none": 441,
+        "YOLO_low": 51
+      },
+      "events": {
+        "detect_lost_search": 157,
+        "detect_flow_unreliable": 488,
+        "detect_interval": 417,
+        "detection_budget_deferred": 148,
+        "global_candidate_pending": 22,
+        "low_confidence_recovery": 51,
+        "motion_change": 18,
+        "detect_motion_change": 14,
+        "global_reacquisition": 8,
+        "expired_since_high_confidence_yolo": 312,
+        "out_of_bounds": 6
+      },
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "982c43ebe1122d3d87dc407d2653ff0f6d4a951466cf0d5dfe1dd0528971ccbb",
+        "scripts\\verify_experiment_runs.py": "e42dcdba032182d5ef35dd63f9d857e9e51b4d3115ea4bfb1edcbaa53f022300"
+      }
+    },
+    "s_B": {
+      "run": "results/condition_f_20261027/s_B_20261027T010601520998Z",
+      "video": "results/condition_f_20261027/s_B_20261027T010601520998Z/tracked.mp4",
+      "sources": {
+        "YOLO": 1822,
+        "none": 690
+      },
+      "events": {},
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "982c43ebe1122d3d87dc407d2653ff0f6d4a951466cf0d5dfe1dd0528971ccbb",
+        "scripts\\verify_experiment_runs.py": "e42dcdba032182d5ef35dd63f9d857e9e51b4d3115ea4bfb1edcbaa53f022300",
+        "scripts\\summarize_condition_f.py": "f3a06ae6073cfbadd76230824aa7d5efd7961a6e6e20a2c3b0cbafc826a8302a"
+      },
+      "historical_accuracy_identical": {
+        "tracking": true,
+        "detection": true
+      }
+    },
+    "s_E": {
+      "run": "results/condition_f_20261027/s_E_20261027T010929365037Z",
+      "video": "results/condition_f_20261027/s_E_20261027T010929365037Z/tracked.mp4",
+      "sources": {
+        "YOLO": 599,
+        "KCF": 885,
+        "none": 1028
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 311,
+        "yolo_miss_or_gate_rejection": 38
+      },
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "f94b7087b1f37ba1fa5791b10d3775a3d562a119cc03579ab3a78d32b95aa44d",
+        "scripts\\verify_experiment_runs.py": "e42dcdba032182d5ef35dd63f9d857e9e51b4d3115ea4bfb1edcbaa53f022300",
+        "scripts\\summarize_condition_f.py": "8be1a908223d43562320c3ff3fb385a1029d9630615342c07b09050eab844d70"
+      },
+      "historical_accuracy_identical": {
+        "tracking": true,
+        "detection": true
+      }
+    },
+    "m_F": {
+      "run": "results/condition_f_20261027/m_F_20261027T011112605641Z",
+      "video": "results/condition_f_20261027/m_F_20261027T011112605641Z/tracked.mp4",
+      "sources": {
+        "YOLO": 968,
+        "LK": 1111,
+        "motion_prediction": 208,
+        "none": 198,
+        "YOLO_low": 27
+      },
+      "events": {
+        "detect_lost_search": 77,
+        "detect_flow_unreliable": 587,
+        "detect_interval": 434,
+        "detection_budget_deferred": 211,
+        "global_candidate_pending": 89,
+        "global_reacquisition": 39,
+        "low_confidence_recovery": 27,
+        "expired_since_high_confidence_yolo": 95,
+        "motion_change": 17,
+        "detect_motion_change": 11,
+        "out_of_bounds": 24
+      },
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "f94b7087b1f37ba1fa5791b10d3775a3d562a119cc03579ab3a78d32b95aa44d",
+        "scripts\\verify_experiment_runs.py": "e42dcdba032182d5ef35dd63f9d857e9e51b4d3115ea4bfb1edcbaa53f022300",
+        "scripts\\summarize_condition_f.py": "8be1a908223d43562320c3ff3fb385a1029d9630615342c07b09050eab844d70"
+      }
+    },
+    "m_B": {
+      "run": "results/condition_f_20261027/m_B_20261027T011402384099Z",
+      "video": "results/condition_f_20261027/m_B_20261027T011402384099Z/tracked.mp4",
+      "sources": {
+        "YOLO": 2326,
+        "none": 186
+      },
+      "events": {},
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "f94b7087b1f37ba1fa5791b10d3775a3d562a119cc03579ab3a78d32b95aa44d",
+        "scripts\\verify_experiment_runs.py": "9bad46a46aec613da8f689b35ede51934f6bc70cd7832ca20b0aa2d3b869fba0",
+        "scripts\\summarize_condition_f.py": "2b8b17ee4a55ff13ad3a6f7f93705be854bb87febaacc0f9fd26aba61f508360"
+      },
+      "historical_accuracy_identical": {
+        "tracking": true,
+        "detection": true
+      }
+    },
+    "m_E": {
+      "run": "results/condition_f_20261027/m_E_20261027T011856296572Z",
+      "video": "results/condition_f_20261027/m_E_20261027T011856296572Z/tracked.mp4",
+      "sources": {
+        "YOLO": 755,
+        "KCF": 1383,
+        "none": 374
+      },
+      "events": {
+        "kcf_failed_or_out_of_bounds": 125,
+        "yolo_miss_or_gate_rejection": 32
+      },
+      "source_hashes": {
+        "src\\__init__.py": "ec35810fc433dc928ac4440d5d774bad9404b885b7954b8f9630ab94364dc137",
+        "src\\common.py": "4970a88994f5964a2f8d1e4fcecd0a52c277435212204f63116e6d6e69b83c2b",
+        "src\\data.py": "6121f44bd3c9748f322e5c8dff69c605890de312dc66d657d42e774025d3e5cb",
+        "src\\detector.py": "940c006725215f625a30aa1b78bf30655b45da7c0722a4cf9c2945e3d5c7a3a0",
+        "src\\tracking.py": "4a8d011596c5c30b432373ad7bda375b1615f614c12a73be140cc678181479ce",
+        "src\\evaluation.py": "b1b9ea7438100fa250d66be079bb14d4c98b8600e277aeadd4bcf52bb93bb009",
+        "src\\reporting.py": "fc2fad504c1978b9cad95bf36b5a33023a12b1957d065b08d3574eb5f8a48907",
+        "src\\compat.py": "5493fa52d93418b60d273f874095b117b75b3395e7c37d8c317a96e5b25846e9",
+        "src\\adaptive_tracking.py": "6c6a1b27d2c2210a74f34d2f3caacefe93c1918f2fd191e093e00d44a9ca74a8",
+        "scripts\\audit_data.py": "def7cb3de019da904e86e417258b2e37016120dd27712eac72fdf8cb98513f0a",
+        "scripts\\setup_assets.py": "0f2ab6b40b95981bf90d772b2533aeb0132fd9926ff15a87a9558058de192aff",
+        "scripts\\run_experiment.py": "1b8f2256c19d19f8811000edab2ca106abb853d534c84bc8fd89c19136e8228a",
+        "scripts\\train_yolov5.py": "0bb2e0768e94e58ccc7f7dcba6eeaf96715cf7e4a77e94af561513fcd9794105",
+        "scripts\\build_colab.py": "e2a49bc7ceebbf6d8b804ce2886a84c9a76a3709efcb66a5b6bab97b5a257ca1",
+        "scripts\\compare_results.py": "3ed405698bf3fed4609720f3c0bdf075b0a81dc7fb5666ddf5f5374af5ef393f",
+        "scripts\\evaluate_saved.py": "8cf38620e77755c98d14e98d60a06d8e02f535bb9f931c973ed01c13c8496e6e",
+        "scripts\\check_runtime.py": "8d0cb04c3fe282c342de8e3ee0ccfc44746a27d09d779df054dfcebc0cc89add",
+        "scripts\\verify_delivery.py": "f94b7087b1f37ba1fa5791b10d3775a3d562a119cc03579ab3a78d32b95aa44d",
+        "scripts\\verify_experiment_runs.py": "9bad46a46aec613da8f689b35ede51934f6bc70cd7832ca20b0aa2d3b869fba0",
+        "scripts\\summarize_condition_f.py": "2b8b17ee4a55ff13ad3a6f7f93705be854bb87febaacc0f9fd26aba61f508360"
+      },
+      "historical_accuracy_identical": {
+        "tracking": true,
+        "detection": true
+      }
+    }
+  },
+  "f_config_sha256": "5b84512b132ced364f420261a7af33741bc730bfbad7cd4d028db541be7fc928"
+}

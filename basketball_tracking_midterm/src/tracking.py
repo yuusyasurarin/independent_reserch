@@ -35,9 +35,13 @@ def create_kcf():
 
 class TrackingPolicy:
     def __init__(self,condition,cfg,fps,kcf_factory=None):
-        if condition not in 'ABCDE':
+        if condition not in 'ABCDEF':
             raise ValueError('Unknown condition')
         self.condition,self.cfg,self.fps=condition,cfg,fps
+        if condition=='F':
+            from .adaptive_tracking import AdaptiveBallPolicy
+            self.adaptive=AdaptiveBallPolicy(cfg,fps)
+            return
         self.box=None
         self.last_yolo_time=None
         self.current_id=None
@@ -57,7 +61,9 @@ class TrackingPolicy:
                 lost_track_buffer=max(1,round(cfg['byte_lost_buffer_s']*30)),
                 minimum_matching_threshold=cfg['byte_matching_threshold'],frame_rate=round(fps),minimum_consecutive_frames=1)
 
-    def needs_detection(self,frame_id):
+    def needs_detection(self,frame_id,frame=None):
+        if self.condition=='F':
+            return self.adaptive.needs_detection(frame_id,frame)
         return self.condition in 'ABC' or frame_id%self.cfg['detect_interval']==0
 
     def lose(self):
@@ -66,6 +72,8 @@ class TrackingPolicy:
         self.current_id=None
 
     def update(self,frame,frame_id,candidates,detected):
+        if self.condition=='F':
+            return self.adaptive.update(frame,frame_id,candidates,detected)
         now=frame_id/self.fps
         h,w=frame.shape[:2]
         state,source,confidence='lost','none',None
