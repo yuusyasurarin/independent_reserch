@@ -1,0 +1,9 @@
+{
+  "recorded_at": "2026-10-28T09:09:03.5809219+09:00",
+  "interrupted_run": "m_G_f_bridge_960_cuda0_20261027T171946754867Z",
+  "archive": "D:\\自主研究\\independent_reserch\\basketball_tracking_midterm\\results\\comparison_fixed_lag_interrupted_20261028",
+  "exit_code": 3221225477,
+  "reason": "Process failed; D drive was unavailable when inspected. Causal link not established.",
+  "recovery": "Only m/G is rerun in a later session; speed is separately qualified.",
+  "power_source_at_recovery": "Battery, confirmed by psutil, 93 percent"
+}

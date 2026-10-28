@@ -1,0 +1,6 @@
+{
+  "reported_at": "2026-10-28T01:47:53.4446185+09:00",
+  "source": "User confirmation in conversation",
+  "power_source": "battery",
+  "interpretation": "Benchmark speed and release latency apply to this battery-powered session, not an AC-powered performance estimate."
+}

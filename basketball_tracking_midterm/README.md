@@ -1,5 +1,7 @@
 # バスケットボール追跡・中間発表用実験
 
+**2026-10-28追記：過去のEにはKCF初期化の不具合がありました。** `comparison_20261027` と条件Fの比較に含まれる旧Eは、方式の性能評価として再利用しないでください。修正と、固定遅延ありE/G対B/Dの共通条件での再測定は「11. 修正済みE・GとB・Dの比較」に記録します。
+
 目的は、全フレームYOLOに対して、低頻度YOLOの中間フレームをKCFで補う効果を実測することです。
 2026-10-27にs/mのA〜Eを実測しました。方法・結果・制約は後半の「8. 実測結果」にまとめています。
 続いて条件F（局所特徴点追跡＋移動予測＋適応再検出）を追加しました。方法と再実行手順は「9. 条件F」、測定結果は [Fの実験レポート](reports/2026-10-27-condition-f/README.md) にまとめます。
@@ -597,3 +599,39 @@ PowerShellで `basketball_tracking_midterm` に移動し、既存の `.venv` と
 
 正解ラベルは事後評価と描画だけに使用します。629不可視フレームの真の位置は不明なので、保持中・遮蔽中の推定位置が正しいかは今回のアノテーションから判定できません。
 今回の31比較から選んだ方式は開発用の暫定候補です。別の動画を用意できた時点で、方式・遅延・検出予算を固定して評価します。
+
+## 11. 修正済みE・GとB・Dの比較
+
+ユーザー指定に合わせ、Eも表示を遅らせるだけでなく、未来情報を使って補正します。**Eは前向きKCF＋逆向きKCF、Gは従来のfプロファイル＋bridge補間、どちらも先読み2秒**です。Bは毎フレームYOLO、Dは3フレームごとのYOLO＋位置保持で、B/Dには意図的な遅延を入れません。
+
+旧EはOpenCV KCFの`init()`後、次の画像で初回`update()`を呼んでいました。このバージョンは初回updateで追跡用の特徴を学習するため、古い位置で次画像を学習する不具合になっていました。`src/tracking.py`を修正し、検出した同じ未描画画像で初回updateを済ませてから、次フレームの追跡に進めます。逆向きKCFも同じ手順を使います。
+
+該当挙動は [OpenCV contrib 4.10.0のKCF実装](https://github.com/opencv/opencv_contrib/blob/4.10.0/modules/tracking/src/trackerKCF.cpp#L258-L431) の初回update処理に基づきます。移動する合成画像による回帰テストで、最初の追跡フレームと再初期化後の追跡フレームを確認しています。
+
+Eでは後から得たYOLO位置を起点に、最大0.4秒前まで画像を逆方向に追跡します。前のYOLO位置との整合性が取れた区間では前向きと逆向きの位置を融合し、前向き出力が欠けた位置では成功した逆追跡で補います。逆追跡に失敗した部分は前向き出力を残します。正解ラベルは追跡・融合の判断に渡しません。
+
+全条件を共通の`run_fixed_lag.py`で測定し、モデル初期化・ウォームアップ・評価を除き、動画読み込み、検出、追跡、補正、描画・保存・ログを計測に含めます。入力は30fpsのファイル到着を模擬します。B/Dも計算が追いつかなければ遅れが蓄積するため、設定遅延と実測遅延を分けて報告します。
+
+実行コマンド（プロジェクト直下のPowerShell）：
+
+```powershell
+# s/m × B/D/E/Gを順に測定。出力先は未使用のフォルダ名にする
+.\.venv\Scripts\python.exe scripts/compare_fixed_lag.py --output results/comparison_fixed_lag_new
+
+# 保存候補から前向き・後向き処理を再現し、全動画と指標を検証
+.\.venv\Scripts\python.exe scripts/verify_g.py --fresh-root results/comparison_fixed_lag_new --output results/comparison_fixed_lag_new/verification.json
+
+# 表・図・4分割比較動画・14秒付近の比較クリップを生成
+.\.venv\Scripts\python.exe scripts/summarize_fixed_lag.py --root results/comparison_fixed_lag_new --output reports/comparison_fixed_lag_new
+```
+
+単独実行は `scripts/run_fixed_lag.py --size s --condition E --method bidir_kcf --lag 2 --realtime` です。B/Dは `--method forward --lag 0`、Gは `--method bridge --lag 2` を使います。共通の検出器設定は既存のval確定値を維持し、再学習していません。
+
+測定結果・修正前後の精度・遅延・動画一覧は [2026-10-28の比較レポート](reports/2026-10-28-fixed-lag-comparison/README.md) にまとめます。
+旧Eの結果・動画は履歴として残します。修正済みEの補正前出力も保存するため、「初期化の修正による変化」と「未来補正による変化」を分けて確認できます。旧Eに対する過去のFの改善倍率は、修正済みEとの比較へ引き継ぎません。
+
+## 12. KCF・LKの成功と失敗を画像で確認する
+
+[実動画による説明と再生成手順](reports/2026-10-28-tracking-explanation/README.md) を追加しました。KCFは前画像・次画像・説明用相関応答、LKは特徴点・追跡矢印・往復誤差を並べています。14.033秒の同じ場面で両者が失敗を返す例も含みます。
+
+画像は `results/tracking_explanation_20261028/kcf_success_failure.png` と `lk_success_failure.png` です。KCFの応答マップは輝度特徴だけの説明用再計算で、OpenCVの内部応答そのものではありません。LKは実際の追跡処理の点座標を取得し、保存済み出力との一致を確認しています。

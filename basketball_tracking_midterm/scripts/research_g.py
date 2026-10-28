@@ -102,7 +102,7 @@ def sweep(fronts,lags,methods,output):
             for method in methods:
                 smoother=FixedLagBall(info['fps'],info['width'],info['height'],lag,method)
                 results=[];seconds=0.
-                cap=cv2.VideoCapture(info['path']) if method=='bidir' else None
+                cap=cv2.VideoCapture(info['path']) if method in ('bidir','bidir_kcf') else None
                 for p,log in zip(predictions,logs):
                     frame=None
                     if cap is not None:

@@ -125,6 +125,14 @@ class TrackingPolicy:
                         try:
                             initialized=self.kcf.init(frame,(x,y,bw,bh))
                             if initialized is False: self.kcf=None
+                            else:
+                                # OpenCV 4.10 KCF learns its first template in update(),
+                                # not init(). Prime on THIS unannotated detection frame;
+                                # otherwise the next frame learns the old ROI after motion.
+                                primed,initial_box=self.kcf.update(frame)
+                                px,py,pw,ph=map(float,initial_box)
+                                if not primed or not valid_box([px,py,px+pw,py+ph],w,h):
+                                    self.kcf=None;events.append('kcf_prime_failed')
                         except Exception as e:
                             self.kcf=None; events.append('kcf_init_failed:'+type(e).__name__)
                 else:

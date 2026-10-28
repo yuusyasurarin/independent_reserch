@@ -5,9 +5,9 @@
     "expensive_actions_default_off": true,
     "colab_execution_by_this_check": false
   },
-  "colab_upload_sha256": "15697db6a473342d3e7c74e9b2a425c0600f32660a8f5c183cc4f52979982a13",
+  "colab_upload_sha256": "5d0a58dcbc61d1bc9f88eaef1267ad548a0eef421e41d2c78c754214eb50e681",
   "tests": {
-    "run": 39,
+    "run": 42,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -123,6 +123,86 @@
       "complete_video": true,
       "processing_fps": 46.606220983162295,
       "tsr05": 0.443441317047265
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/m_B_f_forward_960_cuda0_20261027T165631491085Z",
+      "condition": "B",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 3.660298225787985,
+      "tsr05": 0.8422729686670207
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/m_D_f_forward_960_cuda0_20261027T170834310868Z",
+      "condition": "D",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 9.135836447898392,
+      "tsr05": 0.18799787573021773
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/m_E_f_bidir_kcf_960_cuda0_20261027T171342847683Z",
+      "condition": "E",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 7.657781644830095,
+      "tsr05": 0.20446096654275092
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/m_G_f_bridge_960_cuda0_20261028T001200479734Z",
+      "condition": "G",
+      "size": "m",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 7.087672702163404,
+      "tsr05": 0.8183749336165693
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/s_B_f_forward_960_cuda0_20261027T163902784175Z",
+      "condition": "B",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 6.580398456716602,
+      "tsr05": 0.8146574614976102
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/s_D_f_forward_960_cuda0_20261027T164601626958Z",
+      "condition": "D",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 16.38819559184743,
+      "tsr05": 0.4163568773234201
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/s_E_f_bidir_kcf_960_cuda0_20261027T164913038822Z",
+      "condition": "E",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 13.858666148147442,
+      "tsr05": 0.5326606479022836
+    },
+    {
+      "run": "results/comparison_fixed_lag_20261028/s_G_f_bridge_960_cuda0_20261027T165238603535Z",
+      "condition": "G",
+      "size": "s",
+      "frames": 2512,
+      "cycles": 1,
+      "complete_video": true,
+      "processing_fps": 12.329351625832551,
+      "tsr05": 0.8247477429633564
     },
     {
       "run": "results/condition_f_20261027/m_B_20261027T011402384099Z",

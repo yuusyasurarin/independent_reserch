@@ -1,0 +1,15 @@
+{
+  "run": "results\\comparison_fixed_lag_20261028\\m_B_f_forward_960_cuda0_20261027T165631491085Z",
+  "status": "passed",
+  "frames": 2512,
+  "decoded_video_frames": 2512,
+  "causal_frontend_replay_identical": true,
+  "fixed_lag_replay_identical": true,
+  "rolling_yolo_budget_valid": null,
+  "detector_schedule_valid": true,
+  "temporal_boundaries_valid": true,
+  "reevaluated_metrics_identical": true,
+  "yolo_calls": 2512,
+  "metrics_sha256": "834712c13eedbcaa43feb19870f8863421ff1f4261ddddda5703e6ad0877ffe3",
+  "run_config_sha256": "3bfad766439b3d0ec2ad0e698b79712ed34d23e4fb725db54138e379faee2e24"
+}

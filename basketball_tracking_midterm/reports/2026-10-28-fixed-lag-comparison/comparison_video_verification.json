@@ -1,0 +1,24 @@
+{
+  "videos": [
+    {
+      "path": "results/comparison_fixed_lag_20261028/comparison_videos/s_B_D_E_G.mp4",
+      "frames": 2512,
+      "sha256": "1b39dcd27c89c74baae3b1edeaac2ede49e6a541b6cabb34dde6e3d6681cd044"
+    },
+    {
+      "path": "results/comparison_fixed_lag_20261028/comparison_videos/s_12_to_16_seconds.mp4",
+      "frames": 120,
+      "sha256": "92b5539bfd5a6a32b360cf7a8f0a75bafad3fe6d663be3a0dcee2f9459bf845a"
+    },
+    {
+      "path": "results/comparison_fixed_lag_20261028/comparison_videos/m_B_D_E_G.mp4",
+      "frames": 2512,
+      "sha256": "8a3252224db146ce4e282f44850a9afcb2e1047abff78a58aa4af7d7f80a21d5"
+    },
+    {
+      "path": "results/comparison_fixed_lag_20261028/comparison_videos/m_12_to_16_seconds.mp4",
+      "frames": 120,
+      "sha256": "5d054565bc97afdb73875e5b5d76852caacfea88cb501e393cfc4e8242586930"
+    }
+  ]
+}

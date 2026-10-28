@@ -15,7 +15,7 @@ def observation(i, box=None, source='YOLO'):
 
 class FixedLagTests(unittest.TestCase):
     def test_output_deadline_order_tail_and_bounded_storage(self):
-        for method in (m for m in METHODS if m!='bidir'):
+        for method in (m for m in METHODS if m not in ('bidir','bidir_kcf')):
             g=FixedLagBall(30,640,480,1,method)
             emitted=[]
             for i in range(100):
@@ -108,6 +108,25 @@ class FixedLagTests(unittest.TestCase):
         outputs.extend(g.flush())
         np.testing.assert_allclose(center(outputs[2]['bbox']),(46,52),atol=.7)
         self.assertEqual(outputs[2]['source'],'G_bidir')
+
+    def test_backward_kcf_uses_clean_anchor_and_bounded_future(self):
+        g=FixedLagBall(30,320,240,.2,'bidir_kcf')
+        patch=np.random.default_rng(10).integers(0,256,(40,40,3),dtype=np.uint8)
+        outputs=[]
+        for i in range(16):
+            frame=np.zeros((240,320,3),np.uint8)
+            frame[80:120,100+i*2:140+i*2]=patch
+            box=[100+i*2,80,140+i*2,120] if i%4==0 else None
+            out=g.push(observation(i,box),[],box is not None,frame)
+            frame[:]=255  # Caller-owned image may be overwritten after push.
+            if out:outputs.append(out)
+        outputs.extend(g.flush())
+        np.testing.assert_allclose(center(outputs[2]['bbox']),(124,100),atol=2)
+        self.assertEqual(outputs[2]['source'],'E_bidir_kcf')
+        self.assertIsNone(outputs[2]['confidence'])
+        self.assertEqual([p['frame_id'] for p in outputs],list(range(16)))
+        self.assertTrue(all(p['available_through_frame']<=p['frame_id']+6 for p in outputs))
+        self.assertLessEqual(len(g.images),13)
 
 
 if __name__=='__main__':unittest.main()

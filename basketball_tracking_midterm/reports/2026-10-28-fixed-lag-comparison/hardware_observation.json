@@ -1,0 +1,9 @@
+{
+  "observed_at": "2026-10-28T01:44:55.0290918+09:00",
+  "command": "nvidia-smi --query-gpu=name,utilization.gpu,temperature.gpu,power.draw,pstate,clocks.gr,clocks.mem --format=csv",
+  "output": [
+    "name, utilization.gpu [%], temperature.gpu, power.draw [W], pstate, clocks.current.graphics [MHz], clocks.current.memory [MHz]",
+    "NVIDIA GeForce RTX 3050 Ti Laptop GPU, 91 %, 54, 16.20 W, P5, 1417 MHz, 810 MHz"
+  ],
+  "note": "One read-only observation during s/B; not continuous telemetry, not proof of a battery/power cause. No power settings changed."
+}

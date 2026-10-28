@@ -9,7 +9,7 @@ import numpy as np
 from .common import center, valid_box
 
 
-METHODS = ('forward', 'bridge', 'rts', 'beam', 'bidir')
+METHODS = ('forward', 'bridge', 'rts', 'beam', 'bidir', 'bidir_kcf')
 
 
 def geometry(box):
@@ -125,6 +125,47 @@ class FixedLagBall:
         row['xf'],row['pf'],row['segment']=self.x.copy(),self.P.copy(),self.segment
         row['observed']=observed
 
+    def reverse_kcf_updates(self,frame,row):
+        """Reverse KCF from a current strong YOLO anchor, at most 0.4 s back.
+
+        Both directions use the same-image first update required by OpenCV KCF.
+        Store clean image copies because the caller may render emitted frames.
+        """
+        from .tracking import create_kcf
+        i=row['online']['frame_id'];p=row['online']
+        self.images.append((i,frame.copy()))
+        if p['source']!='YOLO' or p['bbox'] is None:return
+        original=list(p['bbox']);box=list(original);proposals={}
+        left=self.last_anchor[0] if self.last_anchor else max(0,i-self.gap)
+        try:
+            tracker=create_kcf()
+            x,y=max(0,int(box[0])),max(0,int(box[1]))
+            w=min(self.width-x,max(1,math.ceil(box[2])-x))
+            h=min(self.height-y,max(1,math.ceil(box[3])-y))
+            initialized=tracker.init(frame,(x,y,w,h))
+            primed=False if initialized is False else tracker.update(frame)[0]
+            if primed:
+                for j,previous in list(self.images)[-2::-1]:
+                    if j<left:break
+                    ok,xywh=tracker.update(previous)
+                    if not ok:break
+                    x,y,w,h=map(float,xywh);candidate=[x,y,x+w,y+h]
+                    if not valid_box(candidate,self.width,self.height):break
+                    if math.dist(center(candidate),center(box))>max(30.,2*max(box[2]-box[0],box[3]-box[1])):break
+                    proposals[j]=candidate;box=candidate
+        except Exception:
+            # Failed reverse tracking adds no new estimate; retain the online result.
+            proposals={}
+        coherent=False
+        if self.last_anchor and left in proposals:
+            old=self.last_anchor[1]
+            coherent=math.dist(center(old),center(proposals[left]))<=max(6.,max(old[2]-old[0],old[3]-old[1])*.75)
+        for stored in self.rows:
+            t=stored['online']['frame_id']
+            if t in proposals and t>=self.next_emit:
+                stored['reverse']=dict(bbox=proposals[t],left=left,right=i,coherent=coherent)
+        self.last_anchor=(i,original)
+
     def push(self, online, candidates, detected, frame=None):
         i=online['frame_id']
         if i!=self.latest+1:raise ValueError('Frames must arrive exactly once in order')
@@ -135,6 +176,9 @@ class FixedLagBall:
         if self.method=='bidir':
             if frame is None:raise ValueError('Bidirectional LK requires the current image')
             self.reverse_updates(frame,row)
+        elif self.method=='bidir_kcf':
+            if frame is None:raise ValueError('Bidirectional KCF requires the current image')
+            self.reverse_kcf_updates(frame,row)
         self.peak_rows=max(self.peak_rows,len(self.rows))
         if i<self.lag:return None
         return self.emit(i-self.lag)
@@ -196,13 +240,14 @@ class FixedLagBall:
     def estimate(self, rows, index):
         row=rows[index];p=row['online'];target=p['frame_id']
         if self.method=='forward':return p['bbox'],p['source']
-        if self.method=='bidir':
+        if self.method in ('bidir','bidir_kcf'):
             reverse=row.get('reverse')
             if reverse is None or p['source']=='YOLO':return p['bbox'],p['source']
-            if p['bbox'] is None or p['source']=='motion_prediction':return reverse['bbox'],'G_bidir'
+            output_source='E_bidir_kcf' if self.method=='bidir_kcf' else 'G_bidir'
+            if p['bbox'] is None or p['source']=='motion_prediction':return reverse['bbox'],output_source
             if reverse['coherent']:
                 f=(target-reverse['left'])/max(1,reverse['right']-reverse['left'])
-                return rectangle(geometry(p['bbox'])*(1-f)+geometry(reverse['bbox'])*f),'G_bidir'
+                return rectangle(geometry(p['bbox'])*(1-f)+geometry(reverse['bbox'])*f),output_source
             return p['bbox'],p['source']
         if self.method in ('bridge','beam'):
             nodes=(self.beam_nodes(rows) if self.method=='beam' else
@@ -238,8 +283,8 @@ class FixedLagBall:
         box,source=self.estimate(rows,index)
         if box is not None and not valid_box(box,self.width,self.height):box,source=None,'none'
         out=dict(frame_id=target,timestamp_s=target/self.fps,bbox=box,source=source,
-            state='smoothed' if source.startswith('G_') else p['state'],track_id=None,
-            confidence=None if source.startswith('G_') else p['confidence'],
+            state='smoothed' if source.startswith(('G_','E_')) else p['state'],track_id=None,
+            confidence=None if source.startswith(('G_','E_')) else p['confidence'],
             yolo_executed=rows[index]['detected'],events=[],kcf_success_flag=None,
             available_through_frame=self.latest,lookahead_frames=self.latest-target,
             full_lookahead=self.latest-target==self.lag,method=self.method,

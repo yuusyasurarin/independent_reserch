@@ -1,0 +1,3 @@
+﻿size,old_buggy_online_tsr05,corrected_online_tsr05,corrected_bidirectional_tsr05,exact_candidate_frame_matches,frames,old_run,warning
+m,0.19012214551248008,0.17100371747211895,0.20446096654275092,2512,2512,results/comparison_20261027/m_E_20261026T160226501635Z,"Old E is a bug-affected historical record, not a valid method baseline. Do not compare old speed."
+s,0.443441317047265,0.4423791821561338,0.5326606479022836,2512,2512,results/comparison_20261027/s_E_20261026T160938381616Z,"Old E is a bug-affected historical record, not a valid method baseline. Do not compare old speed."

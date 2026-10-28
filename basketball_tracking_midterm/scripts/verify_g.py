@@ -8,6 +8,7 @@ import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.common import ROOT, resolve, sha256, save_json, valid_box
 from src.adaptive_tracking import AdaptiveBallPolicy
+from src.tracking import TrackingPolicy
 from src.lag_tracking import FixedLagBall
 from src.data import load_gt
 from src.evaluation import tracking_metrics, detection_metrics
@@ -23,7 +24,7 @@ def basic(predictions,info,lag):
         assert p['lookahead_frames']==min(steps,n-1-i)
         assert p['full_lookahead']==(p['lookahead_frames']==steps)
         assert p['bbox'] is None or valid_box(p['bbox'],info['width'],info['height'])
-        if p['source'].startswith('G_'):assert p['confidence'] is None
+        if p['source'].startswith(('G_','E_')):assert p['confidence'] is None
 
 
 def verify_sweep(root):
@@ -58,7 +59,7 @@ def verify_fresh(run):
     cv2.setNumThreads(0)
     read=lambda name:json.loads((run/name).read_text(encoding='utf-8'))
     m,metrics,status=read('run_config.json'),read('metrics.json'),read('status.json')
-    assert m['condition']=='G' and status==dict(status='complete',complete_video=True)
+    assert m['condition'] in ('B','D','E','G') and status==dict(status='complete',complete_video=True)
     cfg,info=m['config'],m['video']
     pred=read_jsonl(run/'tracking.jsonl');online=read_jsonl(run/'online.jsonl');logs=read_jsonl(run/'candidates.jsonl')
     n=info['frame_count'];assert len(online)==len(logs)==n
@@ -71,7 +72,8 @@ def verify_fresh(run):
     assert tracking_metrics(gt,online,info['fps'])[0]==metrics['online_tracking']
     assert tracking_metrics(gt,[p for p in pred if p['full_lookahead']],info['fps'])[0]==metrics['full_lookahead_tracking']
     assert detection_metrics(gt,logs,cfg['confidence'])[0]==metrics['detection']
-    policy=AdaptiveBallPolicy(cfg,info['fps'])
+    policy=(AdaptiveBallPolicy(cfg,info['fps']) if m['condition']=='G'
+            else TrackingPolicy(m['condition'],cfg,info['fps']))
     smoother=FixedLagBall(info['fps'],info['width'],info['height'],m['lag_s'],m['method'])
     cap=cv2.VideoCapture(info['path']);assert cap.isOpened()
     replay=[]
@@ -85,8 +87,11 @@ def verify_fresh(run):
             p=policy.update(frame,i,log['candidates'],detected)
             for key in ('bbox','source','state','events','track_id','confidence'):
                 assert p[key]==online[i][key],f'Frontend {i}/{key}'
-            recent=logs[max(0,i-policy.window+1):i+1]
-            assert sum(x['yolo_executed'] for x in recent)<=policy.budget
+            if m['condition']=='G':
+                recent=logs[max(0,i-policy.window+1):i+1]
+                assert sum(x['yolo_executed'] for x in recent)<=policy.budget
+            else:
+                assert detected==(m['condition']=='B' or i%cfg['detect_interval']==0)
             out=smoother.push(p,log['candidates'],detected,frame)
             if out is not None:replay.append(out)
     finally:cap.release()
@@ -113,8 +118,10 @@ def verify_fresh(run):
         assert len(rows)==n
         if name=='release.csv' and m['realtime_pacing']:
             assert all(float(r['simulated_arrival_to_release_s'])>=m['lag_s']-1e-6 for r in rows)
+    if m['method']=='forward':assert [p['bbox'] for p in pred]==[p['bbox'] for p in online]
     report=dict(run=str(run.relative_to(ROOT)),status='passed',frames=n,decoded_video_frames=decoded,
-        causal_frontend_replay_identical=True,fixed_lag_replay_identical=True,rolling_yolo_budget_valid=True,
+        causal_frontend_replay_identical=True,fixed_lag_replay_identical=True,
+        rolling_yolo_budget_valid=True if m['condition']=='G' else None,detector_schedule_valid=True,
         temporal_boundaries_valid=True,reevaluated_metrics_identical=True,
         yolo_calls=metrics['performance']['yolo_calls'],metrics_sha256=sha256(run/'metrics.json'),
         run_config_sha256=sha256(run/'run_config.json'))
@@ -134,5 +141,5 @@ if __name__=='__main__':
         print('Verified cached trials:',root,len(verified),flush=True)
     if a.fresh_root:
         for run in sorted(a.fresh_root.iterdir()):
-            if run.is_dir():reports.append(verify_fresh(run))
+            if run.is_dir() and (run/'run_config.json').is_file():reports.append(verify_fresh(run))
     save_json(a.output,dict(status='passed',runs=reports))

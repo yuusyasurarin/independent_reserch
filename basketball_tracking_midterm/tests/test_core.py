@@ -245,6 +245,20 @@ class IntegrationTests(unittest.TestCase):
         result=p.update(frame,1,[],False)
         self.assertEqual(result['source'],'KCF');self.assertTrue(result['kcf_success_flag'])
 
+    def test_real_kcf_tracks_first_motion_after_each_initialization(self):
+        import numpy as np
+        patch=np.random.default_rng(10).integers(0,256,(40,40,3),dtype=np.uint8)
+        p=TrackingPolicy('E',config(),30)
+        for start,x in ((0,100),(3,170)):
+            initial=np.zeros((240,320,3),np.uint8)
+            moved=initial.copy()
+            initial[80:120,x:x+40]=patch
+            moved[80:120,x+5:x+45]=patch
+            p.update(initial,start,[candidate([x,80,x+40,120])],True)
+            result=p.update(moved,start+1,[],False)
+            self.assertEqual(result['source'],'KCF')
+            self.assertAlmostEqual(result['bbox'][0],x+5,delta=1)
+
     def test_resume_copy_keeps_full_checkpoint_bytes(self):
         from scripts.train_yolov5 import checkpoint_callback
         with tempfile.TemporaryDirectory() as d:

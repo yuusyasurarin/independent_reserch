@@ -1,0 +1,159 @@
+{
+  "condition": "G",
+  "model_size": "m",
+  "complete_video": true,
+  "tracking": {
+    "evaluated_position_frames": 1883,
+    "total_frames": 2512,
+    "tsr_iou_03": 0.8980350504514073,
+    "tsr_iou_05": 0.8183749336165693,
+    "mean_iou": 0.6212556826721152,
+    "output_rate_visible": 0.9851301115241635,
+    "output_rate_all": 0.9386942675159236,
+    "cle_px": {
+      "n": 1855,
+      "mean": 50.662532456271116,
+      "median": 3.2116993629341692,
+      "p95": 323.82459120799786
+    },
+    "missing_outputs": 28,
+    "longest_failure_at_05_s": 1.6,
+    "longest_no_output_s": 0.16666666666666666,
+    "failure_runs_ge3": 40,
+    "unknown_position_frames": 629,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 503,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "online_tracking": {
+    "evaluated_position_frames": 1883,
+    "total_frames": 2512,
+    "tsr_iou_03": 0.8656399362719065,
+    "tsr_iou_05": 0.7742963356346256,
+    "mean_iou": 0.5948564184801021,
+    "output_rate_visible": 0.9776951672862454,
+    "output_rate_all": 0.9211783439490446,
+    "cle_px": {
+      "n": 1841,
+      "mean": 54.511376862252156,
+      "median": 3.37220572636746,
+      "p95": 422.29386623077585
+    },
+    "missing_outputs": 42,
+    "longest_failure_at_05_s": 1.6,
+    "longest_no_output_s": 0.16666666666666666,
+    "failure_runs_ge3": 44,
+    "unknown_position_frames": 629,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 473,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "full_lookahead_tracking": {
+    "evaluated_position_frames": 1828,
+    "total_frames": 2452,
+    "tsr_iou_03": 0.8982494529540481,
+    "tsr_iou_05": 0.8233041575492341,
+    "mean_iou": 0.6242441976124329,
+    "output_rate_visible": 0.9846827133479212,
+    "output_rate_all": 0.9371941272430668,
+    "cle_px": {
+      "n": 1800,
+      "mean": 52.07596436166347,
+      "median": 3.243326476928916,
+      "p95": 394.1644242459219
+    },
+    "missing_outputs": 28,
+    "longest_failure_at_05_s": 1.6,
+    "longest_no_output_s": 0.16666666666666666,
+    "failure_runs_ge3": 36,
+    "unknown_position_frames": 624,
+    "unannotated_frames": 0,
+    "confirmed_absent_frames": 0,
+    "outputs_unknown_position": 498,
+    "outputs_confirmed_absent": 0,
+    "limitations": [
+      "CLE uses every visible-GT frame with output, including incorrect outputs; missing outputs excluded and reported separately.",
+      "TSR denominator is all visible-GT frames; missing output is failure and IoU=0.",
+      "Runs are observed consecutive visible-GT frames only, broken at unknown/unannotated/segment boundaries; not true occlusion recovery time.",
+      "Without annotated shot boundaries, runs may span scene edits. Sparse labels cannot establish full continuous lost duration.",
+      "Unknown-position outputs cannot be judged as FP, unlike outputs on confirmed-absent frames.",
+      "Failure images show low IoU; semantic wrong-object identity requires visual review."
+    ]
+  },
+  "detection": {
+    "precision": 0.41341743119266056,
+    "recall": 0.8552787663107948,
+    "f1": 0.5574023965983764,
+    "ap50": 0.8163392644560354,
+    "tp": 721,
+    "fp": 1023,
+    "fn": 122,
+    "confidence": 0.25,
+    "iou_threshold": 0.5,
+    "eligible_detection_frames": 843,
+    "gt_boxes": 843,
+    "yolo_executed_frames": 1109,
+    "scope": "Scheduled YOLO frames only; visible/confirmed-absent GT only. Unknown positions excluded.",
+    "ap_definition": "101-point interpolated precision envelope, one ball class, IoU 0.5; candidates above configured floor after NMS."
+  },
+  "performance": {
+    "processed_frames": 2512,
+    "yolo_calls": 1109,
+    "warmup_yolo_calls": 3,
+    "realized_yolo_calls_per_video_second": 13.244426751592357,
+    "processing_fps": 7.087672702163404,
+    "wall_fps": 7.087672702163404,
+    "wall_seconds": 354.4181716000021,
+    "pacing_sleep_seconds": 0.0,
+    "processing_ms": {
+      "n": 2512,
+      "mean": 140.5403306131456,
+      "median": 41.13194999808911,
+      "p95": 283.50685999466805
+    },
+    "frontend_ms": {
+      "n": 2512,
+      "mean": 6.034888734053995,
+      "median": 5.960950016742572,
+      "p95": 10.673154999676626
+    },
+    "backend_ms": {
+      "n": 2512,
+      "mean": 0.2813130176366992,
+      "median": 0.25790001382119954,
+      "p95": 0.5040249961894001
+    },
+    "tail_processing_s": 1.2709181999962311,
+    "peak_buffer_frames": 61,
+    "peak_rgb_buffer_bytes": 168652800,
+    "peak_state_rows": 73,
+    "peak_process_rss_or_peak_wset_bytes": 1546485760,
+    "simulated_release_latency_s": {
+      "n": 2512,
+      "mean": 141.02098696505234,
+      "median": 139.3529059500055,
+      "p95": 264.09046490000645
+    },
+    "gpu_peak_allocated_bytes": 303416832,
+    "timing_scope": "Fresh inference + decode + frontend + smoother + drawing + log/video writes and EOF tail; excludes setup/warmup/post-run evaluation; processing FPS excludes explicit pacing waits",
+    "latency_scope": "Simulated file arrival to video-write completion; not camera/display latency"
+  }
+}
