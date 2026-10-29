@@ -94,7 +94,9 @@ independent_reserch/
 | `basketball_tracking_midterm/weights/finetuned/{s,m}/` | `best.pt`、`best.pt.metadata.json`、`final_selection.json`、学習設定・val/test評価などのエクスポート一式 |
 | `basketball_tracking_midterm/results/` | 過去結果の再照合、比較動画・説明画像の再生成で使用する実行ログ |
 
-外部データの位置は `basketball_tracking_midterm/configs/experiment*.json` と監査スクリプトで参照します。`colab_ball_*` 内には旧作業用コードもローカルに残っていますが、現在の学習・評価の入口は中間発表用フォルダです。元の撮影動画・注釈・重み・実験ログは今回の整理で削除していません。
+外部データの位置は `basketball_tracking_midterm/configs/experiment*.json` と監査スクリプトで参照します。現在の学習・評価の入口は中間発表用フォルダです。元の撮影動画・注釈・重み・実験ログは今回の整理で削除していません。
+
+データ作成の再現用に [CVAT画像抽出](CVAT_DATASET.md)、[評価動画の準備記録](TRACKING_TEST_09_10.md)、[データセット作成コードと旧Colab学習](colab_ball_yolo/README.md)、[旧Colab追跡評価](colab_ball_tracking/README.md) のソースも公開しています。旧Colab版はUltralyticsを使う別の構成であり、現在のYOLOv5版の手順とは区別してください。各フォルダの実画像・動画・注釈ZIP・生成パッケージはGit対象外です。
 
 ## 学習から評価までの入口
 

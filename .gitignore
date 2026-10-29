@@ -11,3 +11,18 @@ results/
 /weights/
 /runs/
 /編集済み元データ/
+
+# Local research data and generated Colab packages (publish source only).
+/colab_ball_yolo/dataset*/
+/colab_ball_yolo/*.zip
+/colab_ball_yolo/*.jpg
+/colab_ball_yolo/image_quality_report.json
+/colab_ball_yolo/bundle_sha256.txt
+/colab_ball_tracking/data/
+/colab_ball_tracking/bundles/
+/colab_ball_tracking/*.zip
+/colab_ball_tracking/*.jpg
+/colab_ball_tracking/*.sha256
+/colab_ball_tracking/bundle_sha256.txt
+/colab_ball_tracking/manifest.json
+/colab_ball_tracking/annotation_report.json

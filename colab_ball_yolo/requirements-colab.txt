@@ -1,0 +1,2 @@
+# Match the existing project; keep Colab GPU-compatible torch/torchvision.
+ultralytics==8.4.121
