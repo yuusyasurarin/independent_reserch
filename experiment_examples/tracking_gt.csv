@@ -1,4 +1,0 @@
-frame_index,timestamp_s,shot_id,visibility,bbox_x,bbox_y,bbox_w,bbox_h,ring_bbox_x,ring_bbox_y,ring_bbox_w,ring_bbox_h,fast,small,score
-0,0.0,shot01,visible,100,200,12,12,300,150,80,15,0,1,score
-1,0.0166666667,shot01,partial,102,195,12,12,300,150,80,15,0,1,score
-2,0.0333333333,shot01,occluded,,,,,300,150,80,15,0,1,score

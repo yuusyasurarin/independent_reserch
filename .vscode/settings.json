@@ -1,5 +1,5 @@
 {
-    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python.defaultInterpreterPath": "${workspaceFolder}\\basketball_tracking_midterm\\.venv\\Scripts\\python.exe",
     "python.terminal.activateEnvironment": true,
     "terminal.integrated.env.windows": {
         "YOLO_CONFIG_DIR": "${workspaceFolder}\\.ultralytics",

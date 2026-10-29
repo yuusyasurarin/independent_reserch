@@ -1,0 +1,155 @@
+{
+  "status": "passed",
+  "midterm_tracked_files_unchanged": 319,
+  "removed_files": [
+    "ADAPTIVE_TRACKING.md",
+    "EXPERIMENT_PROTOCOL.md",
+    "YOLO_ByteTrack_使い方.md",
+    "__pycache__/elp_camera_demo.cpython-312.pyc",
+    "__pycache__/tracking_baseline_experiment.cpython-312.pyc",
+    "adaptive_basketball_tracker.py",
+    "adaptive_tracking.py",
+    "budget.py",
+    "evaluate_adaptive_tracking.py",
+    "evaluate_score_events.py",
+    "evaluate_tracking_experiment.py",
+    "experiment_detectors.py",
+    "experiment_examples/detection.yaml",
+    "experiment_examples/score_predictions.csv",
+    "experiment_examples/sessions.csv",
+    "experiment_examples/tracking_gt.csv",
+    "experiment_tracking.py",
+    "kcf_basketball_tracker.py",
+    "prepare_experiment_data.py",
+    "realtime_basketball_tracker.py",
+    "requirements-cuda.txt",
+    "run_tracking_experiment.py",
+    "test_adaptive_tracking.py",
+    "test_experiment_pipeline.py",
+    "tracking_baseline_experiment.py",
+    "tracking_experiment_setup.md",
+    "tracking_method_summary.md",
+    "train_blob_cnn.py",
+    "yolo_basketball_tracker.py",
+    "yolo_bytetrack_live.py",
+    "yolo_bytetrack_video.py",
+    "既存手法まとめ.md"
+  ],
+  "checked_python_files": 32,
+  "deleted_root_imports_found": 0,
+  "dataset_counts": {
+    "train": {
+      "images": 300,
+      "empty": 113,
+      "boxes": 187
+    },
+    "val": {
+      "images": 50,
+      "empty": 20,
+      "boxes": 30
+    },
+    "test": {
+      "images": 58,
+      "empty": 28,
+      "boxes": 30
+    }
+  },
+  "gt_regeneration_identical": true,
+  "video_sha256": "17714f44266d6b26b33ccee050a581103f717e3f796149ddb38ae096f43078bb",
+  "weights": [
+    {
+      "size": "s",
+      "condition": "A",
+      "sha256": "8b3b748c1e592ddd8868022e8732fde20025197328490623cc16c6f24d0782ee",
+      "class_id": 32
+    },
+    {
+      "size": "s",
+      "condition": "B",
+      "sha256": "e9591189566b289a8488e63e38d5f285fafb4c7dc3afbc023ea2f3db33d12b7e",
+      "class_id": 0
+    },
+    {
+      "size": "m",
+      "condition": "A",
+      "sha256": "61d933360ba5a7733a36764996c800287d973889d875227f5beedd2473a97a56",
+      "class_id": 32
+    },
+    {
+      "size": "m",
+      "condition": "B",
+      "sha256": "85cf5fc79646b25b73104ea3fb3ca4b11bc5bc2653d89864181128e336aa684a",
+      "class_id": 0
+    }
+  ],
+  "colab_zip_sha256": "5d0a58dcbc61d1bc9f88eaef1267ad548a0eef421e41d2c78c754214eb50e681",
+  "readme_links_checked": [
+    "basketball_tracking_midterm/README.md",
+    "basketball_tracking_midterm/README.md",
+    "basketball_tracking_midterm/EVALUATION_B.md",
+    "basketball_tracking_midterm/reports/2026-10-28-fixed-lag-comparison/README.md",
+    "basketball_tracking_midterm/reports/2026-10-27/comparison.csv",
+    "basketball_tracking_midterm/reports/2026-10-27-condition-f/README.md",
+    "basketball_tracking_midterm/reports/2026-10-27-condition-g/README.md",
+    "basketball_tracking_midterm/reports/2026-10-28-tracking-explanation/README.md",
+    "basketball_tracking_midterm/THIRD_PARTY.md",
+    "docs/repository_cleanup_20261029.md",
+    "basketball_tracking_midterm/reports/2026-10-28-fixed-lag-comparison/comparison.csv",
+    "basketball_tracking_midterm/README.md",
+    "様式2_申請書・自主研究計画書(基)_v3_tanaka.pdf"
+  ],
+  "date": "2026-10-29",
+  "base_commit": "b9ea8745da0d0d2944042ff74375af1f9764a3a3",
+  "integrated_remote_commit": "848535fc133be9718cfe708172e4e33e8308583a",
+  "tests": {
+    "run": 42,
+    "failures": 0,
+    "errors": 0,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "smoke_runs": [
+    {
+      "condition": "B",
+      "size": "s",
+      "frames": 12,
+      "run": "basketball_tracking_midterm/results/cleanup_smoke_20261029/s_B_20261029T003221770574Z",
+      "status": "passed"
+    },
+    {
+      "condition": "E",
+      "size": "s",
+      "frames": 12,
+      "run": "basketball_tracking_midterm/results/cleanup_smoke_20261029/s_E_20261029T003325262772Z",
+      "status": "passed"
+    },
+    {
+      "condition": "F",
+      "size": "s",
+      "frames": 12,
+      "run": "basketball_tracking_midterm/results/cleanup_smoke_20261029/s_F_20261029T003331926134Z",
+      "status": "passed"
+    },
+    {
+      "condition": "G",
+      "size": "s",
+      "frames": 65,
+      "run": "basketball_tracking_midterm/results/cleanup_smoke_20261029/s_G_f_bridge_960_cuda0_20261029T003348449724Z",
+      "status": "passed"
+    }
+  ],
+  "smoke_interpretation": "Startup/integration checks only; not accuracy or performance benchmarks",
+  "camera_cli_checks": [
+    "elp_camera_demo.py --help",
+    "camera_video_recorder.py --help"
+  ],
+  "training_cli_check": "scripts/train_yolov5.py --help",
+  "colab_archive_files_identical": 41,
+  "notebook_cells_compile": true,
+  "readme_results_match_saved_metrics": true,
+  "preserved_local_assets": "Existing datasets, annotations, videos, weights, logs and virtual environments retained",
+  "not_run": [
+    "Colab training",
+    "Full-video remeasurement",
+    "Camera capture"
+  ]
+}
