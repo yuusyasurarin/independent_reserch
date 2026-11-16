@@ -21,8 +21,8 @@ from src.lag_tracking import FixedLagBall, METHODS
 PROFILES={'f':(3,15),'budget10':(6,10),'budget5':(12,5)}
 
 
-def profile_config(profile):
-    cfg=copy.deepcopy(load_config(ROOT/'configs/experiment_f.json'))
+def profile_config(profile,config=None):
+    cfg=copy.deepcopy(load_config(config or ROOT/'configs/experiment_f.json'))
     interval,hz=PROFILES[profile]
     cfg['adaptive'].update(max_interval=interval,max_yolo_hz=hz)
     return cfg

@@ -49,6 +49,8 @@ def main():
     parser.add_argument("--guard-seconds", type=float, default=2)
     parser.add_argument("--ratios", nargs=3, type=float, default=[0.7, 0.15, 0.15])
     parser.add_argument("--jpeg-quality", type=int, default=95)
+    parser.add_argument("--names", nargs="+", default=["experiment11", "experiment12"],
+                        help="video name prefixes under --source-dir, each matching exactly one <name>_*.mp4")
     args = parser.parse_args()
     if not (math.isfinite(args.sample_fps) and args.sample_fps > 0
             and math.isfinite(args.guard_seconds) and args.guard_seconds >= 0
@@ -56,7 +58,7 @@ def main():
             and math.isclose(sum(args.ratios), 1) and 1 <= args.jpeg_quality <= 100):
         parser.error("Invalid sampling, guard, ratios or JPEG quality")
     sources = []
-    for name in ("experiment11", "experiment12"):
+    for name in args.names:
         matches = sorted(args.source_dir.glob(name + "_*.mp4"))
         if len(matches) != 1:
             raise ValueError(f"Expected exactly one {name}_*.mp4; found {len(matches)}")
@@ -75,7 +77,7 @@ def main():
                                 intervals=intervals, frames=frames))
         finally:
             cap.release()
-    if sources[0]["sha256"] == sources[1]["sha256"]:
+    if len({s["sha256"] for s in sources}) != len(sources):
         raise ValueError("Duplicate source videos")
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)  # Never overwrite an annotated dataset.

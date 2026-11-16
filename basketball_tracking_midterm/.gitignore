@@ -8,3 +8,4 @@ weights/finetuned/
 results/**/tracked.mp4
 results/**/failures/
 colab_upload.zip
+results/**/delayed.mp4

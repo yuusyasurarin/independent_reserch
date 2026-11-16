@@ -635,3 +635,31 @@ Eでは後から得たYOLO位置を起点に、最大0.4秒前まで画像を逆
 [実動画による説明と再生成手順](reports/2026-10-28-tracking-explanation/README.md) を追加しました。KCFは前画像・次画像・説明用相関応答、LKは特徴点・追跡矢印・往復誤差を並べています。14.033秒の同じ場面で両者が失敗を返す例も含みます。
 
 画像は `results/tracking_explanation_20261028/kcf_success_failure.png` と `lk_success_failure.png` です。KCFの応答マップは輝度特徴だけの説明用再計算で、OpenCVの内部応答そのものではありません。LKは実際の追跡処理の点座標を取得し、保存済み出力との一致を確認しています。
+
+## 13. リアルタイム固定遅延追跡（カメラ入力、3秒遅延）
+
+`scripts/realtime_tracking.py` は、11で最良だったs/G（fプロファイル＋bridge）をカメラ入力で動かします。表示は取得の3.0秒後に固定し、補正の先読みは0.4秒、処理の遅れが1.0秒を超えた分は間引いてbridgeで補間します。録画は専用スレッドです。方式・図・2026-11-16の測定（バッテリー駆動）は [リアルタイム固定遅延追跡の説明](reports/2026-11-16-realtime-fixed-delay/README.md) を参照してください。
+
+```powershell
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 0 --width 1280 --height 720 --fps 30
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --video ../編集済み元データ/experiment10_編集.mp4 --no-display --record results/realtime_dev
+.\.venv\Scripts\python.exe scripts/evaluate_realtime_log.py results/realtime_dev/realtime_<timestamp>
+```
+
+## 14. 次の目標に向けたプログラム（魚眼カメラ2台・3次元・得点判定）
+
+手順の全体は [リポジトリ直下のREADME「次の目標」](../README.md#次の目標魚眼カメラ2台による3次元追跡と得点判定) にまとめています。このフォルダに追加したものは次のとおりです。いずれも `tests/test_stereo.py` の合成シーンで動作を確認しただけで、実際の魚眼カメラ・体育館では未検証です。
+
+| ファイル | 用途 |
+|---|---|
+| `scripts/fisheye_calibrate.py` | チェスボード動画・画像から魚眼の内部パラメータ（K, D）を推定 |
+| `scripts/court_pose.py` | コート基準点のクリックと solvePnP による外部パラメータ（R, t）の推定 |
+| `scripts/triangulate_ball.py` | 2台の追跡ログからコート座標の3次元軌道CSVを作成 |
+| `scripts/score_detector.py` | 3次元軌道からリング面の通過を判定し、手動の得点記録と照合 |
+| `scripts/import_cvat_gt.py` | CVATのYOLO 1.1エクスポートを追跡評価用の正解CSVへ変換（experiment10で既存CSVと全行一致を確認） |
+| `src/stereo.py` | 歪み補正・三角測量・時刻合わせ・得点判定の共通処理 |
+| `configs/court_fiba.json` | コート座標系と基準点・リング位置の定義（体育館の実測値に書き換える） |
+| `configs/experiment_fisheye.template.json` | 魚眼動画用の実験設定のひな形 |
+
+`run_fixed_lag.py`、`realtime_tracking.py`、`evaluate_realtime_log.py` には `--config` を追加し、experiment10以外の動画・正解・重みを指定できるようにしました。省略時は従来どおり `configs/experiment_f.json` です。
+

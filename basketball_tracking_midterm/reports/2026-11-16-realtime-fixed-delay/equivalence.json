@@ -1,0 +1,10 @@
+{
+ "tsr05": 0.8247477429633564,
+ "tsr03": 0.9235262878385555,
+ "yolo_calls": 1076,
+ "dropped": 0,
+ "seconds": 122.26084110001102,
+ "offline_frames": 2512,
+ "identical_bbox": 2512,
+ "bbox_within_1px": 2512
+}

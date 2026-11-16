@@ -1,0 +1,38 @@
+{
+  "units": "m",
+  "coordinate_system": "Origin at the centre of the floor. X runs along the court length toward hoop A (+14 m baseline), Y along the width (left sideline when facing hoop A is +7.5 m), Z up. Measure your own gym: lines differ from FIBA and this file is only a starting template.",
+  "length": 28.0,
+  "width": 15.0,
+  "landmarks": [
+    {"name": "corner_A_plusY", "xyz": [14.0, 7.5, 0.0]},
+    {"name": "corner_A_minusY", "xyz": [14.0, -7.5, 0.0]},
+    {"name": "corner_B_plusY", "xyz": [-14.0, 7.5, 0.0]},
+    {"name": "corner_B_minusY", "xyz": [-14.0, -7.5, 0.0]},
+    {"name": "centre", "xyz": [0.0, 0.0, 0.0]},
+    {"name": "centre_line_plusY", "xyz": [0.0, 7.5, 0.0]},
+    {"name": "centre_line_minusY", "xyz": [0.0, -7.5, 0.0]},
+    {"name": "lane_A_baseline_plusY", "xyz": [14.0, 2.45, 0.0]},
+    {"name": "lane_A_baseline_minusY", "xyz": [14.0, -2.45, 0.0]},
+    {"name": "freethrow_A_plusY", "xyz": [8.2, 2.45, 0.0]},
+    {"name": "freethrow_A_minusY", "xyz": [8.2, -2.45, 0.0]},
+    {"name": "threept_A_baseline_plusY", "xyz": [14.0, 6.6, 0.0]},
+    {"name": "threept_A_baseline_minusY", "xyz": [14.0, -6.6, 0.0]},
+    {"name": "lane_B_baseline_plusY", "xyz": [-14.0, 2.45, 0.0]},
+    {"name": "lane_B_baseline_minusY", "xyz": [-14.0, -2.45, 0.0]},
+    {"name": "freethrow_B_plusY", "xyz": [-8.2, 2.45, 0.0]},
+    {"name": "freethrow_B_minusY", "xyz": [-8.2, -2.45, 0.0]},
+    {"name": "threept_B_baseline_plusY", "xyz": [-14.0, 6.6, 0.0]},
+    {"name": "threept_B_baseline_minusY", "xyz": [-14.0, -6.6, 0.0]},
+    {"name": "rim_A_front", "xyz": [12.2, 0.0, 3.05]},
+    {"name": "rim_B_front", "xyz": [-12.2, 0.0, 3.05]}
+  ],
+  "hoops": {
+    "A": {"center": [12.425, 0.0, 3.05], "rim_radius": 0.225, "backboard_x": 12.8},
+    "B": {"center": [-12.425, 0.0, 3.05], "rim_radius": 0.225, "backboard_x": -12.8}
+  },
+  "notes": [
+    "FIBA: 28 x 15 m court, rim centre 1.575 m from the baseline at 3.05 m height, rim inner diameter 0.45 m, backboard 1.2 m from the baseline.",
+    "Points above the floor (rim front) improve the height estimate of solvePnP; include at least one per camera if visible.",
+    "Use at least 6 well-spread landmarks per camera; 10 or more spanning the whole visible court is recommended."
+  ]
+}

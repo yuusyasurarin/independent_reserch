@@ -32,7 +32,7 @@ def run(args):
     if args.device=='cpu':
         torch.set_num_threads(args.cpu_threads)
         torch.set_num_interop_threads(1)
-    cfg=profile_config(args.profile)
+    cfg=profile_config(args.profile,args.config)
     cfg['device']=args.device
     if args.imgsz!=cfg['imgsz']:
         cfg['g_development_override']=dict(imgsz=args.imgsz,
@@ -49,7 +49,7 @@ def run(args):
         detector=Detector(cfg,args.size,args.condition)
         env=environment()
         assert env['versions']['torch'].split('+')[0]=='2.5.1' and env['opencv']=='4.10.0'
-        manifest=dict(condition=args.condition,model_size=args.size,profile=args.profile,config=cfg,
+        manifest=dict(condition=args.condition,model_size=args.size,profile=args.profile,config=cfg,config_path=args.config or 'configs/experiment_f.json',
             video=info,ground_truth=str(gt_path),gt_sha256=sha256(gt_path),weights=detector.metadata,
             weights_path=str(detector.path),method=args.method,lag_s=args.lag,
             rendering=cfg['save_video'],realtime_pacing=args.realtime,loop_seconds=0,
@@ -180,6 +180,7 @@ if __name__=='__main__':
     p.add_argument('--condition',choices=['B','D','E','G'],default='G')
     p.add_argument('--size',choices=['s','m'],default='s')
     p.add_argument('--profile',choices=PROFILES,default='f')
+    p.add_argument('--config',help='experiment config JSON (video, ground truth, weights); default configs/experiment_f.json')
     p.add_argument('--method',choices=METHODS,default='bridge')
     p.add_argument('--lag',type=float,default=2.)
     p.add_argument('--imgsz',type=int,default=960)
