@@ -1,0 +1,68 @@
+### 
+2026-11-25T23:49:17.6853456+09:00 status=2 charge=82%
+10.86 W, 1035 MHz, 2100 MHz, 52
+2026-11-25T23:50 ユーザー回答: AC電源（モバイルバッテリーではない）、カメラ未接続
+2026-11-25T23:50:55.2620254+09:00 status=2 charge=82%
+11.96 W, 1035 MHz, 2100 MHz, 60
+### --frontend template
+2026-11-25T23:50:57.2140643+09:00 status=2 charge=82%
+11.91 W, 1035 MHz, 2100 MHz, 60
+2026-11-25T23:52:08.9130569+09:00 status=2 charge=81%
+12.10 W, 1035 MHz, 2100 MHz, 62
+### --roi-imgsz 320
+2026-11-25T23:52:10.5381106+09:00 status=2 charge=81%
+11.99 W, 1035 MHz, 2100 MHz, 62
+2026-11-25T23:53:05.9628588+09:00 status=2 charge=81%
+11.88 W, 1035 MHz, 2100 MHz, 60
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30
+2026-11-25T23:53:07.4210410+09:00 status=2 charge=81%
+11.91 W, 1035 MHz, 2100 MHz, 60
+2026-11-25T23:54:24.3786246+09:00 status=2 charge=80%
+12.04 W, 1035 MHz, 2100 MHz, 61
+### --frontend template --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30
+2026-11-25T23:54:25.8786174+09:00 status=2 charge=80%
+12.03 W, 1035 MHz, 2100 MHz, 61
+2026-11-25T23:55:43.8875324+09:00 status=2 charge=79%
+11.98 W, 1035 MHz, 2100 MHz, 61
+DONE
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30 --keep-challenger-on-roi
+2026-11-25T23:56:03.3407727+09:00 status=2 charge=80%
+11.18 W, 1035 MHz, 2100 MHz, 55
+2026-11-25T23:57:23.7329662+09:00 status=2 charge=79%
+12.03 W, 1035 MHz, 2100 MHz, 60
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30 --keep-challenger-on-roi --instant-switch-conf 0.5
+2026-11-25T23:57:25.3791704+09:00 status=2 charge=79%
+12.08 W, 1035 MHz, 2100 MHz, 60
+2026-11-25T23:58:44.3779675+09:00 status=2 charge=78%
+12.02 W, 1035 MHz, 2100 MHz, 61
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30 --roi-escalate
+2026-11-25T23:58:45.8214064+09:00 status=2 charge=78%
+11.96 W, 1035 MHz, 2100 MHz, 61
+2026-11-26T00:00:03.0565129+09:00 status=2 charge=77%
+12.50 W, 1035 MHz, 2100 MHz, 64
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30 --keep-challenger-on-roi --instant-switch-conf 0.5 --roi-escalate
+2026-11-26T00:00:04.3958239+09:00 status=2 charge=77%
+12.55 W, 1035 MHz, 2100 MHz, 64
+2026-11-26T00:01:23.4280391+09:00 status=2 charge=77%
+12.46 W, 1035 MHz, 2100 MHz, 65
+### --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30 --keep-challenger-on-roi --instant-switch-conf 0.5 --roi-escalate --roi-full-interval-s 0.33
+2026-11-26T00:01:24.9356176+09:00 status=2 charge=77%
+12.38 W, 1035 MHz, 2100 MHz, 64
+2026-11-26T00:02:41.3365871+09:00 status=2 charge=76%
+12.23 W, 1035 MHz, 2100 MHz, 63
+### --roi-imgsz 320 --roi-full-interval-s 0.2
+2026-11-26T00:02:42.8028239+09:00 status=2 charge=76%
+12.30 W, 1035 MHz, 2100 MHz, 63
+2026-11-26T00:03:35.2945176+09:00 status=2 charge=76%
+12.14 W, 1035 MHz, 2100 MHz, 62
+### --instant-switch-conf 0.5
+2026-11-26T00:03:36.7107998+09:00 status=2 charge=76%
+12.06 W, 1035 MHz, 2100 MHz, 62
+2026-11-26T00:04:39.2279378+09:00 status=2 charge=75%
+12.34 W, 1035 MHz, 2100 MHz, 64
+### benchmark_stages
+2026-11-26T00:04:40.7734573+09:00 status=2 charge=75%
+12.42 W, 1035 MHz, 2100 MHz, 64
+2026-11-26T00:05:16.5283215+09:00 status=2 charge=75%
+12.08 W, 1035 MHz, 2100 MHz, 61
+DONE

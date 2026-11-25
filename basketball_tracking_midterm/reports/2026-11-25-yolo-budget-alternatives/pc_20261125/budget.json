@@ -1,0 +1,433 @@
+{
+  "results\\alt_20261125\\s_G_f_bridge_960_cuda0_20261125T144936503520Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 1076,
+    "calls_per_s": 12.85031847133758,
+    "budget_calls": 15,
+    "window_frames": 30,
+    "budget_per_s": 15.0,
+    "utilisation": 0.856687898089172,
+    "frames_with_full_window": 588,
+    "frames_with_full_window_rate": 0.2340764331210191,
+    "gap_frames_histogram": {
+      "1": 317,
+      "2": 85,
+      "3": 672,
+      "8": 1
+    },
+    "max_calls_in_any_window": 15,
+    "deferred_frames": 148,
+    "deferred_rate": 0.0589171974522293,
+    "deferred_episodes": 94,
+    "deferred_while": {
+      "flow_unreliable_or_interval": 129,
+      "lost_search": 15,
+      "motion_change": 4
+    },
+    "call_reasons": {
+      "interval": 417,
+      "flow_unreliable": 488,
+      "motion_change": 14,
+      "lost_search": 157
+    },
+    "sources": {
+      "YOLO": 778,
+      "LK": 1057,
+      "motion_prediction": 185,
+      "none": 441,
+      "YOLO_low": 51
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_f_bridge_960_cuda0_20261125T145215686370Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 1085,
+    "calls_per_s": 12.9578025477707,
+    "budget_calls": 15,
+    "window_frames": 30,
+    "budget_per_s": 15.0,
+    "utilisation": 0.8638535031847134,
+    "frames_with_full_window": 718,
+    "frames_with_full_window_rate": 0.285828025477707,
+    "gap_frames_histogram": {
+      "1": 329,
+      "2": 88,
+      "3": 666,
+      "8": 1
+    },
+    "max_calls_in_any_window": 15,
+    "deferred_frames": 162,
+    "deferred_rate": 0.06449044585987261,
+    "deferred_episodes": 108,
+    "deferred_while": {
+      "flow_unreliable_or_interval": 139,
+      "lost_search": 15,
+      "motion_change": 8
+    },
+    "call_reasons": {
+      "interval": 409,
+      "flow_unreliable": 509,
+      "motion_change": 11,
+      "lost_search": 156
+    },
+    "sources": {
+      "YOLO": 783,
+      "LK": 1048,
+      "motion_prediction": 198,
+      "none": 438,
+      "YOLO_low": 45
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_ft0.2s_f_bridge_960_cuda0_20261125T150247936155Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 1082,
+    "calls_per_s": 12.921974522292993,
+    "budget_calls": 15,
+    "window_frames": 30,
+    "budget_per_s": 15.0,
+    "utilisation": 0.8614649681528662,
+    "frames_with_full_window": 612,
+    "frames_with_full_window_rate": 0.24363057324840764,
+    "gap_frames_histogram": {
+      "1": 319,
+      "2": 99,
+      "3": 662,
+      "8": 1
+    },
+    "max_calls_in_any_window": 15,
+    "deferred_frames": 164,
+    "deferred_rate": 0.06528662420382166,
+    "deferred_episodes": 107,
+    "deferred_while": {
+      "flow_unreliable_or_interval": 144,
+      "lost_search": 14,
+      "motion_change": 6
+    },
+    "call_reasons": {
+      "interval": 406,
+      "flow_unreliable": 509,
+      "motion_change": 12,
+      "lost_search": 155
+    },
+    "sources": {
+      "YOLO": 783,
+      "LK": 1039,
+      "motion_prediction": 201,
+      "none": 438,
+      "YOLO_low": 51
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_esc_f_bridge_960_cuda0_20261125T145850757097Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1511,
+      "flow_unreliable": 706,
+      "motion_change": 24,
+      "lost_search": 271
+    },
+    "sources": {
+      "YOLO": 1771,
+      "YOLO_low": 129,
+      "LK": 254,
+      "motion_prediction": 88,
+      "none": 270
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_esc_sw0.5_keep_f_bridge_960_cuda0_20261125T150009878028Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1505,
+      "flow_unreliable": 713,
+      "motion_change": 24,
+      "lost_search": 270
+    },
+    "sources": {
+      "YOLO": 1775,
+      "YOLO_low": 133,
+      "LK": 248,
+      "motion_prediction": 87,
+      "none": 269
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_f_bridge_960_cuda0_20261125T145313530714Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1492,
+      "flow_unreliable": 706,
+      "motion_change": 25,
+      "lost_search": 289
+    },
+    "sources": {
+      "YOLO": 1752,
+      "YOLO_low": 137,
+      "LK": 249,
+      "none": 288,
+      "motion_prediction": 86
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_ft0.33s_esc_sw0.5_keep_f_bridge_960_cuda0_20261125T150130844582Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1502,
+      "flow_unreliable": 715,
+      "motion_change": 26,
+      "lost_search": 269
+    },
+    "sources": {
+      "YOLO": 1779,
+      "YOLO_low": 132,
+      "LK": 242,
+      "motion_prediction": 91,
+      "none": 268
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_keep_f_bridge_960_cuda0_20261125T145609149412Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1495,
+      "flow_unreliable": 703,
+      "motion_change": 23,
+      "lost_search": 291
+    },
+    "sources": {
+      "YOLO": 1749,
+      "YOLO_low": 137,
+      "LK": 252,
+      "none": 290,
+      "motion_prediction": 84
+    }
+  },
+  "results\\alt_20261125\\s_G_roi320e5_i1_hz30_sw0.5_keep_f_bridge_960_cuda0_20261125T145731895760Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1495,
+      "flow_unreliable": 703,
+      "motion_change": 23,
+      "lost_search": 291
+    },
+    "sources": {
+      "YOLO": 1749,
+      "YOLO_low": 137,
+      "LK": 252,
+      "none": 290,
+      "motion_prediction": 84
+    }
+  },
+  "results\\alt_20261125\\s_G_sw0.5_f_bridge_960_cuda0_20261125T150342052524Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 1082,
+    "calls_per_s": 12.921974522292993,
+    "budget_calls": 15,
+    "window_frames": 30,
+    "budget_per_s": 15.0,
+    "utilisation": 0.8614649681528662,
+    "frames_with_full_window": 621,
+    "frames_with_full_window_rate": 0.24721337579617833,
+    "gap_frames_histogram": {
+      "1": 325,
+      "2": 87,
+      "3": 668,
+      "8": 1
+    },
+    "max_calls_in_any_window": 15,
+    "deferred_frames": 156,
+    "deferred_rate": 0.06210191082802548,
+    "deferred_episodes": 100,
+    "deferred_while": {
+      "flow_unreliable_or_interval": 137,
+      "lost_search": 15,
+      "motion_change": 4
+    },
+    "call_reasons": {
+      "interval": 412,
+      "flow_unreliable": 500,
+      "motion_change": 14,
+      "lost_search": 156
+    },
+    "sources": {
+      "YOLO": 786,
+      "LK": 1040,
+      "motion_prediction": 195,
+      "none": 440,
+      "YOLO_low": 51
+    }
+  },
+  "results\\alt_20261125\\s_G_template_f_bridge_960_cuda0_20261125T145105703442Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 1051,
+    "calls_per_s": 12.551751592356688,
+    "budget_calls": 15,
+    "window_frames": 30,
+    "budget_per_s": 15.0,
+    "utilisation": 0.8367834394904459,
+    "frames_with_full_window": 339,
+    "frames_with_full_window_rate": 0.13495222929936307,
+    "gap_frames_histogram": {
+      "1": 217,
+      "2": 207,
+      "3": 625,
+      "4": 1
+    },
+    "max_calls_in_any_window": 15,
+    "deferred_frames": 70,
+    "deferred_rate": 0.02786624203821656,
+    "deferred_episodes": 53,
+    "deferred_while": {
+      "motion_change": 9,
+      "flow_unreliable_or_interval": 54,
+      "lost_search": 7
+    },
+    "call_reasons": {
+      "interval": 329,
+      "flow_unreliable": 451,
+      "motion_change": 136,
+      "lost_search": 135
+    },
+    "sources": {
+      "YOLO": 731,
+      "LK": 1223,
+      "motion_prediction": 123,
+      "YOLO_low": 47,
+      "none": 388
+    }
+  },
+  "results\\alt_20261125\\s_G_template_roi320e5_i1_hz30_f_bridge_960_cuda0_20261125T145431761399Z\\online.jsonl": {
+    "frames": 2512,
+    "seconds": 83.73333333333333,
+    "yolo_calls": 2512,
+    "calls_per_s": 30.0,
+    "budget_calls": 30,
+    "window_frames": 30,
+    "budget_per_s": 30.0,
+    "utilisation": 1.0,
+    "frames_with_full_window": 2483,
+    "frames_with_full_window_rate": 0.9884554140127388,
+    "gap_frames_histogram": {
+      "1": 2511
+    },
+    "max_calls_in_any_window": 30,
+    "deferred_frames": 0,
+    "deferred_rate": 0.0,
+    "deferred_episodes": 0,
+    "deferred_while": {},
+    "call_reasons": {
+      "interval": 1814,
+      "flow_unreliable": 317,
+      "motion_change": 134,
+      "lost_search": 247
+    },
+    "sources": {
+      "YOLO": 1752,
+      "YOLO_low": 113,
+      "LK": 337,
+      "motion_prediction": 64,
+      "none": 246
+    }
+  }
+}

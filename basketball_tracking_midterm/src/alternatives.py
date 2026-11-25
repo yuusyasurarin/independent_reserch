@@ -16,7 +16,7 @@ Scheduling, budget, candidate choice, expiry and the fixed-lag smoother are unch
 import math
 
 from .adaptive_tracking import AdaptiveBallPolicy
-from .common import valid_box
+from .common import center, valid_box
 
 TEMPLATE_DEFAULTS = dict(template_threshold=.6, template_pad=.25, template_min_px=8)
 
@@ -135,3 +135,97 @@ class RoiScheduler:
         """Inference cost relative to all-full-frame calls (pixels ~ FLOPs)."""
         n = self.counts['full']+self.counts['roi']
         return (self.counts['full']+self.counts['roi']*(self.roi_imgsz/self.imgsz)**2)/n if n else 0.
+
+
+# --- Recovery when the ROI locks onto a head / shoe (2026-11-25 development study) ---
+# All options default to "off", which reproduces the behaviour above exactly.
+RECOVERY_DEFAULTS = dict(keep_challenger_on_roi=False, instant_switch_conf=0.)
+
+
+class RecoveryMixin:
+    """Changes only how a distant candidate may replace the current track.
+
+    keep_challenger_on_roi : an ROI call cannot see a distant ball, so it no longer
+                             cancels a pending distant challenger from a full-frame call.
+    instant_switch_conf    : on a full-frame call, a distant candidate with confidence
+                             >= this value (and challenge_margin above the best local one)
+                             replaces the track at once instead of after two detections.
+    """
+    roi_call = False
+
+    def choose(self, candidates, reference, frame_id):
+        o = RECOVERY_DEFAULTS | self.options
+        if reference is not None and not self.roi_call and o['instant_switch_conf'] > 0:
+            high = [c for c in candidates if c['confidence'] >= self.cfg['confidence']]
+            top = max(high, key=lambda c: c['confidence'], default=None)
+            diameter = max(reference[2]-reference[0], reference[3]-reference[1])
+            gate = max(12., diameter*o['motion_gate_diameters'])
+            def distance(c):
+                return math.dist(center(c['bbox']), center(reference))
+            local = max((c['confidence'] for c in high if distance(c) <= gate), default=0.)
+            if (top and top['confidence'] >= o['instant_switch_conf'] and distance(top) > gate
+                    and top['confidence'] > local+o['challenge_margin']):
+                self.challenger = None
+                self.events += ['global_reacquisition', 'instant_switch']
+                return top, True
+        saved, before = self.challenger, len(self.events)
+        choice, strong = super().choose(candidates, reference, frame_id)
+        added = self.events[before:]
+        if (self.roi_call and o['keep_challenger_on_roi'] and saved is not None
+                and not {'global_candidate_pending', 'global_reacquisition'} & set(added)):
+            self.challenger = saved
+        return choice, strong
+
+
+def with_recovery(policy_class):
+    return type('Recovery'+policy_class.__name__, (RecoveryMixin, policy_class), {})
+
+
+class RecoveryRoiScheduler(RoiScheduler):
+    """RoiScheduler with time-based full frames and escalation after a doubtful ROI call.
+
+    full_interval : whole frame when >= this many frames passed since the last whole
+                    frame (replaces the every-N-th-call rule when > 0).
+    escalate      : after an ROI call that gave no high-confidence ball, or whose box
+                    area changed by more than size_jump times, the next call is whole-frame.
+    """
+
+    def __init__(self, imgsz, roi_imgsz, full_every, full_interval=0, escalate=False, size_jump=2.):
+        super().__init__(imgsz, roi_imgsz, full_every)
+        if full_interval < 0 or size_jump <= 1:
+            raise ValueError('full_interval >= 0 and size_jump > 1 required')
+        self.full_interval, self.escalate, self.size_jump = full_interval, escalate, size_jump
+        self.last_full_frame = None
+        self.force_full = False
+        self.reference = None
+        self.counts.update(escalated=0)
+
+    def window(self, policy, frame):
+        frame_id = policy.prepared_frame
+        reference = policy.flow_box or policy.predicted_box or policy.box
+        self.reference = list(reference) if reference else None
+        if self.full_interval:
+            due = self.last_full_frame is None or frame_id-self.last_full_frame >= self.full_interval
+        else:
+            due = self.since_full+1 >= self.full_every
+        if self.force_full and reference is not None and policy.request_reason != 'lost_search':
+            self.counts['escalated'] += 1
+        if reference is None or policy.request_reason == 'lost_search' or due or self.force_full:
+            self.since_full, self.last_full_frame, self.force_full = 0, frame_id, False
+            self.counts['full'] += 1
+            return None
+        self.since_full += 1
+        self.counts['roi'] += 1
+        h, w = frame.shape[:2]
+        return roi_window(reference, w, h, self.imgsz, self.roi_imgsz)
+
+    def after_update(self, result, used_roi):
+        """Call after policy.update() on a frame where YOLO ran."""
+        if not (self.escalate and used_roi):
+            return
+        box, ref = result['bbox'], self.reference
+        if result['source'] != 'YOLO' or box is None:
+            self.force_full = True
+        elif ref is not None:
+            area = max((box[2]-box[0])*(box[3]-box[1]), 1.)/max((ref[2]-ref[0])*(ref[3]-ref[1]), 1.)
+            self.force_full = not 1/self.size_jump <= area <= self.size_jump
