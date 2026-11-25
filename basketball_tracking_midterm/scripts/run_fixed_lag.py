@@ -14,7 +14,6 @@ import time
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.common import ROOT, resolve, save_json, save_csv, sha256, stats, environment
 from src.adaptive_tracking import AdaptiveBallPolicy
-from src.alternatives import TemplateBallPolicy, RoiScheduler
 from src.tracking import TrackingPolicy
 from src.data import inspect_video, load_gt
 from src.detector import Detector
@@ -34,8 +33,6 @@ def run(args):
         torch.set_num_threads(args.cpu_threads)
         torch.set_num_interop_threads(1)
     cfg=profile_config(args.profile,args.config)
-    if args.max_interval:cfg['adaptive']['max_interval']=args.max_interval
-    if args.max_yolo_hz:cfg['adaptive']['max_yolo_hz']=args.max_yolo_hz
     cfg['device']=args.device
     if args.imgsz!=cfg['imgsz']:
         cfg['g_development_override']=dict(imgsz=args.imgsz,
@@ -44,9 +41,7 @@ def run(args):
     cfg['save_video']=not args.no_video
     video=resolve(cfg['video']);info=inspect_video(video)
     gt_path=resolve(cfg['ground_truth']);gt=load_gt(gt_path,info)
-    variant=('' if args.frontend=='lk' else f'_{args.frontend}')+(f'_roi{args.roi_imgsz}e{args.roi_full_every}' if args.roi_imgsz else '')
-    variant+=(f'_i{args.max_interval}' if args.max_interval else '')+(f'_hz{args.max_yolo_hz:g}' if args.max_yolo_hz else '')
-    name=f"{args.size}_{args.condition}{variant}_{args.profile}_{args.method}_{args.imgsz}_{args.device.replace(':','')}_{datetime.now(timezone.utc):%Y%m%dT%H%M%S%fZ}"
+    name=f"{args.size}_{args.condition}_{args.profile}_{args.method}_{args.imgsz}_{args.device.replace(':','')}_{datetime.now(timezone.utc):%Y%m%dT%H%M%S%fZ}"
     output=resolve(args.output)/name;output.mkdir(parents=True,exist_ok=False)
     save_json(output/'status.json',dict(status='initializing'))
     cap=writer=None
@@ -65,14 +60,11 @@ def run(args):
             source_sha256={str(p.relative_to(ROOT)):sha256(p) for folder in ('src','scripts') for p in (ROOT/folder).glob('*.py')},
             command=sys.argv,warmup_calls=3,precision='FP32',
             kcf_initialization='init plus first update on the same clean detection image',
-            frontend=('TemplateBallPolicy' if args.frontend=='template' else 'AdaptiveBallPolicy') if args.condition=='G' else 'TrackingPolicy',
-            roi=dict(roi_imgsz=args.roi_imgsz,full_every=args.roi_full_every) if args.roi_imgsz else None,
+            frontend='AdaptiveBallPolicy' if args.condition=='G' else 'TrackingPolicy',
             comparison_runner_version=2)
         save_json(output/'run_config.json',manifest)
-        frontend=TemplateBallPolicy if args.frontend=='template' else AdaptiveBallPolicy
-        policy=(frontend(cfg,info['fps']) if args.condition=='G'
+        policy=(AdaptiveBallPolicy(cfg,info['fps']) if args.condition=='G'
                 else TrackingPolicy(args.condition,cfg,info['fps']))
-        roi=RoiScheduler(cfg['imgsz'],args.roi_imgsz,args.roi_full_every) if args.roi_imgsz else None
         smoother=FixedLagBall(info['fps'],info['width'],info['height'],args.lag,args.method)
         detector.warmup(info['width'],info['height'])
         if args.device!='cpu':torch.cuda.reset_peak_memory_stats(detector.device)
@@ -122,9 +114,7 @@ def run(args):
                 prepare_ms=(time.perf_counter()-detection_start)*1000
                 candidates=[];dt=dict(preprocess_ms=0.,inference_ms=0.,postprocess_ms=0.)
                 if detected:
-                    candidates,dt=roi.detect(detector,policy,frame) if roi else detector.detect(frame);calls+=1
-                    roi_info={k:dt.pop(k) for k in ('roi','roi_window') if k in dt}
-                else:roi_info={}
+                    candidates,dt=detector.detect(frame);calls+=1
                 a=time.perf_counter();p=policy.update(frame,i,candidates,detected)
                 frontend_ms=prepare_ms+(time.perf_counter()-a)*1000
                 p.update(yolo_executed=detected,cycle=0,global_frame_id=i)
@@ -133,7 +123,7 @@ def run(args):
                 a=time.perf_counter()
                 if out is not None:emit(out)
                 render_ms=(time.perf_counter()-a-(sleep_s-sleep_before))*1000
-                log=dict(frame_id=i,cycle=0,global_frame_id=i,yolo_executed=detected,candidates=candidates,**roi_info)
+                log=dict(frame_id=i,cycle=0,global_frame_id=i,yolo_executed=detected,candidates=candidates)
                 rawlog.write(json.dumps(log,allow_nan=False)+'\n');onlinelog.write(json.dumps(p,allow_nan=False)+'\n')
                 online.append(p);logs.append(log)
                 if i%30==0:
@@ -160,9 +150,7 @@ def run(args):
             wall_fps=n/elapsed,wall_seconds=elapsed,pacing_sleep_seconds=sleep_s,
             processing_ms=stats([r['processing_ms'] for r in timings]),
             frontend_ms=stats([r['frontend_ms'] for r in timings]),backend_ms=stats([r['backend_ms'] for r in timings]),
-            tail_processing_s=tail_processing,
-            roi_calls=roi.counts if roi else None,
-            relative_inference_pixels=roi.relative_cost() if roi else 1.,peak_buffer_frames=peak_frames,
+            tail_processing_s=tail_processing,peak_buffer_frames=peak_frames,
             peak_rgb_buffer_bytes=peak_frames*info['width']*info['height']*3,
             peak_state_rows=smoother.peak_rows,peak_process_rss_or_peak_wset_bytes=peak_rss,
             simulated_release_latency_s=stats([r['simulated_arrival_to_release_s'] for r in releases if args.realtime]),
@@ -202,18 +190,11 @@ if __name__=='__main__':
     p.add_argument('--max-frames',type=int,default=0)
     p.add_argument('--no-video',action='store_true')
     p.add_argument('--realtime',action='store_true')
-    p.add_argument('--frontend',choices=['lk','template'],default='lk',help='System 1: LK feature points (G) or colour template matching')
-    p.add_argument('--roi-imgsz',type=int,default=0,help='YOLO on a crop around the predicted ball at this input size (0 = whole frame)')
-    p.add_argument('--roi-full-every',type=int,default=5,help='every N-th YOLO call uses the whole frame even while tracking')
-    p.add_argument('--max-interval',type=int,default=0,help='override adaptive max_interval (frames)')
-    p.add_argument('--max-yolo-hz',type=float,default=0,help='override adaptive max_yolo_hz')
     args=p.parse_args()
     if args.imgsz<32 or args.imgsz%32 or args.lag<0 or args.cpu_threads<1 or args.max_frames<0:p.error('Invalid settings')
     if args.condition in ('B','D') and (args.method!='forward' or args.lag!=0):
         p.error('B/D baselines require --method forward --lag 0')
     if args.condition!='G' and args.imgsz!=960:p.error('Only G permits explicit input-resolution development overrides')
-    if args.condition!='G' and (args.frontend!='lk' or args.roi_imgsz or args.max_interval or args.max_yolo_hz):
-        p.error('--frontend/--roi-*/--max-* are condition G development options')
     import socket
     def no_network(sock,address):raise RuntimeError('Fresh G experiment has no network access')
     socket.socket.connect=no_network

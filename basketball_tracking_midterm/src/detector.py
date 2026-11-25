@@ -96,13 +96,11 @@ class Detector:
         if self.device.type=='cuda':
             self.torch.cuda.synchronize(self.device)
 
-    def detect(self,frame,imgsz=None):
-        # imgsz override is only used for ROI crops (src/alternatives.py); default = val setting.
+    def detect(self,frame):
         t=self.torch
-        size=imgsz or self.cfg['imgsz']
         self.sync()
         start=time.perf_counter()
-        img=self.letterbox(frame,new_shape=(size,size),auto=False,stride=self.stride)[0]
+        img=self.letterbox(frame,new_shape=(self.cfg['imgsz'],self.cfg['imgsz']),auto=False,stride=self.stride)[0]
         img=self.np.ascontiguousarray(img[:,:,::-1].transpose(2,0,1))
         tensor=t.from_numpy(img).to(self.device)
         tensor=tensor.half() if self.half else tensor.float()
