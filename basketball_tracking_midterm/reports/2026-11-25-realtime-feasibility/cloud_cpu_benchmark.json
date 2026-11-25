@@ -1,0 +1,171 @@
+{
+  "platform": "Linux-6.18.44-fc-v880-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "python": "3.13.18",
+  "torch": "2.15.0+cu132",
+  "opencv": "5.1.0",
+  "torch_threads": 4,
+  "cuda_device": null,
+  "device": "cpu",
+  "half": false,
+  "source": "synthetic",
+  "frame_size": [
+    1280,
+    720
+  ],
+  "stages_ms": {
+    "decode": null,
+    "system1": {
+      "n": 150,
+      "mean": 0.5526637800028311,
+      "median": 0.5318069999873387,
+      "p95": 0.6625940000049013
+    },
+    "draw_encode": {
+      "n": 150,
+      "mean": 3.4230754866685706,
+      "median": 3.142917500014164,
+      "p95": 4.705788000023858
+    }
+  },
+  "yolo": {
+    "960": {
+      "stages_ms": {
+        "pre": {
+          "n": 30,
+          "mean": 4.474859166672711,
+          "median": 4.464276000021528,
+          "p95": 4.910629999983485
+        },
+        "infer": {
+          "n": 30,
+          "mean": 138.87820343333033,
+          "median": 138.14884149999784,
+          "p95": 144.8114709999686
+        },
+        "post": {
+          "n": 30,
+          "mean": 1.0300733666686785,
+          "median": 1.0215509999795813,
+          "p95": 1.1158690000456772
+        }
+      },
+      "total_median_ms": 143.63466849999895,
+      "budget": [
+        {
+          "yolo_hz": 30.0,
+          "load_ms_per_s": 4419.281790000014,
+          "utilisation": 4.419281790000014,
+          "sustainable_fps": 6.788433375731831,
+          "realtime": false
+        },
+        {
+          "yolo_hz": 15.0,
+          "load_ms_per_s": 2264.7617625000294,
+          "utilisation": 2.2647617625000294,
+          "sustainable_fps": 13.246426399783235,
+          "realtime": false
+        },
+        {
+          "yolo_hz": 12.85,
+          "load_ms_per_s": 1955.9472252250316,
+          "utilisation": 1.9559472252250316,
+          "sustainable_fps": 15.337837142588805,
+          "realtime": false
+        }
+      ]
+    },
+    "640": {
+      "stages_ms": {
+        "pre": {
+          "n": 30,
+          "mean": 1.5358118999984072,
+          "median": 1.510404500010054,
+          "p95": 1.6921249999768406
+        },
+        "infer": {
+          "n": 30,
+          "mean": 56.969381033331956,
+          "median": 56.958707499973116,
+          "p95": 62.25433500003419
+        },
+        "post": {
+          "n": 30,
+          "mean": 0.786207633336744,
+          "median": 0.811841000000868,
+          "p95": 0.9138560000110374
+        }
+      },
+      "total_median_ms": 59.28095299998404,
+      "budget": [
+        {
+          "yolo_hz": 30.0,
+          "load_ms_per_s": 1888.6703249995662,
+          "utilisation": 1.8886703249995662,
+          "sustainable_fps": 15.884190905581624,
+          "realtime": false
+        },
+        {
+          "yolo_hz": 15.0,
+          "load_ms_per_s": 999.4560299998057,
+          "utilisation": 0.9994560299998057,
+          "sustainable_fps": 30.01632798193817,
+          "realtime": true
+        },
+        {
+          "yolo_hz": 12.85,
+          "load_ms_per_s": 872.00198104984,
+          "utilisation": 0.87200198104984,
+          "sustainable_fps": 34.40359156510371,
+          "realtime": true
+        }
+      ]
+    },
+    "416": {
+      "stages_ms": {
+        "pre": {
+          "n": 30,
+          "mean": 0.8299465000031129,
+          "median": 0.8409084999811967,
+          "p95": 0.8895679999909589
+        },
+        "infer": {
+          "n": 30,
+          "mean": 32.84408726665902,
+          "median": 31.564181499987853,
+          "p95": 38.545919000000595
+        },
+        "post": {
+          "n": 30,
+          "mean": 0.6359940000019529,
+          "median": 0.6322584999907122,
+          "p95": 0.7179070000233878
+        }
+      },
+      "total_median_ms": 33.03734849995976,
+      "budget": [
+        {
+          "yolo_hz": 30.0,
+          "load_ms_per_s": 1101.362189998838,
+          "utilisation": 1.101362189998838,
+          "sustainable_fps": 27.238995738569574,
+          "realtime": false
+        },
+        {
+          "yolo_hz": 15.0,
+          "load_ms_per_s": 605.8019624994415,
+          "utilisation": 0.6058019624994415,
+          "sustainable_fps": 49.5211337319292,
+          "realtime": true
+        },
+        {
+          "yolo_hz": 12.85,
+          "load_ms_per_s": 534.7716632245281,
+          "utilisation": 0.5347716632245281,
+          "sustainable_fps": 56.09870915580706,
+          "realtime": true
+        }
+      ]
+    }
+  }
+}
