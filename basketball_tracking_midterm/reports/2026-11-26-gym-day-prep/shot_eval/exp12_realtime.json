@@ -1,0 +1,109 @@
+{
+  "trajectory": "frames.jsonl",
+  "rim": [
+    728.0,
+    128.0,
+    782.0,
+    144.0
+  ],
+  "options": {
+    "approach_halfwidths": 4.0,
+    "approach_height": 160.0,
+    "margin_halfwidths": 0.35,
+    "near_px": 60.0,
+    "confirm_px": 25.0,
+    "confirm_frames": 8,
+    "side_halfwidths": 2.5,
+    "confirm_halfwidths": 1.1,
+    "leave_frames": 6,
+    "timeout_s": 2.0
+  },
+  "score": {
+    "attempts": 9,
+    "made": 5,
+    "missed": 4
+  },
+  "events": [
+    {
+      "frame_id": 255,
+      "time_s": 8.5,
+      "result": "made",
+      "reason": "through_rim",
+      "start_frame": 243,
+      "crossed_frame": 253,
+      "min_rim_distance_px": 1.891626616230265
+    },
+    {
+      "frame_id": 686,
+      "time_s": 22.866666666666667,
+      "result": "made",
+      "reason": "through_rim",
+      "start_frame": 669,
+      "crossed_frame": 679,
+      "min_rim_distance_px": 1.8890266418457031
+    },
+    {
+      "frame_id": 1669,
+      "time_s": 55.63333333333333,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 1646,
+      "crossed_frame": null,
+      "min_rim_distance_px": 16.953163146972656
+    },
+    {
+      "frame_id": 2232,
+      "time_s": 74.4,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 2208,
+      "crossed_frame": null,
+      "min_rim_distance_px": 12.816238403320312
+    },
+    {
+      "frame_id": 2555,
+      "time_s": 85.16666666666667,
+      "result": "made",
+      "reason": "through_rim",
+      "start_frame": 2531,
+      "crossed_frame": 2543,
+      "min_rim_distance_px": 3.4600963592529297
+    },
+    {
+      "frame_id": 2898,
+      "time_s": 96.6,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 2868,
+      "crossed_frame": null,
+      "min_rim_distance_px": 12.417793722888776
+    },
+    {
+      "frame_id": 3124,
+      "time_s": 104.13333333333334,
+      "result": "made",
+      "reason": "through_rim",
+      "start_frame": 3112,
+      "crossed_frame": 3120,
+      "min_rim_distance_px": 1.6197713216145644
+    },
+    {
+      "frame_id": 3236,
+      "time_s": 107.86666666666666,
+      "result": "made",
+      "reason": "through_rim",
+      "start_frame": 3199,
+      "crossed_frame": 3231,
+      "min_rim_distance_px": 1.6659088134765625
+    },
+    {
+      "frame_id": 3631,
+      "time_s": 121.03333333333333,
+      "result": "miss",
+      "reason": "dropped_beside_rim",
+      "start_frame": 3597,
+      "crossed_frame": 3628,
+      "min_rim_distance_px": 3.987773895263672
+    }
+  ]
+}

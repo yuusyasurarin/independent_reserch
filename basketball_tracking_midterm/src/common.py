@@ -89,6 +89,35 @@ def hardware_sample():
         return None
 
 
+def power_state():
+    """Power source and GPU clock at this moment. Speed measurements depend on both, so every
+    timed run stores this at start and end. Fields are None where the platform cannot report them."""
+    result = dict(source=None, battery_percent=None, gpu=None)
+    try:
+        import ctypes
+
+        class Status(ctypes.Structure):
+            _fields_ = [('ac', ctypes.c_ubyte), ('flag', ctypes.c_ubyte), ('percent', ctypes.c_ubyte),
+                        ('saver', ctypes.c_ubyte), ('life', ctypes.c_ulong), ('full', ctypes.c_ulong)]
+        status = Status()
+        if ctypes.windll.kernel32.GetSystemPowerStatus(ctypes.byref(status)):
+            result['source'] = {0: 'battery', 1: 'ac'}.get(status.ac)
+            result['battery_percent'] = status.percent if status.percent <= 100 else None
+            result['battery_saver'] = bool(status.saver)
+    except (AttributeError, OSError):
+        pass
+    try:
+        p = subprocess.run(['nvidia-smi', '--query-gpu=clocks.gr,clocks.max.gr,pstate,temperature.gpu',
+                            '--format=csv,noheader,nounits'], capture_output=True, text=True, timeout=5)
+        if p.returncode == 0 and p.stdout.strip():
+            clock, limit, pstate, temp = [v.strip() for v in p.stdout.strip().splitlines()[0].split(',')]
+            number = lambda v: float(v) if v.replace('.', '', 1).isdigit() else None
+            result['gpu'] = dict(clock_mhz=number(clock), max_clock_mhz=number(limit), pstate=pstate, temperature_c=number(temp))
+    except (OSError, subprocess.TimeoutExpired, ValueError):
+        pass
+    return result
+
+
 def environment():
     versions = {}
     for name in ('torch','torchvision','numpy','opencv-contrib-python','opencv-python','supervision',
