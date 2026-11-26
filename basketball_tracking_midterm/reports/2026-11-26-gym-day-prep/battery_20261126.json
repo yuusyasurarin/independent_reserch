@@ -1,0 +1,354 @@
+[
+  {
+    "name": "A_960",
+    "run": "realtime_20261126T001719077317Z",
+    "args": {
+      "imgsz": 960,
+      "roi_imgsz": 0,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.7703025477707006,
+    "processed": 577,
+    "yolo_calls": 543,
+    "measured_fps": 6.890923566878981,
+    "processing_ms_median": 134.3196000016178,
+    "processing_ms_mean": 145.93944332760464,
+    "tsr05": 0.5889537971322358,
+    "tsr03": 0.7180031864046734,
+    "output_rate_visible": 0.8417419012214551,
+    "tsr05_processed": 0.8210290827740492,
+    "missing_results": 0,
+    "display_delay_p95": 3.003516389994547,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 95,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 37.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 90,
+      "gpu": {
+        "clock_mhz": 1762.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 53.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "B_960",
+    "run": "realtime_20261126T001933048983Z",
+    "args": {
+      "imgsz": 960,
+      "roi_imgsz": 320,
+      "max_interval": 1,
+      "max_yolo_hz": 30.0
+    },
+    "drop_rate": 0.5935509554140127,
+    "processed": 1021,
+    "yolo_calls": 1021,
+    "measured_fps": 12.193471337579618,
+    "processing_ms_median": 75.17100000404753,
+    "processing_ms_mean": 82.56360930472894,
+    "tsr05": 0.804567180031864,
+    "tsr03": 0.9028146574614976,
+    "output_rate_visible": 0.9649495485926712,
+    "tsr05_processed": 0.880674448767834,
+    "missing_results": 0,
+    "display_delay_p95": 3.00171473999726,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 89,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 50.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 88,
+      "gpu": {
+        "clock_mhz": 240.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 54.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "A_704",
+    "run": "realtime_20261126T002139523476Z",
+    "args": {
+      "imgsz": 704,
+      "roi_imgsz": 0,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.23646496815286625,
+    "processed": 1918,
+    "yolo_calls": 991,
+    "measured_fps": 22.906050955414013,
+    "processing_ms_median": 66.39104999703704,
+    "processing_ms_mean": 44.00164113657078,
+    "tsr05": 0.8114710568242167,
+    "tsr03": 0.8990971853425385,
+    "output_rate_visible": 0.9559214020180563,
+    "tsr05_processed": 0.8095940959409594,
+    "missing_results": 0,
+    "display_delay_p95": 3.0017761300023267,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 87,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 53.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 86,
+      "gpu": {
+        "clock_mhz": 247.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 56.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "B_704",
+    "run": "realtime_20261126T002344600133Z",
+    "args": {
+      "imgsz": 704,
+      "roi_imgsz": 320,
+      "max_interval": 1,
+      "max_yolo_hz": 30.0
+    },
+    "drop_rate": 0.5668789808917197,
+    "processed": 1088,
+    "yolo_calls": 1088,
+    "measured_fps": 12.993630573248408,
+    "processing_ms_median": 76.0924000023806,
+    "processing_ms_mean": 77.55469623162647,
+    "tsr05": 0.8013807753584705,
+    "tsr03": 0.8996282527881041,
+    "output_rate_visible": 0.9564524694636218,
+    "tsr05_processed": 0.8384332925336597,
+    "missing_results": 0,
+    "display_delay_p95": 3.001644825002586,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 85,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 55.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 84,
+      "gpu": {
+        "clock_mhz": 630.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P8",
+        "temperature_c": 57.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "C_960",
+    "run": "realtime_20261126T002639999851Z",
+    "args": {
+      "imgsz": 960,
+      "roi_imgsz": 320,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.30772292993630573,
+    "processed": 1739,
+    "yolo_calls": 985,
+    "measured_fps": 20.768312101910826,
+    "processing_ms_median": 66.27209999714978,
+    "processing_ms_mean": 48.52358711904145,
+    "tsr05": 0.8321826872012745,
+    "tsr03": 0.9192777482740307,
+    "output_rate_visible": 0.9750398300584174,
+    "tsr05_processed": 0.8479485116653258,
+    "missing_results": 0,
+    "display_delay_p95": 3.0016833150013555,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 83,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 53.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 81,
+      "gpu": {
+        "clock_mhz": 937.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P8",
+        "temperature_c": 50.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "C_704",
+    "run": "realtime_20261126T002847783961Z",
+    "args": {
+      "imgsz": 704,
+      "roi_imgsz": 320,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.16162420382165604,
+    "processed": 2106,
+    "yolo_calls": 1004,
+    "measured_fps": 25.151273885350317,
+    "processing_ms_median": 11.352500001521548,
+    "processing_ms_mean": 40.10634202290693,
+    "tsr05": 0.7780138077535848,
+    "tsr03": 0.8661710037174721,
+    "output_rate_visible": 0.9585767392458843,
+    "tsr05_processed": 0.7841352405721717,
+    "missing_results": 0,
+    "display_delay_p95": 3.0017591050025656,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 81,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 46.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 80,
+      "gpu": {
+        "clock_mhz": 600.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P8",
+        "temperature_c": 46.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "C_960_repeat",
+    "run": "realtime_20261126T003107464154Z",
+    "args": {
+      "imgsz": 960,
+      "roi_imgsz": 320,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.3065286624203822,
+    "processed": 1742,
+    "yolo_calls": 983,
+    "measured_fps": 20.804140127388536,
+    "processing_ms_median": 65.3580000034708,
+    "processing_ms_mean": 48.42858645247283,
+    "tsr05": 0.8077535847052576,
+    "tsr03": 0.893255443441317,
+    "output_rate_visible": 0.9564524694636218,
+    "tsr05_processed": 0.8330696202531646,
+    "missing_results": 0,
+    "display_delay_p95": 3.001799944998493,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 79,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 43.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 77,
+      "gpu": {
+        "clock_mhz": 225.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 46.0
+      },
+      "battery_saver": false
+    }
+  },
+  {
+    "name": "A_704_repeat",
+    "run": "realtime_20261126T003315515657Z",
+    "args": {
+      "imgsz": 704,
+      "roi_imgsz": 0,
+      "max_interval": 0,
+      "max_yolo_hz": 0
+    },
+    "drop_rate": 0.17237261146496816,
+    "processed": 2079,
+    "yolo_calls": 1004,
+    "measured_fps": 24.828821656050955,
+    "processing_ms_median": 11.587400003918447,
+    "processing_ms_mean": 40.60067570939056,
+    "tsr05": 0.7971322357939459,
+    "tsr03": 0.8751991502920871,
+    "output_rate_visible": 0.9362719065321295,
+    "tsr05_processed": 0.8,
+    "missing_results": 0,
+    "display_delay_p95": 3.0017931699971085,
+    "power_start": {
+      "source": "battery",
+      "battery_percent": 77,
+      "gpu": {
+        "clock_mhz": 1035.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P3",
+        "temperature_c": 44.0
+      },
+      "battery_saver": false
+    },
+    "power_end": {
+      "source": "battery",
+      "battery_percent": 76,
+      "gpu": {
+        "clock_mhz": 210.0,
+        "max_clock_mhz": 2100.0,
+        "pstate": "P5",
+        "temperature_c": 46.0
+      },
+      "battery_saver": false
+    }
+  }
+]

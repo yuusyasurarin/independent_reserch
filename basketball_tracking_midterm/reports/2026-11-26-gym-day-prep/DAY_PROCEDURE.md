@@ -33,21 +33,29 @@ cd D:\自主研究\independent_reserch
 
 補正値の計算はあとでできます（`scripts/fisheye_calibrate.py --video ...`）。
 
+## 当日使う2つのモデル（11/26 0時台のバッテリー実測で決定）
+
+| 呼び名 | 中身 | 追加する引数 | バッテリーでのTSR@0.5（2回） | 間引き率 |
+|---|---|---|---:|---:|
+| モデル1 | 条件G、入力704（11/16からの暫定設定） | `--imgsz 704` | 81.2%、79.7% | 17〜24% |
+| モデル2 | G＋ROI、YOLO上限は15回/秒のまま、入力960 | `--roi-imgsz 320` | 83.2%、80.8% | 31% |
+
+「ROI＋30回/秒」（`--max-interval 1 --max-yolo-hz 30`）はAC電源では一番よかったものの、バッテリーでは間引き率が57〜59%になり追いつかないので、当日は使いません。入力960の条件G（引数なし）もバッテリーでは間引き率77%なので使いません。
+
 ## 手順3：バッテリーでの速度確認（試合前に3分、電源を抜いた状態で）
 
-録画ファイルを30fpsのカメラ入力として流し、モデルA・Bが追いつくかを見ます。
+当日の電池残量や室温で速度が変わることがあるので、録画ファイルを30fpsのカメラ入力として流して確認します。
 
 ```powershell
 cd D:\自主研究\independent_reserch\basketball_tracking_midterm
-.\.venv\Scripts\python.exe scripts/realtime_tracking.py --video "../編集済み元データ/experiment10_編集.mp4" --duration 60 --no-display --record results/gym_20261126/check_A
-.\.venv\Scripts\python.exe scripts/realtime_tracking.py --video "../編集済み元データ/experiment10_編集.mp4" --duration 60 --no-display --record results/gym_20261126/check_B --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --video "../編集済み元データ/experiment10_編集.mp4" --duration 60 --no-display --record results/gym_20261126/check_1 --imgsz 704
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --video "../編集済み元データ/experiment10_編集.mp4" --duration 60 --no-display --record results/gym_20261126/check_2 --roi-imgsz 320
 ```
 
 最後に表示される `tracking:` の行の `drop_rate`（間引き率）を見ます。
 
 - [ ] 表示に `power=battery` と出ていることを確認
-- [ ] `drop_rate` が0.1（10%）を超えたら、そのモデルは入力サイズを下げて（`--imgsz 704` を付けて）もう一度確認する
-- [ ] 704でも大きく間引く場合は、そのモデルは704で実施し、間引き率を記録しておく
+- [ ] `drop_rate` がモデル1で0.25、モデル2で0.35くらいまでなら前夜と同じ。大きく超える場合（0.5以上など）は、ほかのアプリを閉じる・PCを冷やすなどしてもう一度確認し、値を記録しておく
 
 ## 手順4：リアルタイム追跡（ボールの追跡のみ）
 
@@ -55,30 +63,28 @@ cd D:\自主研究\independent_reserch\basketball_tracking_midterm
 
 ```powershell
 cd D:\自主研究\independent_reserch\basketball_tracking_midterm
-# モデルA：条件G
-.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/A --record-raw
-# モデルB：G＋ROI、上限30回/秒
-.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/B --record-raw --roi-imgsz 320 --max-interval 1 --max-yolo-hz 30
+# モデル1：条件G、入力704
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/model1 --record-raw --imgsz 704
+# モデル2：G＋ROI、入力960
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/model2 --record-raw --roi-imgsz 320
 ```
 
-手順3で704にすると決めたモデルには `--imgsz 704` を付けます。
-
-- [ ] 画面左上の `dropped`（間引かれたフレーム）が増え続けていないか見る
+- [ ] 画面左上の `dropped`（間引かれたフレーム）の割合が、手順3と同じくらいか見る
 - [ ] `--record-raw` で生映像（`raw.mp4`）を残す。あとで正解を付けて精度を測るのに必要
-- [ ] A・Bは同じ場面を同時には測れないので、交互に同じくらいの時間ずつ行い、何時何分にどちらを動かしたかをメモする
+- [ ] 2つのモデルは同じ場面を同時には測れないので、交互に同じくらいの時間ずつ行い、何時何分にどちらを動かしたかをメモする
 
 ## 手順5：リアルタイム追跡＋シュート判定
 
 ```powershell
 cd D:\自主研究\independent_reserch\basketball_tracking_midterm
-.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/shot_A --record-raw --select-rim
+.\.venv\Scripts\python.exe scripts/realtime_tracking.py --camera-index 1 --record results/gym_20261126/shot_1 --record-raw --select-rim --imgsz 704
 ```
 
 1. 最初の画面で、**リングの輪をぴったり囲む四角**をマウスでドラッグし、Enterを押す
 2. 画面に `rim = x1,y1,x2,y2` と表示されるので、メモする。次からは `--select-rim` の代わりに `--rim x1,y1,x2,y2` で同じ位置を使える（カメラを動かしていなければ）
 3. シュートのたびに、3秒遅れで `SHOT MADE` / `SHOT MISS` と累計が表示される
 
-モデルBでシュート判定をする場合は、上のコマンドに `--roi-imgsz 320 --max-interval 1 --max-yolo-hz 30` を付けます。
+モデル2でシュート判定をする場合は、`--imgsz 704` の代わりに `--roi-imgsz 320` を付けます。
 
 - [ ] **リングを指定したあとはカメラを動かさない**（動いたらやり直す）
 - [ ] リングを横から見る位置にカメラを置くと判定しやすい（手前・奥の区別ができないため）
@@ -104,5 +110,5 @@ cd D:\自主研究\independent_reserch
 | 映像が真っ黒・極端に暗い | USBを挿し直す。別のUSBポートを試す |
 | 1280×720にならない | 手順1で出た解像度を `--width --height` に指定。追跡の精度は1280×720以外では未確認 |
 | 実測fpsが30より低い | 照明が暗いとカメラが露出時間を延ばしてfpsが落ちることがある。明るい場所を映すか、640×480を試す |
-| `dropped` がどんどん増える | `--imgsz 704` を付ける。それでも増えるならモデルAに切り替える |
+| `dropped` の割合が手順3より大きく増える | ほかのアプリを閉じる。それでも増えるならモデル1（`--imgsz 704`）に切り替える |
 | リング指定の画面が出ない | `--no-display` を付けていないか確認（シュート判定には画面が必要） |
