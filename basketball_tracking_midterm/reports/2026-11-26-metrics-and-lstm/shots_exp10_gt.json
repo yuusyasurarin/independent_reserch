@@ -1,0 +1,125 @@
+{
+  "summary": {
+    "labelled_attempts": 5,
+    "judged_events": 4,
+    "matched": 4,
+    "attempt_precision": 1.0,
+    "attempt_recall": 0.8,
+    "attempt_f1": 0.888888888888889,
+    "outcome_accuracy": 1.0,
+    "made_precision": null,
+    "made_recall": null,
+    "end_to_end_accuracy": 0.8,
+    "score_error": {
+      "experiment10": {
+        "made": 0,
+        "attempts": 1
+      }
+    }
+  },
+  "per_video": {
+    "experiment10": {
+      "events": [
+        {
+          "start": 146,
+          "end": 181,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 461,
+          "end": 489,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 1117,
+          "end": 1138,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2358,
+          "end": 2367,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        }
+      ],
+      "labels": [
+        {
+          "start": 141,
+          "end": 185,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 454,
+          "end": 499,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 1111,
+          "end": 1150,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 1535,
+          "end": 1560,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 2345,
+          "end": 2372,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        }
+      ],
+      "pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    }
+  }
+}

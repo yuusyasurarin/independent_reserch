@@ -1,0 +1,591 @@
+{
+  "summary": {
+    "labelled_attempts": 27,
+    "judged_events": 24,
+    "matched": 24,
+    "attempt_precision": 1.0,
+    "attempt_recall": 0.8888888888888888,
+    "attempt_f1": 0.9411764705882353,
+    "outcome_accuracy": 1.0,
+    "made_precision": 1.0,
+    "made_recall": 0.9090909090909091,
+    "end_to_end_accuracy": 0.8888888888888888,
+    "score_error": {
+      "experiment10": {
+        "made": 0,
+        "attempts": 1
+      },
+      "experiment11": {
+        "made": 1,
+        "attempts": 1
+      },
+      "experiment12": {
+        "made": 0,
+        "attempts": 1
+      }
+    }
+  },
+  "per_video": {
+    "experiment10": {
+      "events": [
+        {
+          "start": 146,
+          "end": 181,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 461,
+          "end": 490,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 1117,
+          "end": 1138,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2358,
+          "end": 2367,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        }
+      ],
+      "labels": [
+        {
+          "start": 141,
+          "end": 185,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 454,
+          "end": 499,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 1111,
+          "end": 1150,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 1535,
+          "end": 1560,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        },
+        {
+          "start": 2345,
+          "end": 2372,
+          "result": "miss",
+          "rim": [
+            510.0,
+            172.0,
+            545.0,
+            182.0
+          ]
+        }
+      ],
+      "pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    "experiment11": {
+      "events": [
+        {
+          "start": 166,
+          "end": 188,
+          "result": "miss",
+          "reason": "left_near_rim"
+        },
+        {
+          "start": 444,
+          "end": 452,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 787,
+          "end": 811,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 968,
+          "end": 988,
+          "result": "miss",
+          "reason": "dropped_beside_rim"
+        },
+        {
+          "start": 1369,
+          "end": 1388,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 1774,
+          "end": 1787,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 1987,
+          "end": 2012,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2222,
+          "end": 2242,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2363,
+          "end": 2387,
+          "result": "miss",
+          "reason": "left_near_rim"
+        },
+        {
+          "start": 2553,
+          "end": 2606,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 2707,
+          "end": 2734,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        }
+      ],
+      "labels": [
+        {
+          "start": 164,
+          "end": 192,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 444,
+          "end": 462,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 785,
+          "end": 815,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 965,
+          "end": 995,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 1183,
+          "end": 1206,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 1367,
+          "end": 1395,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 1772,
+          "end": 1795,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 1985,
+          "end": 2015,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 2220,
+          "end": 2246,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 2361,
+          "end": 2390,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 2553,
+          "end": 2612,
+          "result": "made",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        },
+        {
+          "start": 2701,
+          "end": 2738,
+          "result": "miss",
+          "rim": [
+            728.0,
+            127.0,
+            782.0,
+            143.0
+          ]
+        }
+      ],
+      "pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ]
+    },
+    "experiment12": {
+      "events": [
+        {
+          "start": 243,
+          "end": 255,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 669,
+          "end": 685,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 1645,
+          "end": 1669,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2208,
+          "end": 2232,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 2531,
+          "end": 2554,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 2868,
+          "end": 2898,
+          "result": "miss",
+          "reason": "passed_outside_rim"
+        },
+        {
+          "start": 3112,
+          "end": 3124,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 3199,
+          "end": 3236,
+          "result": "made",
+          "reason": "through_rim"
+        },
+        {
+          "start": 3597,
+          "end": 3631,
+          "result": "miss",
+          "reason": "dropped_beside_rim"
+        }
+      ],
+      "labels": [
+        {
+          "start": 243,
+          "end": 262,
+          "result": "made",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 669,
+          "end": 690,
+          "result": "made",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 1380,
+          "end": 1406,
+          "result": "miss",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 1646,
+          "end": 1675,
+          "result": "miss",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 2208,
+          "end": 2238,
+          "result": "miss",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 2531,
+          "end": 2560,
+          "result": "made",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 2862,
+          "end": 2900,
+          "result": "miss",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 3112,
+          "end": 3130,
+          "result": "made",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 3199,
+          "end": 3240,
+          "result": "made",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        },
+        {
+          "start": 3597,
+          "end": 3636,
+          "result": "miss",
+          "rim": [
+            728.0,
+            128.0,
+            782.0,
+            144.0
+          ]
+        }
+      ],
+      "pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ]
+      ]
+    }
+  }
+}

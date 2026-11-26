@@ -1,0 +1,64 @@
+{
+  "trajectory": "tracking.csv",
+  "rim": [
+    510.0,
+    172.0,
+    545.0,
+    182.0
+  ],
+  "options": {
+    "approach_halfwidths": 4.0,
+    "approach_height": 160.0,
+    "margin_halfwidths": 0.35,
+    "near_px": 60.0,
+    "confirm_px": 25.0,
+    "confirm_frames": 8,
+    "side_halfwidths": 2.5,
+    "confirm_halfwidths": 1.1,
+    "leave_frames": 6,
+    "timeout_s": 2.0
+  },
+  "score": {
+    "attempts": 4,
+    "made": 0,
+    "missed": 4
+  },
+  "events": [
+    {
+      "frame_id": 181,
+      "time_s": 6.033333333333333,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 146,
+      "crossed_frame": null,
+      "min_rim_distance_px": 11.563849180855444
+    },
+    {
+      "frame_id": 490,
+      "time_s": 16.333333333333332,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 461,
+      "crossed_frame": null,
+      "min_rim_distance_px": 8.402315865953216
+    },
+    {
+      "frame_id": 1138,
+      "time_s": 37.93333333333333,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 1117,
+      "crossed_frame": null,
+      "min_rim_distance_px": 15.518960272764579
+    },
+    {
+      "frame_id": 2367,
+      "time_s": 78.9,
+      "result": "miss",
+      "reason": "passed_outside_rim",
+      "start_frame": 2358,
+      "crossed_frame": null,
+      "min_rim_distance_px": 15.211977135436886
+    }
+  ]
+}

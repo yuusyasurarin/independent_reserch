@@ -6,7 +6,8 @@ import sys
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from src.alternatives import TemplateBallPolicy, RoiScheduler, roi_window
+from src.alternatives import TemplateBallPolicy, RoiScheduler, roi_window, RecoveryRoiScheduler, with_recovery
+from src.adaptive_tracking import AdaptiveBallPolicy
 from src.common import center
 from scripts.analyze_yolo_budget import analyze
 from test_core import candidate, config
@@ -79,3 +80,72 @@ class BudgetAnalysisTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class RecoveryTests(unittest.TestCase):
+    """ROI lock-on recovery options (all off = original behaviour)."""
+
+    def policy(self, **options):
+        cfg = config()
+        cfg['adaptive'] = dict(cfg.get('adaptive', {}), **options)
+        p = with_recovery(AdaptiveBallPolicy)(cfg, 30)
+        p.box = [100., 100., 130., 130.]
+        p.events = []
+        return p
+
+    far = candidate([600, 400, 630, 430], .9)
+    near = candidate([102, 101, 132, 131], .3)
+
+    def test_default_needs_two_detections(self):
+        p = self.policy()
+        self.assertIs(p.choose([self.near, self.far], p.box, 10)[0], self.near)
+        self.assertIs(p.choose([self.near, self.far], p.box, 12)[0], self.far)
+
+    def test_instant_switch_on_full_frame_only(self):
+        p = self.policy(instant_switch_conf=.5)
+        p.roi_call = True
+        self.assertIs(p.choose([self.near, self.far], p.box, 10)[0], self.near)
+        p.roi_call = False
+        self.assertIs(p.choose([self.near, self.far], p.box, 11)[0], self.far)
+        self.assertIn('instant_switch', p.events)
+
+    def test_roi_call_keeps_pending_challenger(self):
+        for keep, expected in ((False, None), (True, 'far')):
+            p = self.policy(keep_challenger_on_roi=keep)
+            p.events = []
+            p.choose([self.near, self.far], p.box, 10)   # full frame: challenger pending
+            p.roi_call = True
+            p.choose([self.near], p.box, 11)              # ROI: far ball outside the crop
+            p.roi_call = False
+            got = p.choose([self.near, self.far], p.box, 12)[0]
+            self.assertIs(got, self.far if expected else self.near)
+
+
+class RecoverySchedulerTests(unittest.TestCase):
+    class P:
+        flow_box = [100, 100, 130, 130]; predicted_box = box = None
+        request_reason = 'interval'; prepared_frame = 0
+
+    def test_time_based_full_frame(self):
+        s = RecoveryRoiScheduler(960, 320, 5, full_interval=4)
+        f = np.zeros((720, 1280, 3), np.uint8)
+        kinds = []
+        for i in range(9):
+            self.P.prepared_frame = i
+            kinds.append(s.window(self.P, f) is None)
+        self.assertEqual(kinds, [True, False, False, False, True, False, False, False, True])
+
+    def test_escalates_after_weak_or_resized_roi_detection(self):
+        s = RecoveryRoiScheduler(960, 320, 100, escalate=True)
+        f = np.zeros((720, 1280, 3), np.uint8)
+        for i, result, full_next in ((0, None, None),
+                                     (1, dict(source='YOLO_low', bbox=[100, 100, 130, 130]), True),
+                                     (3, dict(source='YOLO', bbox=[100, 100, 200, 200]), True),
+                                     (5, dict(source='YOLO', bbox=[101, 101, 131, 131]), False)):
+            self.P.prepared_frame = i
+            win = s.window(self.P, f)
+            if result:
+                self.assertIsNotNone(win)
+                s.after_update(result, True)
+                self.P.prepared_frame = i+1
+                self.assertEqual(s.window(self.P, f) is None, full_next)

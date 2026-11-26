@@ -1,0 +1,28 @@
+video,start_frame,end_frame,result,rim_x1,rim_y1,rim_x2,rim_y2,note
+experiment10,141,185,miss,510,172,545,182,fell past the left of the ring
+experiment10,454,499,miss,510,172,545,182,off the backboard to the right
+experiment10,1111,1150,miss,510,172,545,182,off the ring to the right
+experiment10,1535,1560,miss,510,172,545,182,went right of / behind the backboard; never near the ring
+experiment10,2345,2372,miss,510,172,545,182,off the backboard to the left
+experiment11,164,192,miss,728,127,782,143,off the ring upward
+experiment11,444,462,made,728,127,782,143,
+experiment11,785,815,made,728,127,782,143,
+experiment11,965,995,miss,728,127,782,143,dropped beside the left of the ring
+experiment11,1183,1206,made,728,127,782,143,layup from below the ring
+experiment11,1367,1395,made,728,127,782,143,
+experiment11,1772,1795,made,728,127,782,143,
+experiment11,1985,2015,miss,728,127,782,143,off to the right
+experiment11,2220,2246,miss,728,127,782,143,off to the left
+experiment11,2361,2390,miss,728,127,782,143,off the ring to the upper right
+experiment11,2553,2612,made,728,127,782,143,
+experiment11,2701,2738,miss,728,127,782,143,
+experiment12,243,262,made,728,128,782,144,
+experiment12,669,690,made,728,128,782,144,
+experiment12,1380,1406,miss,728,128,782,144,short; never reached the ring
+experiment12,1646,1675,miss,728,128,782,144,off the backboard to the right
+experiment12,2208,2238,miss,728,128,782,144,off the backboard to the right
+experiment12,2531,2560,made,728,128,782,144,
+experiment12,2862,2900,miss,728,128,782,144,off the ring to the left
+experiment12,3112,3130,made,728,128,782,144,
+experiment12,3199,3240,made,728,128,782,144,rolled on the ring then in
+experiment12,3597,3636,miss,728,128,782,144,back off the backboard and down beside the left of the ring
