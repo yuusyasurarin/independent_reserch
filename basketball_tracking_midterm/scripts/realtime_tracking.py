@@ -20,7 +20,7 @@ import traceback
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.common import environment, power_state, resolve, save_json, stats
 from src.adaptive_tracking import AdaptiveBallPolicy
-from src.alternatives import RoiScheduler
+from src.alternatives import NoLKBallPolicy, RoiScheduler
 from src.shot import ShotJudge
 from src.detector import Detector
 from src.lag_tracking import FixedLagBall
@@ -163,11 +163,11 @@ def run(args):
         shotlog=(output/'shots.jsonl').open('w',encoding='utf-8') if judge else None
         framelog=(output/'frames.jsonl').open('w',encoding='utf-8')
         save_json(output/'run_config.json',dict(args=vars(args),config=cfg,source=source.info,weights=detector.metadata,
-            weights_path=str(detector.path),method='bridge',rim=rim,
+            weights_path=str(detector.path),method='bridge',rim=rim,frontend=args.frontend,
             roi=dict(roi_imgsz=args.roi_imgsz,full_every=args.roi_full_every) if args.roi_imgsz else None,environment=environment(),power_at_start=power_start,command=sys.argv,
             notes='Display delay is fixed after capture; the smoother looks ahead --lookahead seconds; '
                   'frames older than --max-backlog are skipped when newer frames wait.'))
-    policy=AdaptiveBallPolicy(cfg,fps)
+    policy=(NoLKBallPolicy if args.frontend=='nolk' else AdaptiveBallPolicy)(cfg,fps)
     smoother=FixedLagBall(fps,width,height,args.lookahead,'bridge',max_bridge_s=args.max_bridge)
     roi=RoiScheduler(cfg['imgsz'],args.roi_imgsz,args.roi_full_every) if args.roi_imgsz else None
     detect=(lambda image:roi.detect(detector,policy,image)) if roi else detector.detect
@@ -315,6 +315,7 @@ if __name__=='__main__':
     p.add_argument('--roi-full-every',type=int,default=5,help='every N-th YOLO call uses the whole frame even while tracking')
     p.add_argument('--max-interval',type=int,default=0,help='override adaptive max_interval (frames)')
     p.add_argument('--max-yolo-hz',type=float,default=0,help='override adaptive max_yolo_hz')
+    p.add_argument('--frontend',choices=['lk','nolk'],default='lk',help='nolk = ablation without LK (YOLO every --max-interval frames + constant-velocity prediction)')
     p.add_argument('--rim',help='shot judgement: rim box x1,y1,x2,y2 in frame pixels')
     p.add_argument('--select-rim',action='store_true',help='shot judgement: drag a box around the rim on the first frame')
     a=p.parse_args()

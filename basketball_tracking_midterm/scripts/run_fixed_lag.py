@@ -14,7 +14,7 @@ import time
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from src.common import ROOT, resolve, save_json, save_csv, sha256, stats, environment
 from src.adaptive_tracking import AdaptiveBallPolicy
-from src.alternatives import TemplateBallPolicy, RoiScheduler, RecoveryRoiScheduler, with_recovery
+from src.alternatives import TemplateBallPolicy, NoLKBallPolicy, RoiScheduler, RecoveryRoiScheduler, with_recovery
 from src.tracking import TrackingPolicy
 from src.data import inspect_video, load_gt
 from src.detector import Detector
@@ -70,13 +70,13 @@ def run(args):
             source_sha256={str(p.relative_to(ROOT)):sha256(p) for folder in ('src','scripts') for p in (ROOT/folder).glob('*.py')},
             command=sys.argv,warmup_calls=3,precision='FP32',
             kcf_initialization='init plus first update on the same clean detection image',
-            frontend=('TemplateBallPolicy' if args.frontend=='template' else 'AdaptiveBallPolicy') if args.condition=='G' else 'TrackingPolicy',
+            frontend={'template':'TemplateBallPolicy','nolk':'NoLKBallPolicy'}.get(args.frontend,'AdaptiveBallPolicy') if args.condition=='G' else 'TrackingPolicy',
             roi=dict(roi_imgsz=args.roi_imgsz,full_every=args.roi_full_every,full_interval_s=args.roi_full_interval_s,
                      escalate=args.roi_escalate) if args.roi_imgsz else None,
             recovery=dict(instant_switch_conf=args.instant_switch_conf,keep_challenger_on_roi=args.keep_challenger_on_roi) if recovery else None,
             comparison_runner_version=2)
         save_json(output/'run_config.json',manifest)
-        frontend=TemplateBallPolicy if args.frontend=='template' else AdaptiveBallPolicy
+        frontend={'template':TemplateBallPolicy,'nolk':NoLKBallPolicy}.get(args.frontend,AdaptiveBallPolicy)
         if recovery:frontend=with_recovery(frontend)
         policy=(frontend(cfg,info['fps']) if args.condition=='G'
                 else TrackingPolicy(args.condition,cfg,info['fps']))
@@ -215,7 +215,7 @@ if __name__=='__main__':
     p.add_argument('--max-frames',type=int,default=0)
     p.add_argument('--no-video',action='store_true')
     p.add_argument('--realtime',action='store_true')
-    p.add_argument('--frontend',choices=['lk','template'],default='lk',help='System 1: LK feature points (G) or colour template matching')
+    p.add_argument('--frontend',choices=['lk','template','nolk'],default='lk',help='System 1: LK feature points (G), colour template matching, or none (ablation)')
     p.add_argument('--roi-imgsz',type=int,default=0,help='YOLO on a crop around the predicted ball at this input size (0 = whole frame)')
     p.add_argument('--roi-full-every',type=int,default=5,help='every N-th YOLO call uses the whole frame even while tracking')
     p.add_argument('--max-interval',type=int,default=0,help='override adaptive max_interval (frames)')

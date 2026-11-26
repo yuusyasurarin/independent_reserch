@@ -229,3 +229,30 @@ class RecoveryRoiScheduler(RoiScheduler):
         elif ref is not None:
             area = max((box[2]-box[0])*(box[3]-box[1]), 1.)/max((ref[2]-ref[0])*(ref[3]-ref[1]), 1.)
             self.force_full = not 1/self.size_jump <= area <= self.size_jump
+
+
+class NoLKBallPolicy(AdaptiveBallPolicy):
+    """Ablation: condition G without System 1 (no LK, no template).
+
+    Between YOLO calls the ball is placed by constant-velocity prediction from the last
+    YOLO positions. YOLO is called every max_interval frames (no early call on LK failure
+    or sudden motion; lost-ball search unchanged). Candidate choice, expiry, budget and
+    the fixed-lag smoother are inherited unchanged. Output frames between YOLO calls are
+    labelled 'LK' by the inherited update(); here they are predictions, not image evidence.
+    """
+
+    def prepare(self, frame, frame_id):
+        if self.prepared_frame == frame_id:
+            return
+        self.prepared_frame = frame_id
+        self.gray = None
+        self.flow_box = self.flow_points = None
+        self.flow_fraction, self.flow_error = 0., None
+        self.events, self.request_reason = [], 'interval'
+        self.predicted_box = self.translated(self.box, self.velocity) if self.box else None
+        h, w = frame.shape[:2]
+        if self.predicted_box is not None and valid_box(self.predicted_box, w, h):
+            self.flow_box, self.flow_points = self.predicted_box, self.np.zeros((1, 1, 2), self.np.float32)
+
+    def seed(self, gray):
+        return None
